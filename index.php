@@ -6,8 +6,8 @@
                 <div class="entry-content">
 <?php the_content() ?>
                 </div>
-            </div><!-- .post -->
-        </div><!-- .content -->
+            </div><?php // <!-- .post --> ?>
+        </div><?php // <!-- .content --> ?>
 <?php get_footer() ?>
 </body>
 </html>

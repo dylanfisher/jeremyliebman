@@ -1,0 +1,15 @@
+//
+// Main styles
+//
+
+header {
+  margin-bottom: $space_large;
+}
+
+.pjax-container {
+  transition: opacity 0.6s;
+}
+
+.pjax-transition {
+  opacity: 0;
+}

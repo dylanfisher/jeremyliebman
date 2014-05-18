@@ -1,0 +1,24 @@
+//
+// Image sets
+//
+
+.image-set {
+  position: relative;
+  display: inline-block;
+  margin: 0 $space_xsmall $space_xsmall;
+
+  img,
+  .image-set-placeholder {
+    position: absolute;
+  }
+
+  img {
+    z-index: 1;
+    left: 0;
+  }
+
+  .image-set-placeholder {
+    background: #fff;
+    outline: 2px solid #000;
+  }
+}
