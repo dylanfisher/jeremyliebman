@@ -11,10 +11,10 @@ $(function(){
 
 
   // Initialize pjax on all anchor tags
-  $(document).pjax('a', '#pjax-container', {
-    // Increase the pjax timeout
-    timeout: 10000
-  });
+  $(document).pjax('a', '#pjax-container');
+
+  // Increase the pjax timeout
+  $.pjax.defaults.timeout = 5000;
 
   $(document).on('pjax:start', function(){
     console.log('pjax start');
@@ -24,6 +24,10 @@ $(function(){
   $(document).on('pjax:end', function(){
     console.log('pjax end');
     $('#pjax-container').removeClass('pjax-transition');
+
+    // Replace the select2 chosen item in search input with proper pjax page title
+    var pjaxTitle = $('#pjax-page-title').html();
+    $('#select2-chosen-1').html(pjaxTitle + '<span class="search-caret"></span>');
   });
 
   $(document).on('pjax:timeout, pjax:error', function(event){
@@ -36,6 +40,8 @@ $(function(){
   // Search and select2
   //
   ///////////////////////////////////////////////////////
+
+  $('.search-nav').fadeIn(100);
 
   $('#search-select').select2({
     // Matcher is used to determine how search results are displayed.
@@ -84,6 +90,9 @@ $(function(){
     }
   });
 
+  // Add blinking caret to the end of the selected term
+  $('#select2-chosen-1').append('<span class="search-caret"></span>');
+
   function searchTagEnabler(state){
     if(state == 'enable'){
       $('#select2-drop').addClass('active');
@@ -94,5 +103,36 @@ $(function(){
     }
   }
 
+  ///////////////////////////////////////////////////////
+  //
+  // Info wrapper toggle
+  //
+  ///////////////////////////////////////////////////////
+
+  var infoWrapper = $('#info-wrapper');
+  var infoWrapperHeight = infoWrapper.outerHeight(true);
+  var infoWrapperOpen = false;
+
+  $('#info-button').click(function(){
+    toggleInfoBox();
+  });
+
+  $('#info-wrapper-close').click(function(){
+    toggleInfoBox();
+  });
+
+  function toggleInfoBox(){
+    if(infoWrapperOpen === false){
+      infoWrapper.css({marginTop: -infoWrapperHeight});
+      infoWrapper.show();
+      infoWrapper.transition({marginTop: 0});
+      infoWrapperOpen = true;
+    } else {
+      infoWrapper.transition({marginTop: -infoWrapperHeight}, function(){
+        infoWrapper.hide();
+        infoWrapperOpen = false;
+      });
+    }
+  }
 
 });

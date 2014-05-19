@@ -1,13 +1,10 @@
 <?php get_header() ?>
-        <div class="content">
-<?php the_post() ?>
-            <div id="post-<?php the_ID() ?>" class="<?php sandbox_post_class() ?>">
-                <h2 class="entry-title"><?php the_title() ?></h2>
-                <div class="entry-content">
-<?php the_content() ?>
-                </div>
-            </div><?php // <!-- .post --> ?>
-        </div><?php // <!-- .content --> ?>
+
+<?php // Send all requestes to the application router ?>
+
+<?php get_template_part( 'partials/application', 'router' ); ?>
+
 <?php get_footer() ?>
+
 </body>
 </html>

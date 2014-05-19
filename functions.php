@@ -341,9 +341,9 @@ function sandbox_content($limit) {
 }
 
 // Add Custom Image Sizes
-/* 
-add_image_size( 'custom-image-size-name', 300, 300, true ); // Custom Image - Name, Width, Height, Hard Crop boolean
- */
+// add_image_size( 'custom-image-size-name', 300, 300, true ); // Custom Image - Name, Width, Height, Hard Crop boolean
+add_image_size( 'small', 175, 9999, false );
+
 
 // Open external links in new windows
 /* function sandbox_autoblank($text) {
@@ -425,27 +425,12 @@ function sandbox_ajax_get_single_post($id){
      return $posts;
 }
 
-// Enable pretty search permalinks. e.g.:
-// http://example.com?s=africa into http://example.com/search/africa
-// http://wordpress.stackexchange.com/questions/15418/pretty-permalinks-for-search-results-with-extra-query-var
-// add_action( 'template_redirect', 'sandbox_search_rewrite' );
-// function sandbox_search_rewrite() {
-    // if ( is_search() and false === strpos( $_SERVER['REQUEST_URI'], '/search/' ) ) {
-        // wp_redirect( get_bloginfo( 'url' ) . '/search/' . str_replace( ' ', '+', str_replace( '%20', '+', get_query_var( 's' ) ) ) );
-        // exit();
-    // }
-// }
-
-// pjax detection
+// pjax detection routes all pjex requests to pjax_template.php
 add_action( 'template_redirect', 'getCustomPjaxTemplate' );
-// $PJAX_enabled = 'false';
 function getCustomPjaxTemplate() {
     if (array_key_exists('HTTP_X_PJAX', $_SERVER) && $_SERVER['HTTP_X_PJAX']) {
-        $PJAX_enabled = 'true';
         include('pjax_template.php');
         exit;
-    } else {
-        $PJAX_enabled = 'false';
     }
 }
 

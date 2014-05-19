@@ -493,6 +493,18 @@ h6 {
   padding: 0;
 }
 
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 /*
  * Image replacement
  */
@@ -598,8 +610,8 @@ h6 {
   padding: 0.2em 0;
 }
 
-header {
-  margin-bottom: 80px;
+body {
+  font-size: 1.250em;
 }
 
 .pjax-container {
@@ -611,8 +623,85 @@ header {
   opacity: 0;
 }
 
+.info-wrapper {
+  display: none;
+  font-size: 16px;
+  padding: 40px;
+  background: yellow;
+  z-index: 100;
+}
+
+.info-wrapper h2 {
+  margin-bottom: 40px;
+}
+
+.info-wrapper h4 {
+  margin-left: 40px;
+}
+
+.info-wrapper-close {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #000;
+  position: absolute;
+  right: 40px;
+  cursor: pointer;
+}
+
+.column {
+  display: inline-block;
+}
+
+header {
+  height: 100px;
+  margin: 30px 40px;
+  position: relative;
+}
+
+.select2-drop-active {
+  top: 31px !important;
+}
+
+h1,
+nav {
+  display: inline-block;
+}
+
+h1 {
+  margin-right: 20px;
+  font-size: 24px;
+  line-height: 46px;
+  vertical-align: top;
+}
+
+nav {
+  width: 60%;
+  max-width: 800px;
+}
+
+.info-button {
+  position: absolute;
+  line-height: 40px;
+  top: 3px;
+  right: 40px;
+  outline: 4px solid #FF0;
+  padding: 0px 20px;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background: #000;
+  color: #FF0;
+  outline: #000;
+}
+
+.search-nav {
+  display: none;
+}
+
 .search-nav .select2-container {
-  width: 33%;
+  width: 100%;
 }
 
 .select2-disabled {
@@ -623,9 +712,51 @@ header {
   display: none !important;
 }
 
+.search-caret {
+  position: absolute;
+  top: 50%;
+  height: 24px;
+  margin-top: -12px;
+  width: 2px;
+  margin-left: 8px;
+  background: #000;
+  -webkit-animation: blink 1.2s steps(2, start) infinite;
+  animation: blink 1.2s steps(2, start) infinite;
+}
+
+@-webkit-keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
 footer {
   background: yellow;
   padding: 40px;
+}
+
+footer h6 {
+  margin-top: 10px;
+  margin-left: -2px;
+}
+
+.footer-image-section {
+  margin: 20px;
+}
+
+.footer-image-wrapper {
+  display: inline-block;
+  margin: 10px;
+}
+
+.footer-image-wrapper img {
+  outline: 2px solid #000;
 }
 
 .image-set {
@@ -637,6 +768,7 @@ footer {
 .image-set img,
 .image-set .image-set-placeholder {
   position: absolute;
+  cursor: pointer;
 }
 
 .image-set img {
@@ -647,6 +779,54 @@ footer {
 .image-set .image-set-placeholder {
   background: #fff;
   outline: 2px solid #000;
+  -webkit-transition: background .4s;
+  transition: background .4s;
+}
+
+.image-set .image-set-placeholder:hover {
+  background: #E8E8E8;
+}
+
+.featured-image-set {
+  display: block;
+  margin: 80px auto;
+}
+
+.featured-image-set .image-set-info {
+  height: 100px;
+  font-size: 24px;
+}
+
+.featured-image-set .image-set-info-wrapper:hover .image-set-info {
+  margin-top: -100px;
+}
+
+.image-set-info-wrapper {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.image-set-info-wrapper:hover .image-set-info {
+  margin-top: -80px;
+}
+
+.image-set-info {
+  height: 80px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: table;
+  z-index: 2;
+  width: 100%;
+  background: yellow;
+  -webkit-transition: margin 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: margin 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.image-info-text {
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .alignnone {
@@ -745,56 +925,23 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
   vertical-align: middle;
 }
 
-.select2-container,
-.select2-drop,
-.select2-search,
-.select2-search input {
-  /*
-    Force border-box so that % widths fit the parent
-    container without overlap because of margin/padding.
-    More Info : http://www.quirksmode.org/css/box.html
-  */
-  /* webkit */
-  -moz-box-sizing: border-box;
-  /* firefox */
-  box-sizing: border-box;
-  /* css3 */
-}
-
 .select2-container .select2-choice {
   display: block;
-  height: 26px;
-  padding: 0 0 0 8px;
+  height: 46px;
+  padding: 0 15px;
   overflow: hidden;
   position: relative;
-  border: 1px solid #aaa;
+  border: 2px solid #000;
   white-space: nowrap;
-  line-height: 26px;
-  color: #444;
+  line-height: 46px;
+  color: #000;
   text-decoration: none;
-  border-radius: 4px;
-  background-clip: padding-box;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   background-color: #fff;
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(0.5, white));
-  background-image: -webkit-linear-gradient(center bottom, #eeeeee 0%, white 50%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#eeeeee', GradientType = 0);
-  background-image: -webkit-linear-gradient(bottom, #eeeeee 0%, white 50%);
-  background-image: linear-gradient(to top, #eeeeee 0%, white 50%);
-}
-
-.select2-container.select2-drop-above .select2-choice {
-  border-bottom-color: #aaa;
-  border-radius: 0 0 4px 4px;
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(0.9, white));
-  background-image: -webkit-linear-gradient(center bottom, #eeeeee 0%, white 90%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eeeeee', GradientType=0);
-  background-image: -webkit-linear-gradient(top, #eeeeee 0%, white 90%);
-  background-image: linear-gradient(to bottom, #eeeeee 0%, white 90%);
 }
 
 .select2-container.select2-allowclear .select2-choice .select2-chosen {
@@ -802,7 +949,6 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 }
 
 .select2-container .select2-choice > .select2-chosen {
-  margin-right: 26px;
   display: block;
   overflow: hidden;
   white-space: nowrap;
@@ -821,7 +967,6 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
   font-size: 1px;
   text-decoration: none;
   border: 0;
-  background: url("../../../images/select2.png") right top no-repeat;
   cursor: pointer;
   outline: 0;
 }
@@ -831,7 +976,6 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 }
 
 .select2-container .select2-choice abbr:hover {
-  background-position: right -11px;
   cursor: pointer;
 }
 
@@ -861,31 +1005,18 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
   top: 100%;
   background: #fff;
   color: #000;
-  border: 1px solid #aaa;
+  border: 2px solid #000;
   border-top: 0;
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
 }
 
 .select2-drop.select2-drop-above {
   margin-top: 1px;
-  border-top: 1px solid #aaa;
+  border-top: 2px solid #000;
   border-bottom: 0;
-  border-radius: 4px 4px 0 0;
-  box-shadow: 0 -4px 5px rgba(0, 0, 0, 0.15);
-}
-
-.select2-drop-active {
-  border: 1px solid #5897fb;
-  border-top: none;
-}
-
-.select2-drop.select2-drop-above.select2-drop-active {
-  border-top: 1px solid #5897fb;
 }
 
 .select2-drop-auto-width {
-  border-top: 1px solid #aaa;
+  border-top: 2px solid #000;
   width: auto;
 }
 
@@ -894,37 +1025,14 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 }
 
 .select2-container .select2-choice .select2-arrow {
-  display: inline-block;
-  width: 18px;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  border-left: 1px solid #aaa;
-  border-radius: 0 4px 4px 0;
-  background-clip: padding-box;
-  background: #ccc;
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #cccccc), color-stop(0.6, #eeeeee));
-  background-image: -webkit-linear-gradient(center bottom, #cccccc 0%, #eeeeee 60%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#eeeeee', endColorstr = '#cccccc', GradientType = 0);
-  background-image: -webkit-linear-gradient(bottom, #cccccc 0%, #eeeeee 60%);
-  background-image: linear-gradient(to top, #cccccc 0%, #eeeeee 60%);
-}
-
-.select2-container .select2-choice .select2-arrow b {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: url("../../../images/select2.png") no-repeat 0 1px;
+  display: none;
 }
 
 .select2-search {
   display: inline-block;
   width: 100%;
-  min-height: 26px;
+  min-height: 46px;
   margin: 0;
-  padding-left: 4px;
-  padding-right: 4px;
   position: relative;
   z-index: 10000;
   white-space: nowrap;
@@ -933,74 +1041,33 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 .select2-search input {
   width: 100%;
   height: auto !important;
-  min-height: 26px;
-  padding: 4px 20px 4px 5px;
+  min-height: 46px;
+  padding: 4px 15px;
   margin: 0;
   outline: 0;
-  font-family: sans-serif;
-  font-size: 1em;
-  border: 1px solid #aaa;
-  border-radius: 0;
-  box-shadow: none;
-  background: white url("../../../images/select2.png") no-repeat 100% -22px;
-  background: url("../../../images/select2.png") no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
-  background: url("../../../images/select2.png") no-repeat 100% -22px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
-  background: url("../../../images/select2.png") no-repeat 100% -22px, -webkit-linear-gradient(top, white 85%, #eeeeee 99%) 0 0;
-  background: url("../../../images/select2.png") no-repeat 100% -22px, linear-gradient(to bottom, white 85%, #eeeeee 99%) 0 0;
+  border: 2px solid #000;
+  border-left: 0;
+  border-right: 0;
+  background: #fff;
 }
 
 .select2-drop.select2-drop-above .select2-search input {
   margin-top: 4px;
 }
 
-.select2-search input.select2-active {
-  background: white url("../../../images/select2-spinner.gif") no-repeat 100%;
-  background: url("../../../images/select2-spinner.gif") no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
-  background: url("../../../images/select2-spinner.gif") no-repeat 100%, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
-  background: url("../../../images/select2-spinner.gif") no-repeat 100%, -webkit-linear-gradient(top, white 85%, #eeeeee 99%) 0 0;
-  background: url("../../../images/select2-spinner.gif") no-repeat 100%, linear-gradient(to bottom, white 85%, #eeeeee 99%) 0 0;
-}
-
 .select2-container-active .select2-choice,
 .select2-container-active .select2-choices {
-  border: 1px solid #5897fb;
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .select2-dropdown-open .select2-choice {
   border-bottom-color: transparent;
-  box-shadow: 0 1px 0 #fff inset;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: #eee;
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, white), color-stop(0.5, #eeeeee));
-  background-image: -webkit-linear-gradient(center bottom, white 0%, #eeeeee 50%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0);
-  background-image: -webkit-linear-gradient(bottom, white 0%, #eeeeee 50%);
-  background-image: linear-gradient(to top, white 0%, #eeeeee 50%);
+  background-color: yellow;
 }
 
 .select2-dropdown-open.select2-drop-above .select2-choice,
 .select2-dropdown-open.select2-drop-above .select2-choices {
-  border: 1px solid #5897fb;
   border-top-color: transparent;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, white), color-stop(0.5, #eeeeee));
-  background-image: -webkit-linear-gradient(center top, white 0%, #eeeeee 50%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#ffffff', GradientType=0);
-  background-image: -webkit-linear-gradient(top, white 0%, #eeeeee 50%);
-  background-image: linear-gradient(to bottom, white 0%, #eeeeee 50%);
-}
-
-.select2-dropdown-open .select2-choice .select2-arrow {
-  background: transparent;
-  border-left: none;
-  -webkit-filter: none;
-  filter: none;
-}
-
-.select2-dropdown-open .select2-choice .select2-arrow b {
-  background-position: -18px 1px;
 }
 
 .select2-hidden-accessible {
@@ -1018,12 +1085,13 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 
 .select2-results {
   max-height: 100%;
-  padding: 0 0 0 4px;
-  margin: 4px 4px 4px 0;
+  margin: 0;
+  padding: 10px 0;
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  box-shadow: 6px 6px 0px #000;
 }
 
 .select2-results ul.select2-result-sub {
@@ -1042,7 +1110,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 }
 
 .select2-results .select2-result-label {
-  padding: 3px 7px 4px;
+  padding: 0 15px;
   margin: 0;
   cursor: pointer;
   min-height: 1em;
@@ -1054,40 +1122,39 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 }
 
 .select2-results-dept-1 .select2-result-label {
-  padding-left: 20px;
+  padding: 0 15px;
 }
 
 .select2-results-dept-2 .select2-result-label {
-  padding-left: 40px;
+  padding: 0 15px;
 }
 
 .select2-results-dept-3 .select2-result-label {
-  padding-left: 60px;
+  padding: 0 15px;
 }
 
 .select2-results-dept-4 .select2-result-label {
-  padding-left: 80px;
+  padding: 0 15px;
 }
 
 .select2-results-dept-5 .select2-result-label {
-  padding-left: 100px;
+  padding: 0 15px;
 }
 
 .select2-results-dept-6 .select2-result-label {
-  padding-left: 110px;
+  padding: 0 15px;
 }
 
 .select2-results-dept-7 .select2-result-label {
-  padding-left: 120px;
+  padding: 0 15px;
 }
 
 .select2-results .select2-highlighted {
-  background: #3875d7;
-  color: #fff;
+  background: yellow;
+  color: #000;
 }
 
 .select2-results li em {
-  background: #feffde;
   font-style: normal;
 }
 
@@ -1103,9 +1170,8 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 .select2-results .select2-no-results,
 .select2-results .select2-searching,
 .select2-results .select2-selection-limit {
-  background: #f4f4f4;
   display: list-item;
-  padding-left: 5px;
+  padding: 0 15px;
 }
 
 /*
@@ -1113,14 +1179,11 @@ disabled look for disabled choices in the results dropdown
 */
 
 .select2-results .select2-disabled.select2-highlighted {
-  color: #666;
-  background: #f4f4f4;
   display: list-item;
   cursor: default;
 }
 
 .select2-results .select2-disabled {
-  background: #f4f4f4;
   display: list-item;
   cursor: default;
 }
@@ -1130,27 +1193,19 @@ disabled look for disabled choices in the results dropdown
 }
 
 .select2-more-results.select2-active {
-  background: #f4f4f4 url("../../../images/select2-spinner.gif") no-repeat 100%;
+  background: white url("../../../images/select2-spinner.gif") no-repeat 100%;
 }
 
 .select2-more-results {
-  background: #f4f4f4;
   display: list-item;
 }
 
 /* disabled styles */
 
 .select2-container.select2-container-disabled .select2-choice {
-  background-color: #f4f4f4;
   background-image: none;
-  border: 1px solid #ddd;
+  border: 2px solid #000;
   cursor: default;
-}
-
-.select2-container.select2-container-disabled .select2-choice .select2-arrow {
-  background-color: #f4f4f4;
-  background-image: none;
-  border-left: 0;
 }
 
 .select2-container.select2-container-disabled .select2-choice abbr {
@@ -1165,13 +1220,10 @@ disabled look for disabled choices in the results dropdown
   margin: 0;
   padding: 0;
   position: relative;
-  border: 1px solid #aaa;
+  border: 2px solid #000;
   cursor: text;
   overflow: hidden;
   background-color: #fff;
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(1%, #eeeeee), color-stop(15%, white));
-  background-image: -webkit-linear-gradient(top, #eeeeee 1%, white 15%);
-  background-image: linear-gradient(to bottom, #eeeeee 1%, white 15%);
 }
 
 .select2-locked {
@@ -1179,13 +1231,11 @@ disabled look for disabled choices in the results dropdown
 }
 
 .select2-container-multi .select2-choices {
-  min-height: 26px;
+  min-height: 46px;
 }
 
 .select2-container-multi.select2-container-active .select2-choices {
-  border: 1px solid #5897fb;
   outline: none;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .select2-container-multi .select2-choices li {
@@ -1206,12 +1256,9 @@ html[dir="rtl"] .select2-container-multi .select2-choices li {
 .select2-container-multi .select2-choices .select2-search-field input {
   padding: 5px;
   margin: 1px 0;
-  font-family: sans-serif;
-  font-size: 100%;
   color: #666;
   outline: 0;
   border: 0;
-  box-shadow: none;
   background: transparent !important;
 }
 
@@ -1230,21 +1277,12 @@ html[dir="rtl"] .select2-container-multi .select2-choices li {
   line-height: 13px;
   color: #333;
   cursor: default;
-  border: 1px solid #aaaaaa;
-  border-radius: 3px;
-  box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-  background-clip: padding-box;
+  border: 2px solid #000;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #e4e4e4;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
-  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eeeeee));
-  background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-  background-image: -webkit-linear-gradient(bottom, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-  background-image: linear-gradient(to top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
 }
 
 html[dir="rtl"] .select2-container-multi .select2-choices .select2-search-choice {
@@ -1256,10 +1294,6 @@ html[dir="rtl"] .select2-container-multi .select2-choices .select2-search-choice
   cursor: default;
 }
 
-.select2-container-multi .select2-choices .select2-search-choice-focus {
-  background: #d4d4d4;
-}
-
 .select2-search-choice-close {
   display: block;
   width: 12px;
@@ -1269,7 +1303,6 @@ html[dir="rtl"] .select2-container-multi .select2-choices .select2-search-choice
   top: 4px;
   font-size: 1px;
   outline: none;
-  background: url("../../../images/select2.png") right top no-repeat;
 }
 
 html[dir="rtl"] .select2-search-choice-close {
@@ -1281,28 +1314,18 @@ html[dir="rtl"] .select2-search-choice-close {
   left: 3px;
 }
 
-.select2-container-multi .select2-choices .select2-search-choice .select2-search-choice-close:hover {
-  background-position: right -11px;
-}
-
-.select2-container-multi .select2-choices .select2-search-choice-focus .select2-search-choice-close {
-  background-position: right -11px;
-}
-
 /* disabled styles */
 
 .select2-container-multi.select2-container-disabled .select2-choices {
-  background-color: #f4f4f4;
   background-image: none;
-  border: 1px solid #ddd;
+  border: 2px solid #000;
   cursor: default;
 }
 
 .select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice {
   padding: 3px 5px 3px 5px;
-  border: 1px solid #ddd;
+  border: 2px solid #000;
   background-image: none;
-  background-color: #f4f4f4;
 }
 
 .select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice .select2-search-choice-close {
@@ -1343,23 +1366,6 @@ html[dir="rtl"] .select2-search-choice-close {
   width: 100px;
   height: 100px;
   overflow: scroll;
-}
-
-/* Retina-ize icons */
-
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 2dppx) {
-  .select2-search input,
-  .select2-search-choice-close,
-  .select2-container .select2-choice abbr,
-  .select2-container .select2-choice .select2-arrow b {
-    background-image: url("../../../images/select2x2.png") !important;
-    background-repeat: no-repeat !important;
-    background-size: 60px 40px !important;
-  }
-
-  .select2-search input {
-    background-position: 100% -21px !important;
-  }
 }
 
 @media only screen and (min-width: 35em) {

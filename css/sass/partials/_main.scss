@@ -2,8 +2,8 @@
 // Main styles
 //
 
-header {
-  margin-bottom: $space_large;
+body {
+  font-size: 1.250em;
 }
 
 .pjax-container {
@@ -12,4 +12,32 @@ header {
 
 .pjax-transition {
   opacity: 0;
+}
+
+.info-wrapper {
+  display: none;
+  font-size: $font_regular;
+  padding: $space_medium;
+  background: $yellow;
+  z-index: 100;
+  h2 {
+    margin-bottom: $space_medium;
+  }
+  h4 {
+    margin-left: $space_medium;;
+  }
+}
+
+.info-wrapper-close {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #000;
+  position: absolute;
+  right: 40px;
+  cursor: pointer;
+}
+
+.column {
+  display: inline-block;
 }

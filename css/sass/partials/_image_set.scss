@@ -2,6 +2,9 @@
 // Image sets
 //
 
+$image_set_info_height: 80px;
+$featured_image_set_info_height: 100px;
+
 .image-set {
   position: relative;
   display: inline-block;
@@ -10,6 +13,7 @@
   img,
   .image-set-placeholder {
     position: absolute;
+    cursor: pointer;
   }
 
   img {
@@ -20,5 +24,53 @@
   .image-set-placeholder {
     background: #fff;
     outline: 2px solid #000;
+    transition: background .4s;
+    &:hover {
+      background: #E8E8E8;
+    }
   }
+}
+
+.featured-image-set {
+  display: block;
+  margin: $space_large auto;
+  .image-set-info {
+    height: $featured_image_set_info_height;
+    font-size: $font_medium;
+  }
+  .image-set-info-wrapper {
+    &:hover {
+      .image-set-info {
+        margin-top: -$featured_image_set_info_height;
+      }
+    }
+  }
+}
+
+.image-set-info-wrapper {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  &:hover {
+    .image-set-info {
+      margin-top: -$image_set_info_height;
+    }
+  }
+}
+
+.image-set-info {
+  height: $image_set_info_height;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: table;
+  z-index: 2;
+  width: 100%;
+  background: $yellow;
+  transition: margin .4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.image-info-text {
+  display: table-cell;
+  vertical-align: middle;
 }

@@ -1,10 +1,54 @@
 //
-// Navigation
+// Header and Navigation
 //
 
+header {
+  height: 100px;
+  margin: 30px $space_medium;
+  position: relative;
+}
+
+.select2-drop-active {
+  top: (30px + 1) !important;
+}
+
+h1,
+nav {
+  display: inline-block;
+}
+
+h1 {
+  margin-right: $space_xsmall;
+  font-size: $font_medium;
+  line-height: 46px; // This matches the height set on the search bar in select2.scss
+  vertical-align: top;
+}
+
+nav {
+  width: 60%;
+  max-width: 800px;
+}
+
+.info-button {
+  position: absolute;
+  line-height: 40px; // Matches search bar height, minus the thicker outline width
+  top: 3px;
+  right: 40px;
+  outline: 4px solid #FF0;
+  padding: 0px 20px;
+  cursor: pointer;
+  &:hover {
+    background: #000;
+    color: #FF0;
+    outline: #000;
+  }
+}
+
 .search-nav {
+  // Start with the nav hidden so that the select field doesn't FOUC before javascript kicks in
+  display: none;
   .select2-container {
-    width: 33%;
+    width: 100%;
   }
 }
 
@@ -15,3 +59,19 @@
 .search-select-title {
   display: none !important;
 }
+
+.search-caret {
+  position: absolute;
+  top: 50%;
+  height: 24px;
+  margin-top: -12px;
+  width: 2px;
+  margin-left: 8px;
+  background: #000;
+  animation: blink 1.2s steps(2,start) infinite;
+}
+
+@keyframes blink {
+  to { visibility: hidden; }
+}
+

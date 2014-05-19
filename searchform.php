@@ -1,6 +1,6 @@
 <div class="search-nav">
   <select id="search-select">
-    <option class="search-select-title" disabled><?php echo strlen(get_search_query()) > 0 ? get_search_query() : the_title() ?></option>
+    <option class="search-select-title"><?php echo strlen(get_search_query()) > 0 ? get_search_query() : the_title() ?></option>
     <?php
       // Loop through every tag on the site and list it as an <option> search-tag.
       $tags = get_tags();
@@ -35,7 +35,7 @@
 </div>
 
 <?php // Hide the #wp-search-form. This is just used to submit our data to WP. The actual search/sorting takes place in #search-select. ?>
-<form role="search" method="get" id="wp-search-form" class="search-form visuallyhidden" hidden>
+<form role="search" method="get" id="wp-search-form" class="search-form visuallyhidden" action="?search" hidden>
   <label>
     <span class="screen-reader-text">Search for:</span>
     <input type="search" id="wp-search-input" class="search-field" placeholder="Search" value="" name="s" title="Search for:" />
