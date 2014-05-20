@@ -11225,4 +11225,51 @@ $(function(){
     }
   }
 
+  ///////////////////////////////////////////////////////
+  //
+  // Image sets
+  //
+  ///////////////////////////////////////////////////////
+
+  calculateColumnsInRow('.image-set');
+
+  $('.image-set-info-wrapper').click(function(){
+
+  });
+
+
+  // Calculate how many columns are in a row, and add a new row class to the first column in each new row. 
+  function calculateColumnsInRow(elString) {
+    // Remove column class first, in case this is on resize and columns have shifted rows.
+    $(elString).removeClass('new-image-set-row');
+
+    var columnsInRow = 0;
+
+    $(elString).each(function() {
+      // If the columns's previous class name matches the current column:
+      if($(this).prev().attr('class').indexOf(elString.replace(/\./g,'')) != -1) {
+        // If the position of the current column is not equal to the previous column:
+        if($(this).position().top != $(this).prev().position().top){
+          // Then this is a new row. 
+          $(this).addClass('new-image-set-row');
+        }
+        columnsInRow++;
+      } else {
+        // Always add class for first column in row.
+        $(this).addClass('new-image-set-row');
+        columnsInRow++;
+      }
+    });
+  }
+
+  ///////////////////////////////////////////////////////
+  //
+  // Resize events
+  //
+  ///////////////////////////////////////////////////////
+
+  $(window).resize(function(){
+    calculateColumnsInRow('.image-set');
+  });
+
 });
