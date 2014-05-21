@@ -592,6 +592,10 @@ body {
   display: inline-block;
 }
 
+.new-image-set-row {
+  background: pink;
+}
+
 header {
   height: 100px;
   margin: 30px 40px;
@@ -746,6 +750,18 @@ footer h6 {
 .image-info-text {
   display: table-cell;
   vertical-align: middle;
+}
+
+.image-viewer {
+  width: 90%;
+  height: 0;
+  margin: 20px auto 80px;
+  background: whitesmoke;
+  border: 2px solid #000;
+  transition: height .4s;
+}
+.image-viewer.open {
+  height: 600px;
 }
 
 .alignnone {

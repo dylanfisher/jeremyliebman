@@ -74,3 +74,17 @@ $featured_image_set_info_height: 100px;
   display: table-cell;
   vertical-align: middle;
 }
+
+// Image viewer
+
+.image-viewer {
+  width: 90%;
+  height: 0;
+  margin: $space_xsmall auto $space_large;
+  background: whitesmoke;
+  border: 2px solid #000;
+  transition: height .4s;
+  &.open {
+    height: 600px;
+  }
+}

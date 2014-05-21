@@ -1,14 +1,26 @@
+///////////////////////////////////////////////////////
+//
 // Primary Javascript file
+//
+///////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//
+// Initial document ready events that don't need to
+// be re-initialized after pjax or popstate event.
+//
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
 $(function(){
-
 
   ///////////////////////////////////////////////////////
   //
   // pjax configuration
   //
   ///////////////////////////////////////////////////////
-
 
   // Initialize pjax on all anchor tags
   $(document).pjax('a', '#pjax-container');
@@ -137,43 +149,6 @@ $(function(){
 
   ///////////////////////////////////////////////////////
   //
-  // Image sets
-  //
-  ///////////////////////////////////////////////////////
-
-  calculateColumnsInRow('.image-set');
-
-  $('.image-set-info-wrapper').click(function(){
-
-  });
-
-
-  // Calculate how many columns are in a row, and add a new row class to the first column in each new row. 
-  function calculateColumnsInRow(elString) {
-    // Remove column class first, in case this is on resize and columns have shifted rows.
-    $(elString).removeClass('new-image-set-row');
-
-    var columnsInRow = 0;
-
-    $(elString).each(function() {
-      // If the columns's previous class name matches the current column:
-      if($(this).prev().attr('class').indexOf(elString.replace(/\./g,'')) != -1) {
-        // If the position of the current column is not equal to the previous column:
-        if($(this).position().top != $(this).prev().position().top){
-          // Then this is a new row. 
-          $(this).addClass('new-image-set-row');
-        }
-        columnsInRow++;
-      } else {
-        // Always add class for first column in row.
-        $(this).addClass('new-image-set-row');
-        columnsInRow++;
-      }
-    });
-  }
-
-  ///////////////////////////////////////////////////////
-  //
   // Resize events
   //
   ///////////////////////////////////////////////////////
@@ -183,3 +158,97 @@ $(function(){
   });
 
 });
+
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//
+// Events that need re-initialization after pjax and
+// popstate events.
+//
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+$(document).on('page:load ready pjax:end', function(){
+
+  ///////////////////////////////////////////////////////
+  //
+  // Image sets
+  //
+  ///////////////////////////////////////////////////////
+
+  // Calculate how many columns are in a row, and add a new row class to the first column in each new row. 
+  calculateColumnsInRow('.image-set');
+
+  // Append an image viewer when clicking on an image set
+  $('.image-set-info-wrapper').click(function(){
+    // Place the image viewer before the next image set on the following row.
+    var thisImageSet = $(this).closest('.image-set');
+    var nextImageSet = thisImageSet.nextAll('.new-image-set-row').first();
+
+    if(thisImageSet.hasClass('image-set-open')){
+      // Do nothing if this image set is already open
+    } else {
+      destroyImageViewer();
+      thisImageSet.addClass('image-set-open');
+
+      // If there is no next image set, place the image viewer after this image set.
+      if(nextImageSet.length === 0){
+        nextImageSet = thisImageSet;
+        createImageViewer(nextImageSet, 'below');
+      } else {
+        createImageViewer(nextImageSet, 'above');
+      }
+    }
+  });
+
+  function createImageViewer(el, aboveOrBelow){
+    var imageViewer = '<div class="image-viewer"></div>';
+    if(aboveOrBelow == 'above'){
+      el.before(imageViewer);
+    } else {
+      el.after(imageViewer);
+    }
+    setTimeout(function(){$('.image-viewer').addClass('open');});
+    var positionTop = $('.image-viewer').position().top - 60;
+    $('html, body').animate({scrollTop: positionTop}, 800, 'swing');
+  }
+
+  function destroyImageViewer(){
+    $('.image-set').removeClass('image-set-open');
+    $('.image-viewer').remove();
+  }
+
+});
+
+
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//
+// Global functions
+//
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+
+function calculateColumnsInRow(elString) {
+  // Remove column class first, in case this is on resize and columns have shifted rows.
+  $(elString).removeClass('new-image-set-row');
+
+  var columnsInRow = 0;
+
+  $(elString).each(function() {
+    // If the columns's previous class name matches the current column:
+    if($(this).prev().attr('class').indexOf(elString.replace(/\./g,'')) != -1) {
+      // If the position of the current column is not equal to the previous column:
+      if($(this).position().top != $(this).prev().position().top){
+        // Then this is a new row. 
+        $(this).addClass('new-image-set-row');
+      }
+      columnsInRow++;
+    } else {
+      // Always add class for first column in row.
+      $(this).addClass('new-image-set-row');
+      columnsInRow++;
+    }
+  });
+}
