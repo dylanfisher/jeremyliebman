@@ -192,9 +192,13 @@ $(document).on('page:load ready pjax:end', function(){
       destroyImageViewer();
       thisImageSet.addClass('image-set-open');
 
-      // If there is no next image set, place the image viewer after this image set.
+      // If there is no next image set on the next row, place the image viewer after the last image set in the current row.
       if(nextImageSet.length === 0){
-        nextImageSet = thisImageSet;
+        nextImageSet = thisImageSet.nextAll('.image-set').last();
+        // If there are no other image set after this one, place the image viewer after this image set.
+        if(nextImageSet.length === 0){
+          nextImageSet = thisImageSet;
+        }
         createImageViewer(nextImageSet, 'below');
       } else {
         createImageViewer(nextImageSet, 'above');
