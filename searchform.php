@@ -14,7 +14,7 @@
         // Parent categories
         if($cat->category_parent == 0 && $cat->slug != 'uncategorized') :
     ?>
-        <optgroup label="<?php echo $cat->name; ?>">
+        <optgroup class="search-category-parent" label="<?php echo $cat->name; ?>">
           <?php
             // Child categories
             $children = get_categories( array('child_of' => $cat->cat_ID) );

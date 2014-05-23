@@ -1,3 +1,49 @@
 //
 // Extends
 //
+
+%arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+%arrow-left {
+  @extend %arrow;
+  border-width: 20px 20px 20px 0;
+  border-color: transparent #000 transparent transparent;
+}
+
+%arrow-right {
+  @extend %arrow;
+  border-width: 20px 0 20px 20px;
+  border-color: transparent transparent transparent #000;
+}
+
+%arrow-top {
+  @extend %arrow;
+  border-width: 0 20px 20px 20px;
+  border-color: transparent transparent #000 transparent;
+}
+
+%close {
+  position: absolute;
+  background: #000;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  &:after {
+    content: "";
+    width: 16px;
+    height: 17px;
+    background-image: url(../../../images/close-white@2x.png);
+    background-size: 16px 17px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -8px;
+    margin-left: -8px;
+  }
+}

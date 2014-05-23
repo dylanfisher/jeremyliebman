@@ -184,6 +184,20 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 }
 
 /* results */
+.search-category-parent {
+    & > .select2-result-label {
+        font-size: $font-regular;
+        margin-top: $space_small;
+    }
+}
+
+.select2-result-sub {
+    font-size: $font-medium;
+    .select2-result-label {
+        margin-top: $space_small;
+    }
+}
+
 .select2-results {
     max-height: 100%;
     margin: 0;
@@ -201,6 +215,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 }
 
 .select2-results li {
+    margin: 0;
     list-style: none;
     display: list-item;
     background-image: none;

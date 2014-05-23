@@ -34,12 +34,13 @@ nav {
   line-height: 40px; // Matches search bar height, minus the thicker outline width
   top: 3px;
   right: 40px;
-  outline: 4px solid #FF0;
+  background: $yellow;
+  outline: 4px solid $yellow;
   padding: 0px 20px;
   cursor: pointer;
   &:hover {
     background: #000;
-    color: #FF0;
+    color: $yellow;
     outline: #000;
   }
 }

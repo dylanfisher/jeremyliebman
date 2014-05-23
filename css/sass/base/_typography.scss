@@ -1,0 +1,20 @@
+//
+// Typography
+//
+
+body {
+  @extend %font-bold;
+  font-size: 1.250em;
+}
+
+h1, h2, h3, h4 {
+  @extend %font-black;
+}
+
+h2 {
+  font-size: $font_medium;
+}
+
+h6 {
+  font-size: $font_small;
+}

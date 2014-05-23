@@ -29,12 +29,12 @@ $(function(){
   $.pjax.defaults.timeout = 5000;
 
   $(document).on('pjax:start', function(){
-    console.log('pjax start');
+    // console.log('pjax start');
     $('#pjax-container').addClass('pjax-transition');
   });
 
   $(document).on('pjax:end', function(){
-    console.log('pjax end');
+    // console.log('pjax end');
     $('#pjax-container').removeClass('pjax-transition');
 
     // Replace the select2 chosen item in search input with proper pjax page title
@@ -43,8 +43,7 @@ $(function(){
   });
 
   $(document).on('pjax:timeout, pjax:error', function(event){
-    console.log('pjax error');
-    console.log(event);
+    // console.log('pjax error');
   });
 
   ///////////////////////////////////////////////////////
@@ -147,6 +146,11 @@ $(function(){
     }
   }
 
+  // Close image viewer when pressing the X close button
+  $(document).on('click', '.image-viewer-close', function(){
+    destroyImageViewer();
+  });
+
   ///////////////////////////////////////////////////////
   //
   // Resize events
@@ -180,11 +184,14 @@ $(document).on('page:load ready pjax:end', function(){
   // Calculate how many columns are in a row, and add a new row class to the first column in each new row. 
   calculateColumnsInRow('.image-set');
 
-  // Append an image viewer when clicking on an image set
+  // Append an image viewer when clicking on an image set and set this set to active
   $('.image-set-info-wrapper').click(function(){
     // Place the image viewer before the next image set on the following row.
     var thisImageSet = $(this).closest('.image-set');
     var nextImageSet = thisImageSet.nextAll('.new-image-set-row').first();
+    var imagesInSet = $(this).closest('.image-set').children();
+
+    var images = imagesInSet.clone().toArray();
 
     if(thisImageSet.hasClass('image-set-open')){
       // Do nothing if this image set is already open
@@ -199,28 +206,51 @@ $(document).on('page:load ready pjax:end', function(){
         if(nextImageSet.length === 0){
           nextImageSet = thisImageSet;
         }
-        createImageViewer(nextImageSet, 'below');
+        createImageViewer(nextImageSet, 'below', images);
       } else {
-        createImageViewer(nextImageSet, 'above');
+        createImageViewer(nextImageSet, 'above', images);
       }
     }
   });
 
-  function createImageViewer(el, aboveOrBelow){
-    var imageViewer = '<div class="image-viewer"></div>';
+  function createImageViewer(el, aboveOrBelow, images){
+    var imageViewer = '<div class="image-viewer"><div class="image-viewer-slide-count"></div><div class="image-viewer-close"></div><div class="image-viewer-slide-container"></div></div>';
+    var offset = 100;
+    var ratio = 0.9;
+    var imageViewerHeight = ($(window).height() - offset) * ratio;
+
     if(aboveOrBelow == 'above'){
       el.before(imageViewer);
     } else {
       el.after(imageViewer);
     }
-    setTimeout(function(){$('.image-viewer').addClass('open');});
-    var positionTop = $('.image-viewer').position().top - 60;
-    $('html, body').animate({scrollTop: positionTop}, 800, 'swing');
-  }
 
-  function destroyImageViewer(){
-    $('.image-set').removeClass('image-set-open');
-    $('.image-viewer').remove();
+    $(images).each(function(){
+      $('.image-viewer-slide-container').append('<div><img src="' + $(this).attr("data-image-url") + '"></div>');
+    });
+
+    $('.image-viewer').addClass('open').css({height: imageViewerHeight});
+    var positionTop = $('.image-viewer').position().top - offset;
+    $('html, body').animate({scrollTop: positionTop}, 800, 'swing');
+
+    // Initiate slick
+    var current = 1;
+    var count = 0;
+    $('.image-viewer-slide-container').slick({
+      onInit: function(slick){
+        count = slick.slideCount;
+        current = slick.currentSlide + 1;
+        updateSlideCount(current, count);
+      },
+      onAfterChange: function(slick){
+        current = slick.currentSlide + 1;
+        updateSlideCount(current, count);
+      }
+    });
+
+    function updateSlideCount(current, count){
+      $('.image-viewer-slide-count').html(current + '/' + count);
+    }
   }
 
 });
@@ -255,4 +285,9 @@ function calculateColumnsInRow(elString) {
       columnsInRow++;
     }
   });
+}
+
+function destroyImageViewer(){
+  $('.image-set').removeClass('image-set-open');
+  $('.image-viewer').remove();
 }
