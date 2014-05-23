@@ -81,29 +81,35 @@ $featured_image_set_info_height: 100px;
   width: 90%;
   height: 0;
   max-height: 800px;
-  margin: $space_small auto $space_large;
+  margin: $space_medium auto $space_large;
   padding: $space_xsmall;
   border: 2px solid #000;
   transition: height .4s;
   &.open {
     height: 600px;
-    &:before,
-    &:after {
-      position: absolute;
-      bottom: 100%;
-    }
-    &:before {
-      @extend %arrow-top;
-      content: "";
-      border-width: 0 30px 30px 30px;
-    }
-    &:after {
-      @extend %arrow-top;
-      content: "";
-      border-width: 0 27px 27px;
-      border-color: transparent transparent #fff transparent;
-      margin-left: 3px;
-    }
+  }
+}
+
+.image-viewer-open-indicator {
+  position: absolute;
+  top: 0;
+  margin-left: -95px; // Offset is relative to the the width of the up indicator and padding on the image set
+  &:before,
+  &:after {
+    position: absolute;
+    bottom: 100%;
+  }
+  &:before {
+    @extend %arrow-top;
+    content: "";
+    border-width: 0 30px 30px 30px;
+  }
+  &:after {
+    @extend %arrow-top;
+    content: "";
+    border-width: 0 27px 27px;
+    border-color: transparent transparent #fff transparent;
+    margin-left: 3px;
   }
 }
 

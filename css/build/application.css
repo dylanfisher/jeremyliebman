@@ -14,7 +14,7 @@
   font-weight: 700;
 }
 
-.slick-prev, .slick-next, .image-viewer.open:before, .image-viewer.open:after {
+.slick-prev, .slick-next, .image-viewer-open-indicator:before, .image-viewer-open-indicator:after {
   width: 0;
   height: 0;
   border-style: solid;
@@ -30,7 +30,7 @@
   border-color: transparent transparent transparent #000;
 }
 
-.image-viewer.open:before, .image-viewer.open:after {
+.image-viewer-open-indicator:before, .image-viewer-open-indicator:after {
   border-width: 0 20px 20px 20px;
   border-color: transparent transparent #000 transparent;
 }
@@ -829,7 +829,7 @@ footer h6 {
   width: 90%;
   height: 0;
   max-height: 800px;
-  margin: 10px auto 80px;
+  margin: 40px auto 80px;
   padding: 20px;
   border: 2px solid #000;
   transition: height .4s;
@@ -837,15 +837,21 @@ footer h6 {
 .image-viewer.open {
   height: 600px;
 }
-.image-viewer.open:before, .image-viewer.open:after {
+
+.image-viewer-open-indicator {
+  position: absolute;
+  top: 0;
+  margin-left: -95px;
+}
+.image-viewer-open-indicator:before, .image-viewer-open-indicator:after {
   position: absolute;
   bottom: 100%;
 }
-.image-viewer.open:before {
+.image-viewer-open-indicator:before {
   content: "";
   border-width: 0 30px 30px 30px;
 }
-.image-viewer.open:after {
+.image-viewer-open-indicator:after {
   content: "";
   border-width: 0 27px 27px;
   border-color: transparent transparent #fff transparent;

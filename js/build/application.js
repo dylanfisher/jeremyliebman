@@ -12980,6 +12980,10 @@ $(document).on('page:load ready pjax:end', function(){
     var nextImageSet = thisImageSet.nextAll('.new-image-set-row').first();
     var imagesInSet = $(this).closest('.image-set').children();
 
+    var imageSetOffset = thisImageSet.offset().left;
+    var imageWidth = thisImageSet.find('img').width();
+    var indicatorPos = imageSetOffset + (imageWidth / 2);
+
     var images = imagesInSet.clone().toArray();
 
     if(thisImageSet.hasClass('image-set-open')){
@@ -13000,10 +13004,12 @@ $(document).on('page:load ready pjax:end', function(){
         createImageViewer(nextImageSet, 'above', images);
       }
     }
+
+    $('.image-viewer-open-indicator').css({left: indicatorPos});
   });
 
   function createImageViewer(el, aboveOrBelow, images){
-    var imageViewer = '<div class="image-viewer"><div class="image-viewer-slide-count"></div><div class="image-viewer-close"></div><div class="image-viewer-slide-container"></div></div>';
+    var imageViewer = '<div class="image-viewer"><div class="image-viewer-slide-count"></div><div class="image-viewer-close"></div><div class="image-viewer-open-indicator"></div><div class="image-viewer-slide-container"></div></div>';
     var offset = 100;
     var ratio = 0.9;
     var imageViewerHeight = ($(window).height() - offset) * ratio;
