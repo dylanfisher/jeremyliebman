@@ -45,6 +45,15 @@ nav {
   }
 }
 
+.search-container {
+  position: relative;
+}
+
+.select2-drop {
+  top: 0 !important;
+  left: 0 !important;
+}
+
 .search-nav {
   // Start with the nav hidden so that the select field doesn't FOUC before javascript kicks in
   display: none;
@@ -69,7 +78,7 @@ nav {
   width: 2px;
   margin-left: 8px;
   background: #000;
-  animation: blink 1.2s steps(2,start) infinite;
+  animation: blink 1.2s steps(2, start) infinite;
 }
 
 @keyframes blink {

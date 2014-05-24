@@ -1348,7 +1348,7 @@ the specific language governing permissions and limitations under the Apache Lic
             this.clearDropdownAlignmentPreference();
 
             if(this.dropdown[0] !== this.body.children().last()[0]) {
-                this.dropdown.detach().appendTo(this.body);
+                this.dropdown.detach().appendTo($('#search-container')); // Custom hack - append to nav instead of body
             }
 
             // create the dropdown mask if doesn't already exist

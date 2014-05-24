@@ -781,6 +781,15 @@ nav {
   outline: #000;
 }
 
+.search-container {
+  position: relative;
+}
+
+.select2-drop {
+  top: 0 !important;
+  left: 0 !important;
+}
+
 .search-nav {
   display: none;
 }
@@ -824,6 +833,7 @@ nav {
 footer {
   background: yellow;
   padding: 40px;
+  margin-top: 140px;
 }
 
 footer h6 {
@@ -915,8 +925,11 @@ footer h6 {
 .image-viewer {
   position: relative;
   width: 90%;
+  width: -webkit-calc(100% - 40px * 2);
+  width: calc(100% - 40px * 2);
   height: 0;
-  max-height: 800px;
+  max-width: 1324px;
+  max-height: 900px;
   margin: 40px auto 80px;
   padding: 20px;
   border: 2px solid #000;
@@ -967,6 +980,10 @@ footer h6 {
   top: 10px;
   right: 10px;
   z-index: 1;
+}
+
+.slick-initialized {
+  padding: 0 40px;
 }
 
 .slick-initialized .slick-slide img {
@@ -1153,7 +1170,6 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 
 .select2-drop {
   width: 100%;
-  margin-top: -1px;
   position: absolute;
   z-index: 9999;
   top: 100%;
@@ -1161,12 +1177,6 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
   color: #000;
   border: 2px solid #000;
   border-top: 0;
-}
-
-.select2-drop.select2-drop-above {
-  margin-top: 1px;
-  border-top: 2px solid #000;
-  border-bottom: 0;
 }
 
 .select2-drop-auto-width {
@@ -1203,10 +1213,6 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
   border-left: 0;
   border-right: 0;
   background: #fff;
-}
-
-.select2-drop.select2-drop-above .select2-search input {
-  margin-top: 4px;
 }
 
 .select2-container-active .select2-choice,

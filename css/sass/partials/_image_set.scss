@@ -79,8 +79,10 @@ $featured_image_set_info_height: 100px;
 .image-viewer {
   position: relative;
   width: 90%;
+  width: calc(100% - #{$space_medium} * 2);
   height: 0;
-  max-height: 800px;
+  max-width: 1324px;
+  max-height: 900px;
   margin: $space_medium auto $space_large;
   padding: $space_xsmall;
   border: 2px solid #000;
@@ -132,6 +134,7 @@ $featured_image_set_info_height: 100px;
 }
 
 .slick-initialized {
+  padding: 0 $space_medium;
   .slick-slide {
     img {
       max-height: 100%;

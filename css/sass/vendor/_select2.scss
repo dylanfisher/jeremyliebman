@@ -92,7 +92,6 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 
 .select2-drop {
     width: 100%;
-    margin-top: -1px;
     position: absolute;
     z-index: 9999;
     top: 100%;
@@ -101,15 +100,6 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
     color: #000;
     border: 2px solid #000;
     border-top: 0;
-}
-
-.select2-drop.select2-drop-above {
-    margin-top: 1px;
-    border-top: 2px solid #000;
-    border-bottom: 0;
-}
-
-.select2-drop.select2-drop-above.select2-drop-active {
 }
 
 .select2-drop-auto-width {
@@ -151,10 +141,6 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
     border-right: 0;
 
     background: #fff;
-}
-
-.select2-drop.select2-drop-above .select2-search input {
-    margin-top: 4px;
 }
 
 .select2-container-active .select2-choice,

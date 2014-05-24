@@ -9,5 +9,3 @@
 <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ) ?></title>
 
 <?php get_template_part( 'partials/application', 'router' ); ?>
-
-<br><span><i><sub>Page called from pjax_template.php</sub></i></span>

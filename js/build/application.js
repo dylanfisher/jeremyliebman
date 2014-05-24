@@ -8989,7 +8989,7 @@ the specific language governing permissions and limitations under the Apache Lic
             this.clearDropdownAlignmentPreference();
 
             if(this.dropdown[0] !== this.body.children().last()[0]) {
-                this.dropdown.detach().appendTo(this.body);
+                this.dropdown.detach().appendTo($('#search-container')); // Custom hack - append to nav instead of body
             }
 
             // create the dropdown mask if doesn't already exist
@@ -12811,11 +12811,16 @@ $(function(){
   //
   ///////////////////////////////////////////////////////
 
+  // Set pjax defaults
+  if ($.support.pjax){
+    // Increase the pjax timeout
+    $.pjax.defaults.timeout = 5000;
+    // Don't scroll to top
+    // $.pjax.defaults.scrollTo = false;
+  }
+
   // Initialize pjax on all anchor tags
   $(document).pjax('a', '#pjax-container');
-
-  // Increase the pjax timeout
-  $.pjax.defaults.timeout = 5000;
 
   $(document).on('pjax:start', function(){
     // console.log('pjax start');
@@ -12937,6 +12942,9 @@ $(function(){
 
   // Close image viewer when pressing the X close button
   $(document).on('click', '.image-viewer-close', function(){
+    if($('.image-set-open').length){
+      $('html, body').animate({scrollTop: $('.image-set-open').offset().top - $(window).height() * 0.1});
+    }
     destroyImageViewer();
   });
 
@@ -13010,8 +13018,9 @@ $(document).on('page:load ready pjax:end', function(){
 
   function createImageViewer(el, aboveOrBelow, images){
     var imageViewer = '<div class="image-viewer"><div class="image-viewer-slide-count"></div><div class="image-viewer-close"></div><div class="image-viewer-open-indicator"></div><div class="image-viewer-slide-container"></div></div>';
-    var offset = 100;
     var ratio = 0.9;
+    var ratioDiff = 1 - ratio;
+    var offset = $(window).height() * ratioDiff;
     var imageViewerHeight = ($(window).height() - offset) * ratio;
 
     if(aboveOrBelow == 'above'){
@@ -13025,8 +13034,8 @@ $(document).on('page:load ready pjax:end', function(){
     });
 
     $('.image-viewer').addClass('open').css({height: imageViewerHeight});
-    var positionTop = $('.image-viewer').position().top - offset;
-    $('html, body').animate({scrollTop: positionTop}, 800, 'swing');
+    var positionTop = $('.image-viewer').offset().top - offset;
+    $('html, body').animate({scrollTop: positionTop}, 400, 'swing');
 
     // Initiate slick
     var current = 1;

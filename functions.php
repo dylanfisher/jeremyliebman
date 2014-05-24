@@ -342,7 +342,8 @@ function sandbox_content($limit) {
 
 // Add Custom Image Sizes
 // add_image_size( 'custom-image-size-name', 300, 300, true ); // Custom Image - Name, Width, Height, Hard Crop boolean
-add_image_size( 'small', 175, 9999, false );
+add_image_size( 'small', 175, 9999, false ); // Footer images
+add_image_size( 'huge', 1200, 856, false ); // Carousel images
 
 
 // Open external links in new windows

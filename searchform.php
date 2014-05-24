@@ -35,7 +35,7 @@
 </div>
 
 <?php // Hide the #wp-search-form. This is just used to submit our data to WP. The actual search/sorting takes place in #search-select. ?>
-<form role="search" method="get" id="wp-search-form" class="search-form visuallyhidden" action="?search" hidden>
+<form role="search" method="get" id="wp-search-form" class="search-form visuallyhidden" action="<?php echo get_bloginfo('url') ?>/?search" hidden>
   <label>
     <span class="screen-reader-text">Search for:</span>
     <input type="search" id="wp-search-input" class="search-field" placeholder="Search" value="" name="s" title="Search for:" />

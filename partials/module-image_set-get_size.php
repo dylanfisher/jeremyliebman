@@ -11,26 +11,25 @@
     $max_image_width = $max_image_width === null ? $item['image']['sizes'][$size . '-width'] : max($max_image_width, $item['image']['sizes'][$size . '-width']);
   }
 
-  $imageSet_height = $max_image_height + ($row_count * $marginTop);
-  $imageSet_width = $max_image_width + ($row_count * $marginTop);
-
   get_field('featured_set') ? $featured_set = true : $featured_set = false;
+
+  // Get the variables of the first image outside the loop for placeholder sizes
+  $first_row = $repeater[0];
+  $image_first = $first_row['image'];
+  $url_first = $image_first['url'];
+  $alt_first = $image_first['alt'];
+
+  // sizes
+  $image_at_size_first = $image_first['sizes'][ $size ];
+  $width_first = $image_first['sizes'][ $size . '-width' ];
+  $height_first = $image_first['sizes'][ $size . '-height' ];
+
+  // Get the largest width and height out of the set (not being used anymore, since the placeholder images are uniform).
+  $imageSet_height = $height_first + ($row_count * $marginTop);
+  $imageSet_width = $width_first + ($row_count * $marginTop);
 ?>
 
 <div class="image-set<?php echo $featured_set ? ' featured-image-set' : false ?> <?php sandbox_post_class() ?>" style="width: <?php echo $imageSet_width .'px' ?>; height: <?php echo $imageSet_height .'px' ?>;">
-
-  <?php
-    // Get the variables of the first image outside the loop for placeholder sizes
-    $first_row = $repeater[0];
-    $image_first = $first_row['image'];
-    $url_first = $image_first['url'];
-    $alt_first = $image_first['alt'];
-
-    // sizes
-    $image_at_size_first = $image_first['sizes'][ $size ];
-    $width_first = $image_first['sizes'][ $size . '-width' ];
-    $height_first = $image_first['sizes'][ $size . '-height' ];
-  ?>
 
   <?php while( have_rows('images') ): the_row(); $row_count--;
 
@@ -46,7 +45,7 @@
     $width = $image['sizes'][ $size . '-width' ];
     $height = $image['sizes'][ $size . '-height' ];
 
-    $data_url = $image['sizes']['large'];
+    $data_url = $image['sizes']['huge'];
 
   ?>
 

@@ -32,12 +32,20 @@
 
           $image_at_size = $image['sizes'][ $size ];
 
+          // Post URL
+          $postName = $child->post_name;
+          $postUrl = get_bloginfo('url') . '/' . $child->post_name;
+
       ?>
         <div class="footer-image-wrapper">
           <?php if($image_at_size){ ?>
-            <img src="<?php echo $image_at_size; ?>" alt="<?php echo $alt ?>" width="<?php echo $width ?>" height="<?php echo $height ?>">
+            <a href="<?php echo $postUrl ?>">
+              <img src="<?php echo $image_at_size; ?>" alt="<?php echo $alt ?>" width="<?php echo $width ?>" height="<?php echo $height ?>">
+            </a>
           <?php } ?>
-          <h6><?php echo $child->post_title; ?></h6>
+          <h6>
+            <a href="<?php echo $postUrl ?>"><?php echo $child->post_title; ?></a>
+          </h6>
         </div>
 
       <?php
