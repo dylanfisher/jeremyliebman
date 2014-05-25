@@ -4,10 +4,10 @@
     <?php
       // Loop through every WP tag on the site and list it as an <option> search-tag.
       // These tags represent the image set's tags as an entire set.
-      $tags = get_tags();
-      foreach ($tags as &$tag) {
-        echo '<option class="search-tag image-set-search-tag" disabled>' . $tag->name . '</option>';
-      }
+      // $tags = get_tags();
+      // foreach ($tags as &$tag) {
+      //   echo '<option class="search-tag image-set-search-tag" disabled>' . $tag->name . '</option>';
+      // }
 
       // Include our wpdb module that queries the database for all ACF tags. Returns $tags_array with all tags.
       include(locate_template('partials/module-acf_tags_query.php'));

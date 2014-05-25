@@ -112,6 +112,7 @@ $(function(){
     } else {
       searchTagEnabler('disable');
     }
+    searchTagDoubleChecker();
   })
   .on('keydown', '#s2id_autogen1_search', function(e){
     // If the delete key is pressed on keydown, also remove class so that
@@ -125,6 +126,7 @@ $(function(){
       // Don't enable if a modifer key is pressed. 
       searchTagEnabler('enable');
     }
+    searchTagDoubleChecker();
   });
 
   // Add blinking caret to the end of the selected term
@@ -133,11 +135,22 @@ $(function(){
   function searchTagEnabler(state){
     if(state == 'enable'){
       $('#select2-drop').addClass('active');
+      $('#select2-drop .search-tag').removeClass('visuallyhidden');
       $('#search-select .search-tag').removeAttr('disabled');
     } else {
       $('#select2-drop').removeClass('active');
+      $('#select2-drop .search-tag').addClass('visuallyhidden');
       $('#search-select .search-tag').prop('disabled', true);
     }
+  }
+
+  function searchTagDoubleChecker(){
+    // Double check the value and see if search tags should be visible
+    setTimeout(function(){
+      if($('#s2id_autogen1_search').val().length === 0){
+        searchTagEnabler('disable');
+      }
+    }, 10);
   }
 
   ///////////////////////////////////////////////////////
