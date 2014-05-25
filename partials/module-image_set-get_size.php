@@ -2,6 +2,12 @@
   $repeater = get_field('images');
   $row_count = count($repeater);
 
+  // echo "<pre>";
+  // print_r($post);
+  // echo "<br><br><br><br> REPEATER: <br><br><br><br>";
+  // print_r($repeater);
+  // echo "</pre>";
+
   // Loop through each image size and find the largest. This is used to set the image-set dimensions.
   $max_image_height = null;
   $max_image_width = null;
@@ -33,12 +39,14 @@
 
   <?php while( have_rows('images') ): the_row(); $row_count--;
 
+    // This while loop is used to 
+
     // Get the variables for each image inside the loop
     $image = get_sub_field('image');
     $url = $image['url'];
     $title = $image['title'];
     $alt = $image['alt'];
-    $caption = $image['caption'];
+    $caption = get_sub_field('caption');
 
     // sizes
     $image_at_size = $image['sizes'][ $size ];
@@ -50,9 +58,9 @@
   ?>
 
     <?php if($row_count > 0){ // only show an image for the first image in the set ?>
-      <div class="image-set-placeholder" data-image-url="<?php echo $data_url ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>; margin-top: <?php echo $row_count * $marginTop . 'px' ?>; margin-left: <?php echo $row_count * $marginLeft . 'px' ?>;"></div>
+      <div class="image-set-placeholder" data-image-url="<?php echo $data_url ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>; margin-top: <?php echo $row_count * $marginTop . 'px' ?>; margin-left: <?php echo $row_count * $marginLeft . 'px' ?>;"></div>
     <?php } else { ?>
-      <div class="image-set-info-wrapper" data-image-url="<?php echo $data_url ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>">
+      <div class="image-set-info-wrapper" data-image-url="<?php echo $data_url ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>">
         <div class="image-set-info">
           <div class="image-info-text">
             <h6><?php the_title() ?></h6>
@@ -61,10 +69,59 @@
             <?php } ?>
           </div>
         </div>
-        <img class="test" src="<?php echo $image_at_size_first; ?>" alt="<?php echo $alt_first ?>" width="<?php echo $width_first ?>" height="<?php echo $height_first ?>">
+        <img src="<?php echo $image_at_size_first; ?>" alt="<?php echo $alt_first ?>" width="<?php echo $width_first ?>" height="<?php echo $height_first ?>">
       </div>
     <?php } ?>
 
   <?php endwhile; ?>
 
 </div>
+
+<?php
+  // Check the search query to see if single-images should be shown
+  $search_query = get_search_query();
+
+  if($search_query):
+?>
+
+  <div class="single-images">
+    <br>
+    <h6>[Single image view]</h6>
+    <br>
+
+    <?php // Individual image results view
+      // Search has no results, which means the search term was an ACF tag.
+      // Instead of showing image sets in the default view, show the individual image view.
+      while( have_rows('images') ): the_row();
+
+        // Reset variables for individual images
+        // Get the variables for each image inside the loop
+        $image = get_sub_field('image');
+        $url = $image['url'];
+        $title = $image['title'];
+        $alt = $image['alt'];
+        $caption = get_sub_field('caption');
+        $tags = get_sub_field('tags');
+
+        // sizes
+        $image_at_size = $image['sizes'][ $size ];
+        $width = $image['sizes'][ $size . '-width' ];
+        $height = $image['sizes'][ $size . '-height' ];
+
+        // Check if the image's tags match the search query, and only show these images.
+        if(strpos($tags, $search_query) !== false):
+
+    ?>
+          <div class="single-image" style="display: inline-block;">
+            <img src="<?php echo $image_at_size; ?>" alt="<?php echo $alt ?>" width="<?php echo $width ?>" height="<?php echo $height ?>">
+            <h6><?php echo $tags; ?></h6>
+          </div>
+    <?php
+        endif;
+      endwhile;
+    ?>
+  </div>
+
+<?php
+  endif;
+?>

@@ -12840,6 +12840,27 @@ $(function(){
     // console.log('pjax error');
   });
 
+  // pjax loader
+  var loaderTimeoutID;
+  var showLoader = function(){
+    $('#pjax-container').prepend('<div class="loader">Loading...</div>');
+    $('.loader').fadeIn();
+  };
+
+  $(document).on('pjax:send', function(){
+    // Show loader after interval, if the page is really slow.
+    var loadingDelay = 2000;
+    loaderTimeoutID = window.setTimeout(showLoader, loadingDelay);
+  });
+
+  $(document).on('pjax:complete', function(){
+    // Remove loader and reset timeout.
+    window.clearTimeout(loaderTimeoutID);
+    $('.loader').fadeOut(function(){
+      $('.loader').remove();
+    });
+  });
+
   ///////////////////////////////////////////////////////
   //
   // Search and select2
@@ -12988,10 +13009,6 @@ $(document).on('page:load ready pjax:end', function(){
     var nextImageSet = thisImageSet.nextAll('.new-image-set-row').first();
     var imagesInSet = $(this).closest('.image-set').children();
 
-    var imageSetOffset = thisImageSet.offset().left;
-    var imageWidth = thisImageSet.find('img').width();
-    var indicatorPos = imageSetOffset + (imageWidth / 2);
-
     var images = imagesInSet.clone().toArray();
 
     if(thisImageSet.hasClass('image-set-open')){
@@ -13013,6 +13030,11 @@ $(document).on('page:load ready pjax:end', function(){
       }
     }
 
+    var imageSetOffset = thisImageSet.offset().left;
+    var imageViewerOffset = $('.image-viewer').offset().left;
+    var imageWidth = thisImageSet.find('img').width();
+    var indicatorPos = imageSetOffset - imageViewerOffset + (imageWidth / 2);
+
     $('.image-viewer-open-indicator').css({left: indicatorPos});
   });
 
@@ -13021,7 +13043,8 @@ $(document).on('page:load ready pjax:end', function(){
     var ratio = 0.9;
     var ratioDiff = 1 - ratio;
     var offset = $(window).height() * ratioDiff;
-    var imageViewerHeight = ($(window).height() - offset) * ratio;
+    var captionHeight = 36;
+    var imageViewerHeight = ( ($(window).height() - offset) * ratio ) + captionHeight;
 
     if(aboveOrBelow == 'above'){
       el.before(imageViewer);
@@ -13030,14 +13053,17 @@ $(document).on('page:load ready pjax:end', function(){
     }
 
     $(images).each(function(){
-      $('.image-viewer-slide-container').append('<div><img src="' + $(this).attr("data-image-url") + '"></div>');
+      var caption = $(this).attr("data-image-caption").length ? '<div class="caption">' + $(this).attr("data-image-caption") + '</div>' : '';
+      var captionParentClass = $(this).attr("data-image-caption").length ? ' class="has-caption"' : '';
+      var image = '<img src="' + $(this).attr("data-image-url") + '">';
+      $('.image-viewer-slide-container').append('<div' + captionParentClass + '>' + image + caption + '</div>');
     });
 
     $('.image-viewer').addClass('open').css({height: imageViewerHeight});
     var positionTop = $('.image-viewer').offset().top - offset;
     $('html, body').animate({scrollTop: positionTop}, 400, 'swing');
 
-    // Initiate slick
+    // Initiate slick carousel
     var current = 1;
     var count = 0;
     $('.image-viewer-slide-container').slick({
@@ -13075,6 +13101,10 @@ function calculateColumnsInRow(elString) {
   var columnsInRow = 0;
 
   $(elString).each(function() {
+    if($(this).prev().attr('class') === undefined){
+      return;
+    }
+
     // If the columns's previous class name matches the current column:
     if($(this).prev().attr('class').indexOf(elString.replace(/\./g,'')) != -1) {
       // If the position of the current column is not equal to the previous column:
@@ -13094,4 +13124,5 @@ function calculateColumnsInRow(elString) {
 function destroyImageViewer(){
   $('.image-set').removeClass('image-set-open');
   $('.image-viewer').remove();
+  calculateColumnsInRow('.image-set');
 }

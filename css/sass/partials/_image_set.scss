@@ -81,7 +81,7 @@ $featured_image_set_info_height: 100px;
   width: 90%;
   width: calc(100% - #{$space_medium} * 2);
   height: 0;
-  max-width: 1324px;
+  // max-width: 1324px;
   max-height: 900px;
   margin: $space_medium auto $space_large;
   padding: $space_xsmall;
@@ -95,7 +95,7 @@ $featured_image_set_info_height: 100px;
 .image-viewer-open-indicator {
   position: absolute;
   top: 0;
-  margin-left: -95px; // Offset is relative to the the width of the up indicator and padding on the image set
+  margin-left: -30px; // Offset is relative to the the width of the indicator
   &:before,
   &:after {
     position: absolute;
@@ -133,6 +133,11 @@ $featured_image_set_info_height: 100px;
   z-index: 1;
 }
 
+.caption {
+  font-size: $font_small;
+  margin-top: -16px; // Caption height
+}
+
 .slick-initialized {
   padding: 0 $space_medium;
   .slick-slide {
@@ -142,6 +147,11 @@ $featured_image_set_info_height: 100px;
       height: auto;
       width: auto;
       margin: 0 auto;
+    }
+    &.has-caption {
+      img {
+        padding-bottom: $space_medium;
+      }
     }
   }
 }
