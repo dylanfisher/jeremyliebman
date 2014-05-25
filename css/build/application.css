@@ -1035,6 +1035,10 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
   background-color: #fff;
 }
 
+.select2-chosen {
+  color: #000;
+}
+
 .select2-container.select2-allowclear .select2-choice .select2-chosen {
   margin-right: 42px;
 }
