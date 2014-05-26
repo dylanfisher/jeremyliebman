@@ -29,7 +29,7 @@
         $children = get_categories( array('child_of' => $cat->cat_ID) );
         foreach ($children as &$child) :
       ?>
-        <option><?php echo $child->name; ?></option>
+        <option class="image-set-search-tag"><?php echo $child->name; ?></option>
       <?php
         endforeach;
       ?>
@@ -45,10 +45,14 @@
 </div>
 
 <?php // Hide the #wp-search-form. This is just used to submit our data to WP. The actual search/sorting takes place in #search-select. ?>
+<?php // Use this search form for image sets ?>
 <form role="search" method="get" id="wp-search-form" class="search-form visuallyhidden" action="<?php echo get_bloginfo('url') ?>/?search" hidden>
-  <label>
-    <span class="screen-reader-text">Search for:</span>
-    <input type="search" id="wp-search-input" class="search-field" placeholder="Search" value="" name="s" title="Search for:" />
-  </label>
+  <input type="search" id="wp-search-input" class="search-field" placeholder="Search" value="" name="s" title="Search for:" />
+  <input type="submit" class="search-submit" value="Search" />
+</form>
+
+<?php // Use a separate search form for searching for single images ?>
+<form role="search" method="get" id="wp-search-form-single-images" class="search-form visuallyhidden" action="<?php echo get_bloginfo('url') ?>/?search&amp;single" hidden>
+  <input type="search" id="wp-search-input" class="search-field" placeholder="Search" value="" name="s" title="Search for:" />
   <input type="submit" class="search-submit" value="Search" />
 </form>

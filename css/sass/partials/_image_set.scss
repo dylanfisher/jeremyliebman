@@ -5,6 +5,19 @@
 $image_set_info_height: 80px;
 $featured_image_set_info_height: 100px;
 
+// Single images
+
+.single-image {
+  display: inline-block;
+  margin: $space_xsmall $space_xsmall 0;
+  cursor: pointer;
+}
+.image-viewer-slide-count {
+  display: none;
+}
+
+// Images sets
+
 .image-set {
   position: relative;
   display: inline-block;

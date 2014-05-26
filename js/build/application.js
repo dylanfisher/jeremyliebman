@@ -12883,14 +12883,23 @@ $(function(){
     // Event triggers when clicking or pressing enter on an item.
     // This is the final event that should trigger search.
     var selection = e.val;
-    $('#wp-search-input').val(selection);
+
+    $('#wp-search-input, #wp-search-input-single-images').val(selection);
 
     // Listen for first event and do our pjax. Without .one() this fires exponentially.
-    $(document).one('submit', '#wp-search-form', function(e){
+    $(document).one('submit', '#wp-search-form, #wp-search-form-single-images', function(e){
       $.pjax.submit(e, '#pjax-container');
     });
 
-    $('#wp-search-form').submit();
+    // Decide which form to submit. One for image sets, the other for single images.
+    if(e.object.css == 'image-set-search-tag'){
+      // Image sets
+      $('#wp-search-form').submit();
+    } else {
+      // Single images
+      $('#wp-search-form-single-images').submit();
+    }
+
   });
 
   $(document)
@@ -12990,6 +12999,7 @@ $(function(){
 
   $(window).resize(function(){
     calculateColumnsInRow('.image-set');
+    calculateColumnsInRow('.single-image');
   });
 
 });
@@ -13040,6 +13050,42 @@ $(document).on('page:load ready pjax:end', function(){
         createImageViewer(nextImageSet, 'below', images);
       } else {
         createImageViewer(nextImageSet, 'above', images);
+      }
+    }
+
+    var imageSetOffset = thisImageSet.offset().left;
+    var imageViewerOffset = $('.image-viewer').offset().left;
+    var imageWidth = thisImageSet.find('img').width();
+    var indicatorPos = imageSetOffset - imageViewerOffset + (imageWidth / 2);
+
+    $('.image-viewer-open-indicator').css({left: indicatorPos});
+  });
+
+  // Calculate how many columns are in a row, and add a new row class to the first column in each new row. 
+  calculateColumnsInRow('.single-image');
+
+  // Single image viewers
+  $('.single-image').click(function(){
+    var thisImageSet = $(this);
+    var nextImageSet = $(this).nextAll('.new-image-set-row').first();
+    var image = [$(this).find('img')];
+
+    if($(this).hasClass('image-set-open')){
+      // Do nothing if this image set is already open
+    } else {
+      destroyImageViewer();
+      $(this).addClass('image-set-open');
+
+      // If there is no next image set on the next row, place the image viewer after the last image set in the current row.
+      if(nextImageSet.length === 0){
+        nextImageSet = thisImageSet.nextAll('.single-image').last();
+        // If there are no other image set after this one, place the image viewer after this image set.
+        if(nextImageSet.length === 0){
+          nextImageSet = thisImageSet;
+        }
+        createImageViewer(nextImageSet, 'below', image);
+      } else {
+        createImageViewer(nextImageSet, 'above', image);
       }
     }
 
@@ -13135,7 +13181,8 @@ function calculateColumnsInRow(elString) {
 }
 
 function destroyImageViewer(){
-  $('.image-set').removeClass('image-set-open');
+  $('.image-set, .single-image').removeClass('image-set-open');
   $('.image-viewer').remove();
   calculateColumnsInRow('.image-set');
+  calculateColumnsInRow('.single-image');
 }

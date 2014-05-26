@@ -867,6 +867,16 @@ footer h6 {
   outline: 2px solid #000;
 }
 
+.single-image {
+  display: inline-block;
+  margin: 20px 20px 0;
+  cursor: pointer;
+}
+
+.image-viewer-slide-count {
+  display: none;
+}
+
 .image-set {
   position: relative;
   display: inline-block;
