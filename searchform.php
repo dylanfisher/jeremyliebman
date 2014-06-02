@@ -17,7 +17,7 @@
         echo '<option class="search-tag image-search-tag" disabled>' . $value . '</option>';
       }
 
-      $categories = get_categories( array('hide_empty' => 0, 'orderby' => 'count', 'order' => 'desc') );
+      $categories = get_categories( array('hide_empty' => 0) );
       foreach ($categories as &$cat) :
         // Parent categories
         if($cat->category_parent == 0 && $cat->slug != 'uncategorized') :

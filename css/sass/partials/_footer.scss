@@ -19,6 +19,7 @@ footer {
 .footer-image-wrapper {
   display: inline-block;
   margin: $space_small;
+  max-width: 175px;
   img {
     outline: 2px solid #000;
   }

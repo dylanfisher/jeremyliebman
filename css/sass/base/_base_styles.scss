@@ -1,7 +1,7 @@
-* { 
-    -moz-box-sizing: border-box; 
-    -webkit-box-sizing: border-box; 
-    box-sizing: border-box; 
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html,
@@ -33,6 +33,8 @@ hr {
 
 img {
     vertical-align: middle;
+    max-width: 100%;
+    height: auto;
 }
 
 fieldset {

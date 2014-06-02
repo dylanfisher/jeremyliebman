@@ -489,6 +489,8 @@ hr {
 
 img {
   vertical-align: middle;
+  max-width: 100%;
+  height: auto;
 }
 
 fieldset {
@@ -747,10 +749,12 @@ nav {
 }
 
 .search-caret {
-  position: absolute;
-  top: 50%;
+  position: relative;
   height: 24px;
-  margin-top: -12px;
+  width: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -4px;
   width: 2px;
   margin-left: 8px;
   background: #000;
@@ -758,6 +762,10 @@ nav {
 }
 
 @keyframes blink {
+  from {
+    visibility: visible;
+  }
+
   to {
     visibility: hidden;
   }
@@ -780,6 +788,7 @@ footer h6 {
 .footer-image-wrapper {
   display: inline-block;
   margin: 10px;
+  max-width: 175px;
 }
 .footer-image-wrapper img {
   outline: 2px solid #000;
@@ -864,7 +873,6 @@ footer h6 {
   margin: 40px auto 80px;
   padding: 20px;
   border: 2px solid #000;
-  transition: height .4s;
 }
 .image-viewer.open {
   height: 600px;
@@ -1491,6 +1499,7 @@ html[dir="rtl"] .select2-search-choice-close {
   display: block;
   margin: 0;
   padding: 0;
+  max-height: 100%;
 }
 .slick-list:focus {
   outline: none;
@@ -1643,8 +1652,37 @@ html[dir="rtl"] .select2-search-choice-close {
   opacity: 0.75;
 }
 
-@media only screen and (min-width: 35em) {
-  /* Style adjustments for viewports that meet the condition */
+@media only screen and (max-width: 1120px) {
+  nav {
+    margin-right: 20px;
+  }
+
+  .info-button {
+    position: static;
+    display: inline-block;
+    margin-top: 4px;
+  }
+}
+@media only screen and (max-width: 1020px) {
+  nav {
+    max-width: 40%;
+  }
+}
+@media only screen and (max-width: 760px) {
+  header {
+    height: auto;
+  }
+
+  h1,
+  nav {
+    display: block;
+    max-width: none;
+    width: 100%;
+  }
+
+  nav {
+    margin-bottom: 20px;
+  }
 }
 @media print, (-o-min-device-pixel-ratio: 5 / 4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */

@@ -40,7 +40,12 @@
         <div class="footer-image-wrapper">
           <?php if($image_at_size){ ?>
             <a href="<?php echo $postUrl ?>">
-              <img src="<?php echo $image_at_size; ?>" alt="<?php echo $alt ?>" width="<?php echo $width ?>" height="<?php echo $height ?>">
+              <picture>
+                <!--[if IE 9]><video style="display: none;"><![endif]-->
+                <source srcset="<?php echo $image['sizes']['small']; ?>, <?php echo $image['sizes']['small@2x']; ?> 2x">
+                <!--[if IE 9]></video><![endif]-->
+                <img srcset="<?php echo $image['sizes']['small']; ?>, <?php echo $image['sizes']['small@2x']; ?> 2x" alt="<?php echo $alt ?>">
+              </picture>
             </a>
           <?php } ?>
           <h6>

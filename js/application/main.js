@@ -65,6 +65,7 @@ $(function(){
   });
 
   $(document).on('pjax:complete', function(){
+    picturefill();
     // Remove loader and reset timeout.
     window.clearTimeout(loaderTimeoutID);
     $('.loader').fadeOut(function(){
@@ -132,7 +133,7 @@ $(function(){
       }
     } else if(e.which <= 90 && e.which >= 48) {
       // If any alphanumeric key is pressed, enable the search tags.
-      // Don't enable if a modifer key is pressed. 
+      // Don't enable if a modifer key is pressed.
       searchTagEnabler('enable');
     }
     searchTagDoubleChecker();
@@ -233,7 +234,7 @@ $(document).on('page:load ready pjax:end', function(){
   //
   ///////////////////////////////////////////////////////
 
-  // Calculate how many columns are in a row, and add a new row class to the first column in each new row. 
+  // Calculate how many columns are in a row, and add a new row class to the first column in each new row.
   calculateColumnsInRow('.image-set');
 
   // Append an image viewer when clicking on an image set and set this set to active
@@ -272,7 +273,7 @@ $(document).on('page:load ready pjax:end', function(){
     $('.image-viewer-open-indicator').css({left: indicatorPos});
   });
 
-  // Calculate how many columns are in a row, and add a new row class to the first column in each new row. 
+  // Calculate how many columns are in a row, and add a new row class to the first column in each new row.
   calculateColumnsInRow('.single-image');
 
   // Single image viewers
@@ -325,9 +326,28 @@ $(document).on('page:load ready pjax:end', function(){
     $(images).each(function(){
       var caption = $(this).attr("data-image-caption").length ? '<div class="caption">' + $(this).attr("data-image-caption") + '</div>' : '';
       var captionParentClass = $(this).attr("data-image-caption").length ? ' class="has-caption"' : '';
-      var image = '<img src="' + $(this).attr("data-image-url") + '">';
-      $('.image-viewer-slide-container').append('<div' + captionParentClass + '>' + image + caption + '</div>');
+      var image = $(this).attr("data-image-url");
+      var image2x = $(this).attr("data-image-url-2x");
+      var imageMobile = $(this).attr("data-image-url-mobile");
+      var imageMobile2x = $(this).attr("data-image-url-mobile-2x");
+      // $('.image-viewer-slide-container').append('<div' + captionParentClass + '>' + image + caption + '</div>');
+      $('.image-viewer-slide-container').append(
+        '<div' + captionParentClass + '>' +
+          '<picture style="display: none;">' +
+            '<!--[if IE 9]><video style="display: none;"><![endif]-->' +
+            '<source srcset="' + imageMobile + ', ' + imageMobile2x + ' 2x" media="(max-width: 800px)">' +
+            '<source srcset="' + image + ', ' + image2x + ' 2x">' +
+            '<!--[if IE 9]></video><![endif]-->' +
+            '<img srcset="' + image + ', ' + image2x + ' 2x">' +
+          '</picture>' +
+          caption +
+        '</div>'
+        );
     });
+
+    // Re-initialize picturefill after appending picture element.
+    $('.image-viewer-slide-container picture').show();
+    picturefill();
 
     $('.image-viewer').addClass('open').css({height: imageViewerHeight});
     var positionTop = $('.image-viewer').offset().top - offset;
@@ -379,7 +399,7 @@ function calculateColumnsInRow(elString) {
     if($(this).prev().attr('class').indexOf(elString.replace(/\./g,'')) != -1) {
       // If the position of the current column is not equal to the previous column:
       if($(this).position().top != $(this).prev().position().top){
-        // Then this is a new row. 
+        // Then this is a new row.
         $(this).addClass('new-image-set-row');
       }
       columnsInRow++;

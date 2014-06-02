@@ -46,7 +46,7 @@
 
     <?php while( have_rows('images') ): the_row(); $row_count--;
 
-      // This while loop is used to 
+      // This while loop is used to
 
       // Get the variables for each image inside the loop
       $image = get_sub_field('image');
@@ -61,13 +61,16 @@
       $height = $image['sizes'][ $size . '-height' ];
 
       $data_url = $image['sizes']['huge'];
+      $data_url_2x = $image['sizes']['huge@2x'];
+      $data_url_mobile = $image['sizes']['carousel-mobile'];
+      $data_url_mobile_2x = $image['sizes']['huge'];
 
     ?>
 
       <?php if($row_count > 0){ // only show an image for the first image in the set ?>
-        <div class="image-set-placeholder" data-image-url="<?php echo $data_url ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>; margin-top: <?php echo $row_count * $marginTop . 'px' ?>; margin-left: <?php echo $row_count * $marginLeft . 'px' ?>;"></div>
+        <div class="image-set-placeholder" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>; margin-top: <?php echo $row_count * $marginTop . 'px' ?>; margin-left: <?php echo $row_count * $marginLeft . 'px' ?>;"></div>
       <?php } else { ?>
-        <div class="image-set-info-wrapper" data-image-url="<?php echo $data_url ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>">
+        <div class="image-set-info-wrapper" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>">
           <div class="image-set-info">
             <div class="image-info-text">
               <h6><?php the_title() ?></h6>
@@ -76,7 +79,12 @@
               <?php } ?>
             </div>
           </div>
-          <img src="<?php echo $image_at_size_first; ?>" alt="<?php echo $alt_first ?>" width="<?php echo $width_first ?>" height="<?php echo $height_first ?>">
+          <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="<?php echo $image_first['sizes']['medium']; ?>, <?php echo $image_first['sizes']['medium@2x']; ?> 2x">
+            <!--[if IE 9]></video><![endif]-->
+            <img srcset="<?php echo $image_first['sizes']['medium']; ?>, <?php echo $image_first['sizes']['medium@2x']; ?> 2x" alt="<?php echo $alt_first ?>">
+          </picture>
         </div>
       <?php } ?>
 
@@ -116,13 +124,21 @@
         $height = $image['sizes'][ $size . '-height' ];
 
         $data_url = $image['sizes']['huge'];
+        $data_url_2x = $image['sizes']['huge@2x'];
+        $data_url_mobile = $image['sizes']['carousel-mobile'];
+        $data_url_mobile_2x = $image['sizes']['huge'];
 
         // Check if the image's tags match the search query, and only show these images.
         if(strpos($tags, $search_query) !== false):
 
     ?>
           <div class="single-image <?php sandbox_post_class() ?>">
-            <img src="<?php echo $image_at_size; ?>" data-image-url="<?php echo $data_url ?>" data-image-caption="<?php echo $caption ?>" alt="<?php echo $alt ?>" width="<?php echo $width ?>" height="<?php echo $height ?>">
+            <picture>
+              <!--[if IE 9]><video style="display: none;"><![endif]-->
+              <source srcset="<?php echo $image['sizes']['medium']; ?>, <?php echo $image['sizes']['medium@2x']; ?> 2x">
+              <!--[if IE 9]></video><![endif]-->
+              <img srcset="<?php echo $image['sizes']['medium']; ?>, <?php echo $image['sizes']['medium@2x']; ?> 2x" alt="<?php echo $alt ?>" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-caption="<?php echo $caption ?>">
+            </picture>
           </div>
     <?php
         endif;

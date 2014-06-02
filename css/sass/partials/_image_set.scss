@@ -99,7 +99,6 @@ $featured_image_set_info_height: 100px;
   margin: $space_medium auto $space_large;
   padding: $space_xsmall;
   border: 2px solid #000;
-  transition: height .4s;
   &.open {
     height: 600px;
   }
