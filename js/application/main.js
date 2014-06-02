@@ -299,6 +299,8 @@ $(document).on('page:load ready pjax:end', function(){
       } else {
         createImageViewer(nextImageSet, 'above', image);
       }
+
+      $('.image-viewer').addClass('image-viewer-single-image');
     }
 
     var imageSetOffset = thisImageSet.offset().left;
@@ -316,6 +318,9 @@ $(document).on('page:load ready pjax:end', function(){
     var offset = $(window).height() * ratioDiff;
     var captionHeight = 36;
     var imageViewerHeight = ( ($(window).height() - offset) * ratio ) + captionHeight;
+    if($(window).width() < 760){
+      imageViewerHeight = imageViewerHeight + 40;
+    }
 
     if(aboveOrBelow == 'above'){
       el.before(imageViewer);

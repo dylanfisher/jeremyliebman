@@ -800,10 +800,6 @@ footer h6 {
   cursor: pointer;
 }
 
-.image-viewer-slide-count {
-  display: none;
-}
-
 .image-set {
   position: relative;
   display: inline-block;
@@ -877,11 +873,18 @@ footer h6 {
 .image-viewer.open {
   height: 600px;
 }
+.image-viewer.image-viewer-single-image .image-viewer-slide-count {
+  display: none;
+}
 
 .image-viewer-open-indicator {
   position: absolute;
   top: 0;
   margin-left: -30px;
+  width: 60px;
+  text-align: left;
+  background-color: #fff;
+  padding-bottom: 2px;
 }
 .image-viewer-open-indicator:before, .image-viewer-open-indicator:after {
   position: absolute;
@@ -1671,6 +1674,7 @@ html[dir="rtl"] .select2-search-choice-close {
 @media only screen and (max-width: 760px) {
   header {
     height: auto;
+    margin: 30px 30px;
   }
 
   h1,
@@ -1682,6 +1686,29 @@ html[dir="rtl"] .select2-search-choice-close {
 
   nav {
     margin-bottom: 20px;
+  }
+
+  .image-viewer {
+    width: calc(100% - 20px);
+    padding-top: 60px;
+  }
+
+  .slick-next,
+  .slick-prev {
+    display: none !important;
+  }
+
+  .slick-initialized {
+    padding: 0;
+  }
+
+  footer {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .footer-image-section {
+    margin: 20px 10px;
   }
 }
 @media print, (-o-min-device-pixel-ratio: 5 / 4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {

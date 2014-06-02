@@ -6,7 +6,7 @@
     <title><?php wp_title( '-', true, 'right' ); echo esc_html( get_bloginfo('name'), 1 ) ?></title>
     <meta name="description" content="<?php echo get_bloginfo('description') ?>">
     <meta name="keywords" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=500, minimal-ui">
     <link rel="icon" type="image/png" href="<?php echo get_bloginfo('template_url'); ?>/images/favicon.png">
     <link rel="stylesheet" type="text/css" href="<?php echo bloginfo('stylesheet_url'); ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo get_bloginfo('template_url'); ?>/css/build/minified/application.css" />

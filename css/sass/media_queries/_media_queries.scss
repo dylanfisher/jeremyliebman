@@ -18,6 +18,7 @@
 @media only screen and (max-width: 760px) {
   header {
     height: auto;
+    margin: 30px 30px;
   }
   h1,
   nav {
@@ -27,6 +28,24 @@
   }
   nav {
     margin-bottom: 20px;
+  }
+  .image-viewer {
+    width: calc(100% - 20px);
+    padding-top: 60px; // value matches the imageViewerHeight javascript variable, minus the original padding
+  }
+  .slick-next,
+  .slick-prev {
+    display: none !important;
+  }
+  .slick-initialized {
+    padding: 0;
+  }
+  footer {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .footer-image-section {
+    margin: 20px 10px;
   }
 }
 

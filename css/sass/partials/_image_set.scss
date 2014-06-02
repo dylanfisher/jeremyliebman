@@ -12,9 +12,6 @@ $featured_image_set_info_height: 100px;
   margin: $space_xsmall $space_xsmall 0;
   cursor: pointer;
 }
-.image-viewer-slide-count {
-  display: none;
-}
 
 // Images sets
 
@@ -102,12 +99,21 @@ $featured_image_set_info_height: 100px;
   &.open {
     height: 600px;
   }
+  &.image-viewer-single-image {
+    .image-viewer-slide-count {
+      display: none;
+    }
+  }
 }
 
 .image-viewer-open-indicator {
   position: absolute;
   top: 0;
   margin-left: -30px; // Offset is relative to the the width of the indicator
+  width: 60px;
+  text-align: left;
+  background-color: #fff;
+  padding-bottom: 2px;
   &:before,
   &:after {
     position: absolute;
