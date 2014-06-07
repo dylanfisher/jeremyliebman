@@ -13444,12 +13444,13 @@ $(function(){
     });
 
     // Decide which form to submit. One for image sets, the other for single images.
-    if(e.object.css == 'image-set-search-tag'){
+    if(e.object.css.indexOf('image-set-search-tag') !== -1){
       // Image sets
       $('#wp-search-form').submit();
     } else {
       // Single images
-      $('#wp-search-form-single-images').submit();
+      // $('#wp-search-form-single-images').submit();
+      $('#wp-search-form').submit(); // Using the same form for both single and sets
     }
 
   });

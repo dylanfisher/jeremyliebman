@@ -352,7 +352,6 @@ add_image_size( 'huge', 1200, 856, false ); // Carousel images
 add_image_size( 'huge@2x', 2400, 1712, false ); // Carousel images
 add_image_size( 'carousel-mobile', 800, 571, false ); // Carousel images mobile
 
-
 // Open external links in new windows
 /* function sandbox_autoblank($text) {
 $return = str_replace('href=', 'target="_blank" href=', $text);

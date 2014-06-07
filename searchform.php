@@ -1,22 +1,66 @@
+<?php
+  // Build the select field search options using two arrays,
+  // one for single images, one for image sets.
+
+  //
+  // Image set array
+  //
+
+  $image_sets = array();
+
+  // Loop through every WP tag on the site and list it as an <option> search-tag.
+  // These tags represent the image set's tags as an entire set.
+  $tags = get_tags();
+  foreach ($tags as &$tag) {
+    array_push($image_sets, $tag->name);
+  }
+
+  // Loop through every Page and get the Title.
+  // List it as an option for image sets.
+  $pages = get_posts(array('post_type' => 'post', 'posts_per_page' => -1));
+  foreach ($pages as $page) {
+    array_push($image_sets, $page->post_title);
+  }
+
+  // Remove duplicates
+  $image_sets = array_unique($image_sets);
+
+  //
+  // Single images array
+  //
+
+  $single_images = array();
+
+  // Include our wpdb module that queries the database for all ACF tags. Returns $tags_array with all tags.
+  include(locate_template('partials/module-acf_tags_query.php'));
+  // Loop through every ACF tag and list these as search-tag's as well.
+  // These represent each individual image's tags.
+  foreach ($tags_array as $tag=>$value) {
+    array_push($single_images, $value);
+  }
+
+  // Remove duplicates
+  $single_images = array_unique($single_images);
+
+?>
+
 <div class="search-nav">
   <select id="search-select">
+
+  <?php
+    // Image set select options
+    foreach ($image_sets as $tag) {
+      echo '<option class="search-tag image-set-search-tag" disabled>' . $tag . '</option>';
+    }
+
+    // Single image select options
+    foreach ($single_images as $tag) {
+      echo '<option class="search-tag image-search-tag" disabled>' . $tag . '</option>';
+    }
+  ?>
+
     <option class="search-select-title"><?php echo strlen(get_search_query()) > 0 ? get_search_query() : the_title() ?></option>
     <?php
-      // Loop through every WP tag on the site and list it as an <option> search-tag.
-      // These tags represent the image set's tags as an entire set.
-      // $tags = get_tags();
-      // foreach ($tags as &$tag) {
-      //   echo '<option class="search-tag image-set-search-tag" disabled>' . $tag->name . '</option>';
-      // }
-
-      // Include our wpdb module that queries the database for all ACF tags. Returns $tags_array with all tags.
-      include(locate_template('partials/module-acf_tags_query.php'));
-      // Loop through every ACF tag and list these as search-tag's as well.
-      // These represent each individual image's tags.
-      foreach ($tags_array as $tag=>$value) {
-        echo '<option class="search-tag image-search-tag" disabled>' . $value . '</option>';
-      }
-
       $categories = get_categories( array('hide_empty' => 0) );
       foreach ($categories as &$cat) :
         // Parent categories
