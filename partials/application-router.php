@@ -14,7 +14,11 @@
 
   <?php
     if(isset($post)):
-      $post->post_name == 'home-page' ? get_template_part( 'partials/content', 'home_page' ) : false;
+      if($post->post_name == 'home-page'){
+        get_template_part( 'partials/content', 'home_page' );
+      } else {
+        get_template_part( 'partials/content', 'single' );
+      }
     else:
   ?>
 
@@ -24,7 +28,5 @@
   <?php
     endif
   ?>
-
-  <?php get_template_part( 'partials/content', 'single' ); ?>
 
 </div>
