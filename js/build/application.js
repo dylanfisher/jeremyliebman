@@ -13400,7 +13400,7 @@ $(function(){
 
   $(document).on('pjax:send', function(){
     // Show loader after interval, if the page is really slow.
-    var loadingDelay = 2000;
+    var loadingDelay = 1000;
     loaderTimeoutID = window.setTimeout(showLoader, loadingDelay);
   });
 
@@ -13576,14 +13576,14 @@ $(document).on('page:load ready pjax:end', function(){
   ///////////////////////////////////////////////////////
 
   // Calculate how many columns are in a row, and add a new row class to the first column in each new row.
-  calculateColumnsInRow('.image-set');
+  calculateColumnsInRow('.image-result');
 
   // Append an image viewer when clicking on an image set and set this set to active
   $('.image-set-info-wrapper').click(function(){
     // Place the image viewer before the next image set on the following row.
-    var thisImageSet = $(this).closest('.image-set');
+    var thisImageSet = $(this).closest('.image-result');
     var nextImageSet = thisImageSet.nextAll('.new-image-set-row').first();
-    var imagesInSet = $(this).closest('.image-set').children();
+    var imagesInSet = $(this).closest('.image-result').children();
 
     var images = imagesInSet.clone().toArray();
 
@@ -13595,7 +13595,7 @@ $(document).on('page:load ready pjax:end', function(){
 
       // If there is no next image set on the next row, place the image viewer after the last image set in the current row.
       if(nextImageSet.length === 0){
-        nextImageSet = thisImageSet.nextAll('.image-set').last();
+        nextImageSet = thisImageSet.nextAll('.image-result').last();
         // If there are no other image set after this one, place the image viewer after this image set.
         if(nextImageSet.length === 0){
           nextImageSet = thisImageSet;
@@ -13604,44 +13604,6 @@ $(document).on('page:load ready pjax:end', function(){
       } else {
         createImageViewer(nextImageSet, 'above', images);
       }
-    }
-
-    var imageSetOffset = thisImageSet.offset().left;
-    var imageViewerOffset = $('.image-viewer').offset().left;
-    var imageWidth = thisImageSet.find('img').width();
-    var indicatorPos = imageSetOffset - imageViewerOffset + (imageWidth / 2);
-
-    $('.image-viewer-open-indicator').css({left: indicatorPos});
-  });
-
-  // Calculate how many columns are in a row, and add a new row class to the first column in each new row.
-  calculateColumnsInRow('.single-image');
-
-  // Single image viewers
-  $('.single-image').click(function(){
-    var thisImageSet = $(this);
-    var nextImageSet = $(this).nextAll('.new-image-set-row').first();
-    var image = [$(this).find('img')];
-
-    if($(this).hasClass('image-set-open')){
-      // Do nothing if this image set is already open
-    } else {
-      destroyImageViewer();
-      $(this).addClass('image-set-open');
-
-      // If there is no next image set on the next row, place the image viewer after the last image set in the current row.
-      if(nextImageSet.length === 0){
-        nextImageSet = thisImageSet.nextAll('.single-image').last();
-        // If there are no other image set after this one, place the image viewer after this image set.
-        if(nextImageSet.length === 0){
-          nextImageSet = thisImageSet;
-        }
-        createImageViewer(nextImageSet, 'below', image);
-      } else {
-        createImageViewer(nextImageSet, 'above', image);
-      }
-
-      $('.image-viewer').addClass('image-viewer-single-image');
     }
 
     var imageSetOffset = thisImageSet.offset().left;
@@ -13715,7 +13677,11 @@ $(document).on('page:load ready pjax:end', function(){
     });
 
     function updateSlideCount(current, count){
-      $('.image-viewer-slide-count').html(current + '/' + count);
+      if(count == 1){
+        $('.image-viewer-slide-count').hide();
+      } else {
+        $('.image-viewer-slide-count').html(current + '/' + count);
+      }
     }
   }
 
@@ -13760,6 +13726,5 @@ function calculateColumnsInRow(elString) {
 function destroyImageViewer(){
   $('.image-set, .single-image').removeClass('image-set-open');
   $('.image-viewer').remove();
-  calculateColumnsInRow('.image-set');
-  calculateColumnsInRow('.single-image');
+  calculateColumnsInRow('.image-result');
 }

@@ -49,15 +49,21 @@
 
   // Create a one-dimensional array of WP Tags.
   $tags_array = array();
-  foreach (get_the_tags() as $tag) {
-    array_push($tags_array, $tag->name);
+  $tags = get_the_tags();
+  if (is_array($tags)){
+    foreach ($tags as $tag) {
+      array_push($tags_array, $tag->name);
+    };
   };
 
   // Check if the image's Category OR WP Tag OR Title match the search query, and show these image sets.
-  if( strpos( strtolower(end(get_the_category())->name), strtolower($search_query) ) !== false || in_array($search_query, $tags_array) !== false || strpos(strtolower(get_the_title()), strtolower($search_query)) !== false):
+  $cats = get_the_category();
+  $cat_end = end($cats);
+  $cat_name = $cat_end->name;
+  if( strpos( strtolower($cat_name), strtolower($search_query) ) !== false || in_array($search_query, $tags_array) !== false || strpos(strtolower(get_the_title()), strtolower($search_query)) !== false):
 ?>
 
-  <div class="image-set<?php echo $featured_set ? ' featured-image-set' : false ?> <?php sandbox_post_class() ?>" style="width: <?php echo $imageSet_width .'px' ?>; height: <?php echo $imageSet_height .'px' ?>;">
+  <div class="image-result image-set<?php echo $featured_set ? ' featured-image-set' : false ?> <?php sandbox_post_class() ?>" style="width: <?php echo $imageSet_width .'px' ?>; height: <?php echo $imageSet_height .'px' ?>;">
 
     <?php
 
@@ -120,6 +126,11 @@
     // Single Images
     ///////////////////////////////////////////////////////
 
+    // Don't show single images on non-search pages.
+    if(!is_search()){
+      return;
+    };
+
     while( have_rows('images') ): the_row();
 
       // Re-set variables for individual images
@@ -144,7 +155,7 @@
       // Check if the image's tags match the search query, and only show these images.
       if(strpos($tags, strtolower($search_query)) !== false):
   ?>
-        <div class="single-image <?php sandbox_post_class() ?>">
+        <div class="image-result single-image <?php sandbox_post_class() ?>">
           <div class="image-set-info-wrapper" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-caption="<?php echo $caption ?>">
             <div class="image-set-info">
               <div class="image-info-text">
