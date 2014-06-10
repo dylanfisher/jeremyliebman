@@ -1,46 +1,47 @@
 <?php
-  // Build the select field search options using two arrays,
-  // one for single images, one for image sets.
+  //
+  // Build a single master array to store all search options (tags, categories, titles, etc.)
+  //
 
   //
   // Image set array
+  // Uses Wordpress default tags and Page Titles
   //
 
-  $image_sets = array();
+  $search_terms = array();
 
   // Loop through every WP tag on the site and list it as an <option> search-tag.
   // These tags represent the image set's tags as an entire set.
   $tags = get_tags();
   foreach ($tags as &$tag) {
-    array_push($image_sets, $tag->name);
+    array_push($search_terms, $tag->name);
   }
 
   // Loop through every Page and get the Title.
   // List it as an option for image sets.
   $pages = get_posts(array('post_type' => 'post', 'posts_per_page' => -1));
   foreach ($pages as $page) {
-    array_push($image_sets, $page->post_title);
+    array_push($search_terms, $page->post_title);
   }
-
-  // Remove duplicates
-  $image_sets = array_unique($image_sets);
 
   //
   // Single images array
+  // Uses ACF single image tags and ACF captions
   //
-
-  $single_images = array();
 
   // Include our wpdb module that queries the database for all ACF tags. Returns $tags_array with all tags.
   include(locate_template('partials/module-acf_tags_query.php'));
   // Loop through every ACF tag and list these as search-tag's as well.
   // These represent each individual image's tags.
   foreach ($tags_array as $tag=>$value) {
-    array_push($single_images, $value);
+    array_push($search_terms, $value);
   }
 
-  // Remove duplicates
-  $single_images = array_unique($single_images);
+  //
+  // Search terms
+  //
+
+  $search_terms = array_unique($search_terms);
 
 ?>
 
@@ -48,14 +49,9 @@
   <select id="search-select">
 
   <?php
-    // Image set select options
-    foreach ($image_sets as $tag) {
-      echo '<option class="search-tag image-set-search-tag" disabled>' . $tag . '</option>';
-    }
-
-    // Single image select options
-    foreach ($single_images as $tag) {
-      echo '<option class="search-tag image-search-tag" disabled>' . $tag . '</option>';
+    // Select options for each search term
+    foreach ($search_terms as $term) {
+      echo '<option class="search-tag image-search-tag" disabled>' . $term . '</option>';
     }
   ?>
 
