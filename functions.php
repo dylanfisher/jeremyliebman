@@ -1,14 +1,11 @@
 <?php
 
-// add_filter( 'posts_where', 'sandbox_posts_where', 10, 2 );
-// function sandbox_posts_where( $where, &$wp_query )
-// {
-//     global $wpdb;
-//     if ( $sandbox_title = $wp_query->get( 'sandbox_title' ) ) {
-//         $where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'' . esc_sql( like_escape( $sandbox_title ) ) . '%\'';
-//     }
-//     return $where;
-// }
+function sandbox_posts_per_page( $query ) {
+    if ( ! $query->is_home() && $query->is_main_query() ) {
+        $query->set( 'posts_per_page', '-1' );
+    }
+}
+add_action( 'pre_get_posts', 'sandbox_posts_per_page' );
 
 ///////////////////////////////////
 //    BEGIN SANDBOX FUNCTIONS    //
