@@ -623,6 +623,10 @@ h2 {
   font-size: 21px;
 }
 
+h5 {
+  font-size: 15px;
+}
+
 h6 {
   font-size: 12px;
 }
@@ -712,7 +716,7 @@ nav {
   position: absolute;
   line-height: 40px;
   top: 3px;
-  right: 40px;
+  right: 0;
   background: yellow;
   outline: 4px solid yellow;
   padding: 0px 20px;
@@ -748,6 +752,10 @@ nav {
   display: none !important;
 }
 
+.search-category-parent + .search-category-parent {
+  padding-top: 20px;
+}
+
 .search-caret {
   position: relative;
   height: 24px;
@@ -774,20 +782,31 @@ nav {
 footer {
   background: yellow;
   padding: 40px;
-  margin-top: 140px;
+  margin-top: 240px;
 }
-footer h6 {
+footer h5 {
   margin-top: 10px;
   margin-left: -2px;
+}
+footer .contact {
+  margin-top: 180px;
+}
+footer .contact > span {
+  margin-right: 40px;
+}
+footer .contact a {
+  word-break: break-all;
 }
 
 .footer-image-section {
   margin: 20px;
+  margin-bottom: 60px;
 }
 
 .footer-image-wrapper {
   display: inline-block;
   margin: 10px;
+  margin-bottom: 30px;
   max-width: 175px;
 }
 .footer-image-wrapper img {
@@ -817,10 +836,9 @@ footer h6 {
 .image-set .image-set-placeholder {
   background: #fff;
   outline: 2px solid #000;
-  transition: background .2s;
 }
 .image-set .image-set-placeholder:hover {
-  background: #DBDBDB;
+  background: yellow;
 }
 
 .featured-image-set {
@@ -920,7 +938,7 @@ footer h6 {
 
 .caption {
   font-size: 12px;
-  margin-top: -16px;
+  margin-top: -1.2em;
 }
 
 .slick-initialized {
@@ -934,7 +952,7 @@ footer h6 {
   margin: 0 auto;
 }
 .slick-initialized .slick-slide.has-caption img {
-  padding-bottom: 40px;
+  padding-bottom: 28px;
 }
 
 .slick-list {

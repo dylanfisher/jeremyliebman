@@ -33,7 +33,7 @@ nav {
   position: absolute;
   line-height: 40px; // Matches search bar height, minus the thicker outline width
   top: 3px;
-  right: 40px;
+  right: 0;
   background: $yellow;
   outline: 4px solid $yellow;
   padding: 0px 20px;
@@ -68,6 +68,10 @@ nav {
 
 .search-select-title {
   display: none !important;
+}
+
+.search-category-parent + .search-category-parent {
+  padding-top: $space_xsmall;
 }
 
 .search-caret {

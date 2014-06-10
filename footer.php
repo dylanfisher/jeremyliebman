@@ -5,8 +5,8 @@
       <div class="contact">
         <span><a href="mailto:jeremy@jeremyliebman.com">jeremy@jeremyliebman.com</a></span>
         <span>+1 718 909 0883</span>
-        <span><a href="http://instagram.com/jeremy_liebman">instagram</a></span>
-        <span><a href="http://jliebman.tumblr.com/">tumblr</a></span>
+        <span><a href="http://instagram.com/jeremy_liebman" target="_blank">instagram</a></span>
+        <span><a href="http://jliebman.tumblr.com/" target="_blank">tumblr</a></span>
       </div>
     </footer>
 

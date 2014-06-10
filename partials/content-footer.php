@@ -48,9 +48,9 @@
               </picture>
             </a>
           <?php } ?>
-          <h6>
+          <h5>
             <a href="<?php echo $postUrl ?>"><?php echo $child->post_title; ?></a>
-          </h6>
+          </h5>
         </div>
 
       <?php

@@ -5,20 +5,33 @@
 footer {
   background: $yellow;
   padding: $space_medium;
-  margin-top: $space_xlarge;
-  h6 {
+  margin-top: 240px;
+  h5 {
     margin-top: $space_small;
     margin-left: -2px; // to account for outline width
+  }
+  .contact {
+    margin-top: 180px;
+
+    & > span {
+      margin-right: $space_medium;
+    }
+
+    a {
+      word-break: break-all;
+    }
   }
 }
 
 .footer-image-section {
   margin: $space_xsmall;
+  margin-bottom: 60px;
 }
 
 .footer-image-wrapper {
   display: inline-block;
   margin: $space_small;
+  margin-bottom: 30px;
   max-width: 175px;
   img {
     outline: 2px solid #000;
