@@ -39,14 +39,6 @@
   $imageSet_height = $height_first + ($row_count * $marginTop);
   $imageSet_width = $width_first + ($row_count * $marginTop);
 
-
-  // echo "<pre style='font-size: 14px; text-align: left;''>";
-  // print_r(get_the_category());
-  // echo "</pre>";
-  // var_dump( strpos( end(get_the_category())->slug, strtolower($search_query) ) );
-
-  // print_r(end(get_the_category()));
-
   // Create a one-dimensional array of WP Tags.
   $tags_array = array();
   $tags = get_the_tags();
@@ -60,7 +52,9 @@
   $cats = get_the_category();
   $cat_end = end($cats);
   $cat_name = $cat_end->name;
-  if( strpos( strtolower($cat_name), strtolower($search_query) ) !== false || in_array($search_query, $tags_array) !== false || strpos(strtolower(get_the_title()), strtolower($search_query)) !== false):
+
+  if( strpos( strtolower($cat_name), strtolower($search_query) ) !== false || in_array($search_query, $tags_array) !== false || strpos(sanitize_title(get_the_title()), sanitize_title($search_query)) !== false):
+
 ?>
 
   <div class="image-result image-set<?php echo $featured_set ? ' featured-image-set' : false ?> <?php sandbox_post_class() ?>" style="width: <?php echo $imageSet_width .'px' ?>; height: <?php echo $imageSet_height .'px' ?>;">
@@ -118,7 +112,7 @@
 
   </div>
 
-  <?php endif; ?>
+<?php endif; ?>
 
   <?php
 
@@ -152,8 +146,8 @@
       $data_url_mobile = $image['sizes']['carousel-mobile'];
       $data_url_mobile_2x = $image['sizes']['huge'];
 
-      // Check if the image's tags match the search query, and only show these images.
-      if(strpos($tags, strtolower($search_query)) !== false):
+      // Check if the image's individual ACF tags OR caption match the search query, and only show these images.
+      if(strpos($tags, strtolower($search_query)) !== false || strpos(strtolower($caption), strtolower($search_query)) !== false):
   ?>
         <div class="image-result single-image <?php sandbox_post_class() ?>">
           <div class="image-set-info-wrapper" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-caption="<?php echo $caption ?>">

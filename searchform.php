@@ -29,7 +29,7 @@
   // Uses ACF single image tags and ACF captions
   //
 
-  // Include our wpdb module that queries the database for all ACF tags. Returns $tags_array with all tags.
+  // Include our wpdb module that queries the database for all ACF tags and captions. Returns $tags_array with all results.
   include(locate_template('partials/module-acf_tags_query.php'));
   // Loop through every ACF tag and list these as search-tag's as well.
   // These represent each individual image's tags.

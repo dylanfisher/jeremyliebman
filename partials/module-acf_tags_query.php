@@ -7,13 +7,16 @@
       SELECT *
       FROM wp_postmeta
       WHERE meta_key LIKE %s
+        OR meta_key LIKE %s
         AND meta_value <>''
       ",
-      'images_%_tags' // meta_name: $ParentName_$RowNumber_$ChildName
+      'images_%_tags', // meta_name: $ParentName_$RowNumber_$ChildName
+      'images_%_caption'
   ));
 
   // loop through the results
   if($rows){
+    // print_r($rows);
     $tags_array = array(); // Initialize empty array
     foreach($rows as $row){
       $tags_array[] = $row->meta_value; // Add each result to the array
