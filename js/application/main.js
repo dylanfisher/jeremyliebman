@@ -36,6 +36,10 @@ $(function(){
   $(document).on('pjax:start', function(){
     // console.log('pjax start');
     $('#pjax-container').addClass('pjax-transition');
+    if(infoWrapperOpen === true){
+      toggleInfoBox();
+      $('html, body').animate({scrollTop: 0}, 400, 'swing');
+    }
   });
 
   $(document).on('pjax:end', function(){
@@ -45,6 +49,8 @@ $(function(){
     // Replace the select2 chosen item in search input with proper pjax page title
     var pjaxTitle = $('#pjax-page-title').html();
     $('#select2-chosen-1').html(pjaxTitle + '<span class="search-caret"></span>');
+
+    destroyImageViewer(); 
   });
 
   $(document).on('pjax:timeout, pjax:error', function(event){
@@ -104,7 +110,11 @@ $(function(){
     });
 
     // Decide which form to submit. One for image sets, the other for single images.
-    if(e.object.css.indexOf('image-set-search-tag') !== -1){
+    if(e.object.css.indexOf('recent-work-option') !== -1){
+      // Recent work links to home page
+      var url = $('html').attr('data-home-url');
+      $.pjax({url: url, container: '#pjax-container'});
+    } else if(e.object.css.indexOf('image-set-search-tag') !== -1){
       // Image sets
       $('#wp-search-form').submit();
     } else {
@@ -198,10 +208,35 @@ $(function(){
 
   // Close image viewer when pressing the X close button
   $(document).on('click', '.image-viewer-close', function(){
-    if($('.image-set-open').length){
-      $('html, body').animate({scrollTop: $('.image-set-open').offset().top - $(window).height() * 0.1});
+    destroyImageViewer(true);
+  });
+
+  $(document).on('click', '.slick-custom-prev', function(){
+    var viewer = $('.image-viewer .slick-slider');
+    var count = viewer.find('.slick-slide').length;
+    if(viewer.length && count > 1){
+      $(this).closest('.slick-slider').slickPrev();
     }
-    destroyImageViewer();
+  });
+
+  $(document).on('click', '.slick-custom-next', function(){
+    var viewer = $('.image-viewer .slick-slider');
+    var count = viewer.find('.slick-slide').length;
+    if(viewer.length && count > 1){
+      $(this).closest('.slick-slider').slickNext();
+    }
+  });
+
+  $(document).on('mouseenter', '.slick-custom-prev', function(){
+    $(this).closest('.slick-slider').find('.slick-prev').addClass('active');
+  });
+
+  $(document).on('mouseenter', '.slick-custom-next', function(){
+    $(this).closest('.slick-slider').find('.slick-next').addClass('active');
+  });
+
+  $(document).on('mouseleave', '.slick-custom-button', function(){
+    $(this).closest('.slick-slider').find('.slick-next, .slick-prev').removeClass('active');
   });
 
   ///////////////////////////////////////////////////////
@@ -274,79 +309,39 @@ $(document).on('page:load ready pjax:end', function(){
     $('.image-viewer-open-indicator').css({left: indicatorPos});
   });
 
-  function createImageViewer(el, aboveOrBelow, images){
-    var imageViewer = '<div class="image-viewer"><div class="image-viewer-slide-count"></div><div class="image-viewer-close"></div><div class="image-viewer-open-indicator"></div><div class="image-viewer-slide-container"></div></div>';
-    var ratio = 0.9;
-    var ratioDiff = 1 - ratio;
-    var offset = $(window).height() * ratioDiff;
-    var captionHeight = 36;
-    var imageViewerHeight = ( ($(window).height() - offset) * ratio ) + captionHeight;
-    if($(window).width() < 760){
-      imageViewerHeight = imageViewerHeight + 40;
-    }
-
-    if(aboveOrBelow == 'above'){
-      el.before(imageViewer);
-    } else {
-      el.after(imageViewer);
-    }
-
-    $(images).each(function(){
-      var caption = $(this).attr("data-image-caption").length ? '<div class="caption">' + $(this).attr("data-image-caption") + '</div>' : '';
-      var captionParentClass = $(this).attr("data-image-caption").length ? ' class="has-caption"' : '';
-      var image = $(this).attr("data-image-url");
-      var image2x = $(this).attr("data-image-url-2x");
-      var imageMobile = $(this).attr("data-image-url-mobile");
-      var imageMobile2x = $(this).attr("data-image-url-mobile-2x");
-      // $('.image-viewer-slide-container').append('<div' + captionParentClass + '>' + image + caption + '</div>');
-      $('.image-viewer-slide-container').append(
-        '<div' + captionParentClass + '>' +
-          '<picture style="display: none;">' +
-            '<!--[if IE 9]><video style="display: none;"><![endif]-->' +
-            '<source srcset="' + imageMobile + ', ' + imageMobile2x + ' 2x" media="(max-width: 800px)">' +
-            '<source srcset="' + image + ', ' + image2x + ' 2x">' +
-            '<!--[if IE 9]></video><![endif]-->' +
-            '<img srcset="' + image + ', ' + image2x + ' 2x">' +
-          '</picture>' +
-          caption +
-        '</div>'
-        );
-    });
-
-    // Re-initialize picturefill after appending picture element.
-    $('.image-viewer-slide-container picture').show();
-    picturefill();
-
-    $('.image-viewer').addClass('open').css({height: imageViewerHeight});
-    var positionTop = $('.image-viewer').offset().top - offset;
-    $('html, body').animate({scrollTop: positionTop}, 400, 'swing');
-
-    // Initiate slick carousel
-    var current = 1;
-    var count = 0;
-    $('.image-viewer-slide-container').slick({
-      onInit: function(slick){
-        count = slick.slideCount;
-        current = slick.currentSlide + 1;
-        updateSlideCount(current, count);
-      },
-      onAfterChange: function(slick){
-        current = slick.currentSlide + 1;
-        updateSlideCount(current, count);
-      }
-    });
-
-    function updateSlideCount(current, count){
-      if(count == 1){
-        $('.image-viewer-slide-count').hide();
-      } else {
-        $('.image-viewer-slide-count').html(current + '/' + count);
-      }
-    }
-  }
-
 });
 
+///////////////////////////////////////////////////////
+//
+// Keyboard bindings
+//
+///////////////////////////////////////////////////////
+
+// Image viewer slide left
+Mousetrap.bind('left', function(){
+  var viewer = $('.image-viewer .slick-slider');
+  var count = viewer.find('.slick-slide').length;
+  if(viewer.length && count > 1){
+    viewer.slickPrev();
+  }
+});
+
+// Image viewer slide right
+Mousetrap.bind('right', function(){
+  var viewer = $('.image-viewer .slick-slider');
+  var count = viewer.find('.slick-slide').length;
+  if(viewer.length && count > 1){
+    viewer.slickNext();
+  }
+});
+
+// Destroy image viewer when escape key pressed
+Mousetrap.bind('escape', function(){
+  var viewer = $('.image-viewer');
+  if(viewer.length){
+    destroyImageViewer(true);
+  }
+});
 
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -383,7 +378,86 @@ function calculateColumnsInRow(elString) {
   });
 }
 
-function destroyImageViewer(){
+function createImageViewer(el, aboveOrBelow, images){
+  var imageViewer = '<div class="image-viewer"><div class="image-viewer-slide-count"></div><div class="image-viewer-close"></div><div class="image-viewer-open-indicator"></div><div class="image-viewer-slide-container"></div></div>';
+  var ratio = 0.9;
+  var ratioDiff = 1 - ratio;
+  var offset = $(window).height() * ratioDiff;
+  var captionHeight = 36;
+  var imageViewerHeight = ( ($(window).height() - offset) * ratio ) + captionHeight;
+  if($(window).width() < 760){
+    imageViewerHeight = imageViewerHeight + 40;
+  }
+
+  if(aboveOrBelow == 'above'){
+    el.before(imageViewer);
+  } else {
+    el.after(imageViewer);
+  }
+
+  $(images).each(function(){
+    var caption = $(this).attr("data-image-caption").length ? '<div class="caption">' + $(this).attr("data-image-caption") + '</div>' : '';
+    var captionParentClass = $(this).attr("data-image-caption").length ? ' class="has-caption"' : '';
+    var image = $(this).attr("data-image-url");
+    var image2x = $(this).attr("data-image-url-2x");
+    var imageMobile = $(this).attr("data-image-url-mobile");
+    var imageMobile2x = $(this).attr("data-image-url-mobile-2x");
+    // $('.image-viewer-slide-container').append('<div' + captionParentClass + '>' + image + caption + '</div>');
+    $('.image-viewer-slide-container').append(
+      '<div' + captionParentClass + '>' +
+        '<picture style="display: none;">' +
+          '<!--[if IE 9]><video style="display: none;"><![endif]-->' +
+          '<source srcset="' + imageMobile + ', ' + imageMobile2x + ' 2x" media="(max-width: 800px)">' +
+          '<source srcset="' + image + ', ' + image2x + ' 2x">' +
+          '<!--[if IE 9]></video><![endif]-->' +
+          '<img srcset="' + image + ', ' + image2x + ' 2x">' +
+        '</picture>' +
+        caption +
+      '</div>'
+      );
+  });
+
+  // Re-initialize picturefill after appending picture element.
+  $('.image-viewer-slide-container picture').show();
+  picturefill();
+
+  $('.image-viewer').addClass('open').css({height: imageViewerHeight});
+  var positionTop = $('.image-viewer').offset().top - offset;
+  $('html, body').animate({scrollTop: positionTop}, 400, 'swing');
+
+  // Initiate slick carousel
+  var current = 1;
+  var count = 0;
+  $('.image-viewer-slide-container').slick({
+    onInit: function(slick){
+      count = slick.slideCount;
+      current = slick.currentSlide + 1;
+      updateSlideCount(current, count);
+      var customButtons = '<div class="slick-custom-prev slick-custom-button"></div><div class="slick-custom-next slick-custom-button"></div>';
+      $('.image-viewer-slide-container').append(customButtons);
+      $('.image-viewer-slide-container').imagesLoaded( function() {
+        $('.slick-slider').addClass('slick-loaded');
+      });
+    },
+    onAfterChange: function(slick){
+      current = slick.currentSlide + 1;
+      updateSlideCount(current, count);
+    }
+  });
+
+  function updateSlideCount(current, count){
+    if(count == 1){
+      $('.image-viewer-slide-count').hide();
+    } else {
+      $('.image-viewer-slide-count').html(current + '/' + count);
+    }
+  }
+}
+
+function destroyImageViewer(scroll){
+  if(scroll === true){
+    $('html, body').animate({scrollTop: $('.image-set-open').offset().top - $(window).height() * 0.1});
+  }
   $('.image-set, .single-image').removeClass('image-set-open');
   $('.image-viewer').remove();
   calculateColumnsInRow('.image-result');

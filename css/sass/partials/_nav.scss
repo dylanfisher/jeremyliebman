@@ -20,8 +20,8 @@ nav {
 h1 {
   margin-right: $space_xsmall;
   font-size: $font_medium;
-  line-height: 46px; // This matches the height set on the search bar in select2.scss
-  vertical-align: top;
+  line-height: $select2_height; // This matches the height set on the search bar in select2.scss
+  vertical-align: middle;
 }
 
 nav {
@@ -31,8 +31,8 @@ nav {
 
 .info-button {
   position: absolute;
-  line-height: 40px; // Matches search bar height, minus the thicker outline width
-  top: 3px;
+  line-height: 46px;
+  top: 7px;
   right: 0;
   background: $yellow;
   outline: 4px solid $yellow;
@@ -92,3 +92,17 @@ nav {
   to { visibility: hidden; }
 }
 
+// Magnifying glass
+.select2-container .select2-choice,
+.select2-search > input {
+  &:after {
+    @include set_background('magnifying-glass.png', '32px 32px', '0 0');
+    content: '';
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    margin-top: -16px;
+  }
+}

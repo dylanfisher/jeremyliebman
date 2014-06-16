@@ -9,3 +9,13 @@
 %font-black {
   font-family: 'univers_black_extended', sans-serif;
 }
+
+//@include set_background('image.png', '18px 18px', '0 0');
+@mixin set_background($img, $size, $position) {
+  @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 192dpi) {
+    background: url('../../../images/retina/' + $img) no-repeat #{$position} !important;
+    -moz-background-size: #{$size};
+    background-size: #{$size} !important;
+  }
+  background: url('../../../images/' + $img) no-repeat #{$position};
+}

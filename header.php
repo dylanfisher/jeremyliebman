@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html class="no-js" data-home-url="<?php echo home_url(); ?>">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -18,62 +18,31 @@
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
   <![endif]-->
 
+  <?php
+    // Query single page by slug
+    $args=array(
+      'name' => 'information',
+      'post_type' => 'page',
+      'numberposts' => 1
+    );
+    $info_page = get_posts($args);
+    if( $info_page ):
+      $info_id = $info_page[0]->ID;
+      $info_content = get_post_meta($info_id);
+      $column1 = wpautop($info_content['column_one'][0]);
+      $column2 = wpautop($info_content['column_two'][0]);
+  ?>
   <div id="info-wrapper" class="info-wrapper">
     <div id="info-wrapper-close" class="info-wrapper-close"></div>
     <h2>Information</h2>
-    <div class="column">
-      <ul>
-        <li>Nam ista vestra</li>
-        <li>Haec para/doca a dicamus.</li>
-        <li>Quod idem cum va</li>
-        <li>Mene ergo et Trmas,?</li>
-        <li>Isto modo, ne sata non esset.</li>
-        <li>Neque solum ea m .</li>
-        <li>Nam ista vestra</li>
-      </ul>
-      <h4>Contact</h4>
-      <ul>
-        <li>Haec para/doca a dicamus.</li>
-        <li>Quod idem cum vatis .</li>
-        <li>Mene ergo et?</li>
-      </ul>
-      <h4>Blog</h4>
-      <ul>
-        <li>Nam ista vestra</li>
-        <li>Haec para/doca a dicamus.</li>
-        <li>Quod idem cum va</li>
-        <li>Mene ergo et Trmas,?</li>
-        <li>Isto modo, ne sata non esset.</li>
-        <li>Neque solum ea m .</li>
-        <li>Nam ista vestra</li>
-        <li>Haec para/doca a dicamus.</li>
-        <li>Quod idem cum vatis .</li>
-        <li>Mene ergo et?</li>
-        <li>Isto modo, ne sata non esset.</li>
-        <li>Neque solum ea m paria.</li>
-        <li>Nam ista vestra</li>
-        <li>Haec para/doca a dicamus.</li>
-        <li>Quod idem cum .</li>
-        <li>Mene ergo et Trmas, ?</li>
-        <li>Isto modo, ne sata non esset.</li>
-        <li>Neque solum ea m .</li>
-      </ul>
+    <div class="column column1">
+    <?php echo $column1 ?>
     </div>
-    <div class="column">
-      <h4>Interview &amp; Press</h4>
-      <ul><li>Nam ista vestra</li>
-        <li>Haec para/doca a dicamus.</li>
-        <li>Quod idem cum vatis .</li>
-        <li>Mene ergo et?</li></ul>
-      <h4>Client List</h4>
-      <ul>
-        <li>Quod idem cum .</li>
-        <li>Mene ergo et Trmas, ?</li>
-        <li>Isto modo, ne sata non esset.</li>
-        <li>Neque solum ea m .</li>
-      </ul>
+    <div class="column column2">
+    <?php echo $column2; ?>
     </div>
   </div>
+<?php endif; ?>
 
   <div class="wrapper">
     <header>

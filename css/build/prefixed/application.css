@@ -14,23 +14,37 @@
   font-weight: 700;
 }
 
+.slick-prev.active,
 .slick-prev,
+.slick-next.active,
 .slick-next,
 .image-viewer-open-indicator:before,
 .image-viewer-open-indicator:after {
   width: 0;
   height: 0;
   border-style: solid;
+  -webkit-transition: border-width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: border-width 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
+.slick-prev.active,
 .slick-prev {
   border-width: 20px 20px 20px 0;
   border-color: transparent #000 transparent transparent;
 }
 
+.slick-next.active,
 .slick-next {
   border-width: 20px 0 20px 20px;
   border-color: transparent transparent transparent #000;
+}
+
+.slick-prev.active {
+  border-width: 30px 30px 30px 0;
+}
+
+.slick-next.active {
+  border-width: 30px 0 30px 30px;
 }
 
 .image-viewer-open-indicator:before,
@@ -39,6 +53,7 @@
   border-color: transparent transparent #000 transparent;
 }
 
+.info-wrapper-close,
 .image-viewer-close {
   position: absolute;
   background: #000;
@@ -48,6 +63,7 @@
   cursor: pointer;
 }
 
+.info-wrapper-close:after,
 .image-viewer-close:after {
   content: "";
   width: 16px;
@@ -60,6 +76,10 @@
   left: 50%;
   margin-top: -8px;
   margin-left: -8px;
+}
+
+.info-wrapper-close:after {
+  background-image: url(../../../images/close-yellow@2x.png);
 }
 
 body {
@@ -721,7 +741,7 @@ h6 {
   display: none;
   font-size: 15px;
   padding: 40px;
-  background: yellow;
+  background: #fdfe35;
   z-index: 100;
 }
 
@@ -733,18 +753,19 @@ h6 {
   margin-left: 40px;
 }
 
+.info-wrapper h4:not(:first-child) {
+  padding-top: 1.4em;
+}
+
 .info-wrapper-close {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #000;
   position: absolute;
   right: 40px;
-  cursor: pointer;
 }
 
 .column {
   display: inline-block;
+  max-width: 400px;
+  margin-left: 40px;
 }
 
 .loader {
@@ -774,8 +795,8 @@ nav {
 h1 {
   margin-right: 20px;
   font-size: 21px;
-  line-height: 46px;
-  vertical-align: top;
+  line-height: 54px;
+  vertical-align: middle;
 }
 
 nav {
@@ -785,18 +806,18 @@ nav {
 
 .info-button {
   position: absolute;
-  line-height: 40px;
-  top: 3px;
+  line-height: 46px;
+  top: 7px;
   right: 0;
-  background: yellow;
-  outline: 4px solid yellow;
+  background: #fdfe35;
+  outline: 4px solid #fdfe35;
   padding: 0px 20px;
   cursor: pointer;
 }
 
 .info-button:hover {
   background: #000;
-  color: yellow;
+  color: #fdfe35;
   outline: #000;
 }
 
@@ -863,8 +884,28 @@ nav {
   }
 }
 
+.select2-container .select2-choice:after,
+.select2-search > input:after {
+  background: url("../../../images/magnifying-glass.png") no-repeat 0 0;
+  content: '';
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  margin-top: -16px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 192dpi) {
+  .select2-container .select2-choice:after,
+  .select2-search > input:after {
+    background: url("../../../images/retina/magnifying-glass.png") no-repeat 0 0 !important;
+    background-size: 32px 32px !important;
+  }
+}
+
 footer {
-  background: yellow;
+  background: #fdfe35;
   padding: 40px;
   margin-top: 240px;
 }
@@ -931,7 +972,7 @@ footer .contact a {
 }
 
 .image-set .image-set-placeholder:hover {
-  background: yellow;
+  background: #fdfe35;
 }
 
 .featured-image-set {
@@ -966,7 +1007,7 @@ footer .contact a {
   display: table;
   z-index: 2;
   width: 100%;
-  background: yellow;
+  background: #fdfe35;
 }
 
 .image-info-text {
@@ -1037,6 +1078,22 @@ footer .contact a {
   top: 10px;
   right: 10px;
   z-index: 1;
+}
+
+.slick-custom-button {
+  width: 15%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+}
+
+.slick-custom-prev {
+  left: -10px;
+}
+
+.slick-custom-next {
+  right: -10px;
 }
 
 .caption {
@@ -1164,13 +1221,13 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 
 .select2-container .select2-choice {
   display: block;
-  height: 46px;
+  height: 54px;
   padding: 0 15px;
   overflow: hidden;
   position: relative;
   border: 2px solid #000;
   white-space: nowrap;
-  line-height: 46px;
+  line-height: 54px;
   color: #000;
   text-decoration: none;
   -webkit-touch-callout: none;
@@ -1266,7 +1323,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 .select2-search {
   display: inline-block;
   width: 100%;
-  min-height: 46px;
+  min-height: 54px;
   margin: 0;
   position: relative;
   z-index: 10000;
@@ -1276,7 +1333,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 .select2-search input {
   width: 100%;
   height: auto !important;
-  min-height: 46px;
+  min-height: 54px;
   padding: 4px 15px;
   margin: 0;
   outline: 0;
@@ -1293,7 +1350,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 
 .select2-dropdown-open .select2-choice {
   border-bottom-color: transparent;
-  background-color: yellow;
+  background-color: #fdfe35;
 }
 
 .select2-dropdown-open.select2-drop-above .select2-choice,
@@ -1394,7 +1451,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 }
 
 .select2-results .select2-highlighted {
-  background: yellow;
+  background: #fdfe35;
   color: #000;
 }
 
@@ -1475,7 +1532,7 @@ disabled look for disabled choices in the results dropdown
 }
 
 .select2-container-multi .select2-choices {
-  min-height: 46px;
+  min-height: 54px;
 }
 
 .select2-container-multi.select2-container-active .select2-choices {
@@ -1628,6 +1685,11 @@ html[dir="rtl"] .select2-search-choice-close {
   -ms-touch-action: none;
   touch-action: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background: url(../../../images/ajax-loader.gif) center center no-repeat;
+}
+
+.slick-slider.slick-loaded {
+  background: #fff;
 }
 
 .slick-list {

@@ -1,6 +1,7 @@
 /*
 Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 */
+
 .select2-container {
     margin: 0;
     position: relative;
@@ -13,14 +14,14 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 
 .select2-container .select2-choice {
     display: block;
-    height: 46px;
+    height: $select2_height;
     padding: 0 15px;
     overflow: hidden;
     position: relative;
 
     border: 2px solid #000;
     white-space: nowrap;
-    line-height: 46px;
+    line-height: $select2_height;
     color: #000;
     text-decoration: none;
 
@@ -123,7 +124,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 .select2-search {
     display: inline-block;
     width: 100%;
-    min-height: 46px;
+    min-height: $select2_height;
     margin: 0;
 
     position: relative;
@@ -135,7 +136,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 .select2-search input {
     width: 100%;
     height: auto !important;
-    min-height: 46px;
+    min-height: $select2_height;
     padding: 4px 15px;
     margin: 0;
 
@@ -321,7 +322,7 @@ disabled look for disabled choices in the results dropdown
 }
 
 .select2-container-multi .select2-choices {
-    min-height: 46px;
+    min-height: $select2_height;
 }
 
 .select2-container-multi.select2-container-active .select2-choices {

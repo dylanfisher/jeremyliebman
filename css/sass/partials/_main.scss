@@ -25,21 +25,22 @@
   }
   h4 {
     margin-left: $space_medium;;
+    &:not(:first-child){
+      padding-top: 1.4em;
+    }
   }
 }
 
 .info-wrapper-close {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #000;
+  @extend %close-yellow;
   position: absolute;
   right: 40px;
-  cursor: pointer;
 }
 
 .column {
   display: inline-block;
+  max-width: 400px;
+  margin-left: $space_medium;
 }
 
 .loader {

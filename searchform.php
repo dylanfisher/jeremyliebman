@@ -47,7 +47,6 @@
 
 <div class="search-nav">
   <select id="search-select">
-
   <?php
     // Select options for each search term
     foreach ($search_terms as $term) {
@@ -56,6 +55,11 @@
   ?>
 
     <option class="search-select-title"><?php echo strlen(get_search_query()) > 0 ? get_search_query() : the_title() ?></option>
+
+    <optgroup class="search-category-parent recent-work-optgroup" label="Home">
+      <option class="image-set-search-tag recent-work-option">Recent Work</option>
+    </optgroup>
+
     <?php
       $categories = get_categories( array('hide_empty' => 0) );
       foreach ($categories as &$cat) :

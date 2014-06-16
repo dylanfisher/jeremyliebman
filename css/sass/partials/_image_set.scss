@@ -150,6 +150,22 @@ $featured_image_set_info_height: 100px;
   z-index: 1;
 }
 
+.slick-custom-button {
+  width: 15%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+}
+
+.slick-custom-prev {
+  left: -10px;
+}
+
+.slick-custom-next {
+  right: -10px;
+}
+
 .caption {
   font-size: $font_small;
   margin-top: -1.2em; // Caption height
