@@ -14248,7 +14248,6 @@ the specific language governing permissions and limitations under the Apache Lic
 //
 ///////////////////////////////////////////////////////
 
-
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //
@@ -14518,19 +14517,26 @@ $(document).on('page:load ready pjax:end', function(){
   calculateColumnsInRow('.image-result');
 
   // Append an image viewer when clicking on an image set and set this set to active
-  $('.image-set-info-wrapper').click(function(){
+  $('.image-set-placeholder, .image-set-info-wrapper').click(function(){
     // Place the image viewer before the next image set on the following row.
     var thisImageSet = $(this).closest('.image-result');
     var nextImageSet = thisImageSet.nextAll('.new-image-set-row').first();
-    var imagesInSet = $(this).closest('.image-result').children();
+    var imagesInSet = thisImageSet.children();
 
     var images = imagesInSet.clone().toArray();
 
+    thisImageSet.find('.image-set-placeholder, .image-set-info-wrapper').removeClass('activate-slide');
+
     if(thisImageSet.hasClass('image-set-open')){
-      // Do nothing if this image set is already open
+      // Go to active slide if a placeholder is clicked
+      $(this).addClass('activate-slide');
+      $('.image-viewer-slide-container').slickGoTo(slideActivator());
     } else {
       destroyImageViewer();
       thisImageSet.addClass('image-set-open');
+
+      // If a placehold image is clicked, give the image a class to be used to determine which slide to go to
+      $(this).addClass('activate-slide');
 
       // If there is no next image set on the next row, place the image viewer after the last image set in the current row.
       if(nextImageSet.length === 0){
@@ -14689,6 +14695,8 @@ function createImageViewer(el, aboveOrBelow, images){
     }
   });
 
+  $('.image-viewer-slide-container').slickGoTo(slideActivator());
+
   function updateSlideCount(current, count){
     if(count == 1){
       $('.image-viewer-slide-count').hide();
@@ -14698,11 +14706,26 @@ function createImageViewer(el, aboveOrBelow, images){
   }
 }
 
+function slideActivator(){
+  // Determine if a placeholder image was clicked, and go to that slide if it was.
+  var el = $('.image-set-open');
+  if(el.find('.activate-slide').length){
+    activator = el.find('.activate-slide').index();
+    totalSlides = el.find('.image-set-placeholder').length;
+    activeSlide = totalSlides - activator;
+
+    return activeSlide;
+  } else {
+    return 0;
+  }
+}
+
 function destroyImageViewer(scroll){
   if(scroll === true){
     $('html, body').animate({scrollTop: $('.image-set-open').offset().top - $(window).height() * 0.1});
   }
   $('.image-set, .single-image').removeClass('image-set-open');
+  $('.image-set-placeholder').removeClass('activate-slide');
   $('.image-viewer').remove();
   calculateColumnsInRow('.image-result');
 }
