@@ -48,12 +48,14 @@
     };
   };
 
-  // Check if the image's Category OR WP Tag OR Title match the search query, and show these image sets.
+  // Check if the image's Category OR WP Tag OR Title OR ACF Image Set Caption match the search query, and show these image sets.
   $cats = get_the_category();
   $cat_end = end($cats);
   $cat_name = $cat_end->name;
 
-  if( strpos( strtolower($cat_name), strtolower($search_query) ) !== false || in_array($search_query, $tags_array) !== false || strpos(sanitize_title(get_the_title()), sanitize_title($search_query)) !== false):
+  $image_set_caption = get_field('image_set_caption');
+
+  if( strpos( strtolower($cat_name), strtolower($search_query) ) !== false || in_array($search_query, $tags_array) !== false || strpos(sanitize_title(get_the_title()), sanitize_title($search_query)) !== false || strpos($image_set_caption, $search_query) !== false ):
 
 ?>
 

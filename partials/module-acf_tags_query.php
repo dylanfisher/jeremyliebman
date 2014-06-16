@@ -8,10 +8,12 @@
       FROM wp_postmeta
       WHERE meta_key LIKE %s
         OR meta_key LIKE %s
+        OR meta_key LIKE %s
         AND meta_value <>''
       ",
       'images_%_tags', // meta_name: $ParentName_$RowNumber_$ChildName
-      'images_%_caption'
+      'images_%_caption',
+      'image_set_caption'
   ));
 
   // loop through the results
