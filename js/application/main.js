@@ -315,6 +315,14 @@ $(document).on('page:load ready pjax:end', function(){
     $('.image-viewer-open-indicator').css({left: indicatorPos});
   });
 
+  // If only one result is available, automatically open the image viewer
+  if($('#pjax-container').find('.image-result').length == 1){
+    var single_result_timer = setTimeout(function(){
+      $('.image-set-info-wrapper').trigger('click');
+      console.log('true test');
+    }, 50);
+  }
+
 });
 
 ///////////////////////////////////////////////////////

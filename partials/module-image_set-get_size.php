@@ -6,8 +6,6 @@
   // If search query is empty it means we are searching for a page, so change search query to equal the page's title.
   empty($search_query) ? $search_query = get_the_title() : $search_query;
 
-  // echo $search_query;
-
   $tagsArray = array();
   foreach($repeater as $tags) {
     $tagsArray[] = $tags['tags'];
@@ -44,18 +42,36 @@
   $tags = get_the_tags();
   if (is_array($tags)){
     foreach ($tags as $tag) {
-      array_push($tags_array, $tag->name);
+      array_push($tags_array, sanitize_title($tag->name));
     };
   };
 
-  // Check if the image's Category OR WP Tag OR Title OR ACF Image Set Caption match the search query, and show these image sets.
+  // Create a one-dimensional array of WP Categories.
+  $cats_array = array();
   $cats = get_the_category();
-  $cat_end = end($cats);
-  $cat_name = $cat_end->name;
+  if (is_array($cats)){
+    foreach ($cats as $cat) {
+      array_push($cats_array, sanitize_title($cat->name));
+    };
+  };
+
+  // echo "<br>";
+  // echo "<br>";
+  // print_r($cats);
+  // echo "<br>";
+  // echo "<br>";
 
   $image_set_caption = get_field('image_set_caption');
 
-  if( strpos( strtolower($cat_name), strtolower($search_query) ) !== false || in_array($search_query, $tags_array) !== false || strpos(sanitize_title(get_the_title()), sanitize_title($search_query)) !== false || strpos($image_set_caption, $search_query) !== false ):
+  $sanitized_query = sanitize_title($search_query);
+
+  $category_match          = in_array($sanitized_query, $cats_array) !== false;
+  $wp_tags_match           = in_array($sanitized_query, $tags_array) !== false;
+  $title_match             = strpos(sanitize_title(get_the_title()), $sanitized_query) !== false;
+  $image_set_caption_match = strpos(sanitize_title($image_set_caption), $sanitized_query) !== false;
+
+  // Check if the image's Category OR WP Tag OR Title OR ACF Image Set Caption match the search query, and show these image sets.
+  if( $category_match || $wp_tags_match || $title_match || $image_set_caption_match ):
 
 ?>
 
@@ -148,8 +164,11 @@
       $data_url_mobile = $image['sizes']['carousel-mobile'];
       $data_url_mobile_2x = $image['sizes']['huge'];
 
+      $single_tag_match     = strpos(sanitize_title($tags), $sanitized_query) !== false;
+      $single_caption_match = strpos(sanitize_title($caption), $sanitized_query) !== false;
+
       // Check if the image's individual ACF tags OR caption match the search query, and only show these images.
-      if(strpos($tags, strtolower($search_query)) !== false || strpos(strtolower($caption), strtolower($search_query)) !== false):
+      if($single_tag_match || $single_caption_match):
   ?>
         <div class="image-result single-image <?php sandbox_post_class() ?>">
           <div class="image-set-info-wrapper" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-caption="<?php echo $caption ?>">

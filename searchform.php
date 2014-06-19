@@ -41,7 +41,15 @@
   // Search terms
   //
 
-  $search_terms = array_unique($search_terms);
+  // Case-insensitive array_unique
+  function array_iunique($array) {
+      return array_intersect_key(
+          $array,
+          array_unique(array_map("StrToLower",$array))
+      );
+  }
+
+  $search_terms = array_iunique($search_terms);
 
 ?>
 

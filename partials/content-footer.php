@@ -9,6 +9,11 @@
     <div class="footer-image-section">
 
       <?php
+      // $child_cats = get_categories( array('parent' => $cat->cat_ID ) );
+      // // $child_cats = implode(", ", $child_cats);
+
+      // var_dump($child_cats);
+      
         // Child posts of parent categories
         $children = get_posts( array('category' => $cat->cat_ID) );
 
