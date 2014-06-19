@@ -49,7 +49,11 @@
       );
   }
 
+  // Get unique values
   $search_terms = array_iunique($search_terms);
+
+  // Sort alphabetically
+  sort($search_terms);
 
 ?>
 

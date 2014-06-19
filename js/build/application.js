@@ -14563,8 +14563,7 @@ $(document).on('page:load ready pjax:end', function(){
   if($('#pjax-container').find('.image-result').length == 1){
     var single_result_timer = setTimeout(function(){
       $('.image-set-info-wrapper').trigger('click');
-      console.log('true test');
-    }, 100);
+    }, 50);
   }
 
 });
