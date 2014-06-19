@@ -10,7 +10,7 @@
 <?php // Pages that call module-image_set.php ?>
 
 <div id="post-<?php the_ID() ?>" class="post-container content center <?php sandbox_body_class() ?> <?php sandbox_post_class() ?>">
-  <h2 id="pjax-page-title" class="pjax-page-title hidden"><?php echo strlen(get_search_query()) > 0 ? get_search_query() : the_title() ?></h2>
+  <h2 id="pjax-page-title" class="pjax-page-title hidden"><?php echo strlen(get_search_query()) > 0 ? get_search_query() : get_the_title() ?></h2>
 
   <?php
     if(isset($post)):
