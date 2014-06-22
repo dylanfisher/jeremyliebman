@@ -14383,23 +14383,15 @@ $(function(){
 
     $('#wp-search-input, #wp-search-input-single-images').val(selection);
 
-    // Listen for first event and do our pjax. Without .one() this fires exponentially.
-    $(document).one('submit', '#wp-search-form, #wp-search-form-single-images', function(e){
-      $.pjax.submit(e, '#pjax-container');
-    });
-
-    // Decide which form to submit. One for image sets, the other for single images.
+    var url;
     if(e.object.css.indexOf('recent-work-option') !== -1){
       // Recent work links to home page
-      var url = $('html').attr('data-home-url');
+      url = $('html').attr('data-home-url');
       $.pjax({url: url, container: '#pjax-container'});
-    } else if(e.object.css.indexOf('image-set-search-tag') !== -1){
-      // Image sets
-      $('#wp-search-form').submit();
     } else {
-      // Single images
-      // $('#wp-search-form-single-images').submit();
-      $('#wp-search-form').submit(); // Using the same form for both single and sets
+      var searchQuery = encodeURIComponent(e.object.text);
+      url = $('html').attr('data-home-url') + '/?search&s=' + searchQuery;
+      $.pjax({url: url, container: '#pjax-container'});
     }
 
   });

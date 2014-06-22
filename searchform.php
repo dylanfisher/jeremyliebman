@@ -106,9 +106,3 @@
   <input type="search" id="wp-search-input" class="search-field" placeholder="Search" value="" name="s" title="Search for:" />
   <input type="submit" class="search-submit" value="Search" />
 </form>
-
-<?php // Use a separate search form for searching for single images ?>
-<form role="search" method="get" id="wp-search-form-single-images" class="search-form visuallyhidden" action="<?php echo get_bloginfo('url') ?>/?search&amp;single" hidden>
-  <input type="search" id="wp-search-input" class="search-field" placeholder="Search" value="" name="s" title="Search for:" />
-  <input type="submit" class="search-submit" value="Search" />
-</form>
