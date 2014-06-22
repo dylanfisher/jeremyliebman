@@ -756,10 +756,16 @@ h6 {
 
 .info-wrapper h4 {
   margin-left: 40px;
+  margin-bottom: 1em;
 }
 
 .info-wrapper h4:not(:first-child) {
   padding-top: 1.4em;
+}
+
+.info-wrapper h4 + h4,
+.info-wrapper h4 + ul {
+  margin-top: -1em;
 }
 
 .info-wrapper-close {

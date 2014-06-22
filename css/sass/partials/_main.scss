@@ -24,9 +24,14 @@
     margin-bottom: $space_medium;
   }
   h4 {
-    margin-left: $space_medium;;
+    margin-left: $space_medium;
+    margin-bottom: 1em;
     &:not(:first-child){
       padding-top: 1.4em;
+    }
+    & + h4,
+    & + ul {
+      margin-top: -1em;
     }
   }
 }
