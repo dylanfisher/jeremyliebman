@@ -60,7 +60,7 @@ $(function(){
   // Set pjax defaults
   if ($.support.pjax){
     // Increase the pjax timeout
-    $.pjax.defaults.timeout = 5000;
+    $.pjax.defaults.timeout = 10000;
     // Don't scroll to top
     // $.pjax.defaults.scrollTo = false;
   }
@@ -85,11 +85,11 @@ $(function(){
     var pjaxTitle = $('#pjax-page-title').html();
     $('#select2-chosen-1').html(pjaxTitle + '<span class="search-caret"></span>');
 
-    destroyImageViewer(); 
+    destroyImageViewer();
   });
 
   $(document).on('pjax:timeout, pjax:error', function(event){
-    // console.log('pjax error');
+    console.log('pjax:timeout, pjax:error');
   });
 
   // pjax loader
