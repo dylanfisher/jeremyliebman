@@ -57,7 +57,9 @@
               $postName = get_the_title();
               $postSlug = sanitize_title(get_the_title());
               $postUrl = get_the_permalink();
-              $searchLink = get_home_url() . '/?search&amp;s=' . sanitize_title($child->cat_name);
+              // $cat_space_replace = preg_replace('/[ ](?=[^>]*(?:<|$))/', '+', $child->cat_name);
+              $cat_space_replace = urlencode($child->cat_name);
+              $searchLink = get_home_url() . '/?search&amp;s=' . $cat_space_replace;
 
       ?>
 

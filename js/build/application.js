@@ -14315,10 +14315,10 @@ $(function(){
   $(document).on('pjax:start', function(){
     // console.log('pjax start');
     $('#pjax-container').addClass('pjax-transition');
-    if(infoWrapperOpen === true){
-      toggleInfoBox();
+    // if(infoWrapperOpen === true){
+      // toggleInfoBox();
       $('html, body').animate({scrollTop: 0}, 400, 'swing');
-    }
+    // }
   });
 
   $(document).on('pjax:end', function(){
