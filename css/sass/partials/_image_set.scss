@@ -20,6 +20,10 @@ $featured_image_set_info_height: 100px;
   display: inline-block;
   margin: $space_xsmall $space_xsmall 0;
 
+  &.no-outline {
+    outline: 0;
+  }
+
   img,
   .image-set-placeholder {
     position: absolute;
@@ -151,7 +155,7 @@ $featured_image_set_info_height: 100px;
 }
 
 .slick-custom-button {
-  width: 50%;
+  width: 25%;
   height: 100%;
   position: absolute;
   top: 0;
@@ -168,7 +172,9 @@ $featured_image_set_info_height: 100px;
 
 .caption {
   font-size: $font_small;
-  margin-top: -1.2em; // Caption height
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .slick-initialized {
@@ -183,7 +189,7 @@ $featured_image_set_info_height: 100px;
     }
     &.has-caption {
       img {
-        padding-bottom: 28px;
+        padding-bottom: 48px;
       }
     }
   }

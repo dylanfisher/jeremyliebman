@@ -14259,6 +14259,21 @@ the specific language governing permissions and limitations under the Apache Lic
 
 $(function(){
 
+  // If an image set width is larger than initial viewport width,
+  // update the VW dynamically to match max image set width.
+  var initialWidth = 500;
+  var viewportWidth = initialWidth;
+  $('.image-result').each(function(){
+    var width = $(this).outerWidth(true);
+    if(width > viewportWidth){
+      viewportWidth = width;
+    }
+  });
+
+  if(viewportWidth > initialWidth){
+    $('#viewport').attr('content', 'width=' + viewportWidth + ', minimal-ui');
+  }
+
   ///////////////////////////////////////////////////////
   //
   // pjax configuration
@@ -14557,6 +14572,25 @@ $(document).on('page:load ready pjax:end', function(){
     var indicatorPos = imageSetOffset - imageViewerOffset + (imageWidth / 2);
 
     $('.image-viewer-open-indicator').css({left: indicatorPos});
+
+    // Remove focus from image set on click.
+    thisImageSet.addClass('no-outline');
+
+  });
+
+  // Remove focus outline when clicking on an image set.
+  var isMouseDown = false;
+
+  $('.image-set').on('mousedown', function(){
+    $(this).addClass('no-outline');
+    isMouseDown = true;
+  });
+
+  $(document).mouseup(function(){
+    if(isMouseDown){
+      $('.image-set').removeClass('no-outline');
+      isMouseDown = false;
+    }
   });
 
   // If only one result is available, automatically open the image viewer
@@ -14589,6 +14623,14 @@ Mousetrap.bind('right', function(){
   var count = viewer.find('.slick-slide').length;
   if(viewer.length && count > 1){
     viewer.slickNext();
+  }
+});
+
+// Create image viewer if image-set is focused and enter key is pressed
+Mousetrap.bind('enter', function(){
+  var focused = $('.image-result:focus');
+  if(focused.length){
+    focused.find('.image-set-info-wrapper').trigger('click');
   }
 });
 
@@ -14642,9 +14684,6 @@ function createImageViewer(el, aboveOrBelow, images){
   var offset = $(window).height() * ratioDiff;
   var captionHeight = 36;
   var imageViewerHeight = ( ($(window).height() - offset) * ratio ) + captionHeight;
-  if($(window).width() < 760){
-    imageViewerHeight = imageViewerHeight + 40;
-  }
 
   if(aboveOrBelow == 'above'){
     el.before(imageViewer);
@@ -14653,15 +14692,16 @@ function createImageViewer(el, aboveOrBelow, images){
   }
 
   $(images).each(function(){
-    var caption = $(this).attr("data-image-caption").length ? '<div class="caption">' + $(this).attr("data-image-caption") + '</div>' : '';
-    var captionParentClass = $(this).attr("data-image-caption").length ? ' class="has-caption"' : '';
+    var setCaption = $(this).attr('data-image-set-caption').length ? ' \u2014 ' + $(this).attr('data-image-set-caption') : '';
+    var caption = $(this).attr("data-image-caption").length ? '<div class="caption">' + $(this).attr("data-title") + setCaption + ' \u2014 ' + $(this).attr("data-image-caption") + '</div>' : '<div class="caption">' + $(this).attr("data-title") + setCaption + '</div>';
+    // var captionParentClass = $(this).attr("data-image-caption").length ? ' class="has-caption"' : '';
     var image = $(this).attr("data-image-url");
     var image2x = $(this).attr("data-image-url-2x");
     var imageMobile = $(this).attr("data-image-url-mobile");
     var imageMobile2x = $(this).attr("data-image-url-mobile-2x");
     // $('.image-viewer-slide-container').append('<div' + captionParentClass + '>' + image + caption + '</div>');
     $('.image-viewer-slide-container').append(
-      '<div' + captionParentClass + '>' +
+      '<div class="has-caption">' +
         '<picture style="display: none;">' +
           '<!--[if IE 9]><video style="display: none;"><![endif]-->' +
           '<source srcset="' + imageMobile + ', ' + imageMobile2x + ' 2x" media="(max-width: 800px)">' +
@@ -14694,6 +14734,21 @@ function createImageViewer(el, aboveOrBelow, images){
       $('.image-viewer-slide-container').append(customButtons);
       $('.image-viewer-slide-container').imagesLoaded( function() {
         $('.slick-slider').addClass('slick-loaded');
+      });
+      $('.slick-slide').each(function(){
+        var that = this;
+        $(that).imagesLoaded(function(){
+          var sliderHeight = $('.slick-slider').height();
+          var trackHeight = $('.slick-track').height();
+          var slideHeight = $(that).height();
+          var trackOffset = (sliderHeight - trackHeight) / 2;
+          var offset = (sliderHeight - slideHeight) / 2;
+          var caption = $(that).find('.caption');
+          var captionHeight = caption.height() + (caption.height() / 2);
+          $('.slick-list').css({height: sliderHeight});
+          $('.slick-track').css({top: trackOffset});
+          caption.css({transform: 'translate(' + '-50%,' + (offset - captionHeight) + ')'});
+        });
       });
     },
     onAfterChange: function(slick){
@@ -14732,6 +14787,7 @@ function destroyImageViewer(scroll){
     $('html, body').animate({scrollTop: $('.image-set-open').offset().top - $(window).height() * 0.1});
   }
   $('.image-set, .single-image').removeClass('image-set-open');
+  $('.image-set').removeClass('no-outline');
   $('.image-set-placeholder').removeClass('activate-slide');
   $('.image-viewer').remove();
   calculateColumnsInRow('.image-result');

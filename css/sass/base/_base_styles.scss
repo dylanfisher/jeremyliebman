@@ -62,8 +62,14 @@ a {
     text-decoration: none;
 }
 
-ul, li {
+ol, ul, li {
     margin: 0;
     padding: 0;
     list-style: none;
+}
+
+ol li {
+    &:before {
+        content: '\2014  ';
+    }
 }

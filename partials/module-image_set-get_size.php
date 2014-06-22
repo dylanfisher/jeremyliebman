@@ -75,7 +75,7 @@
 
 ?>
 
-  <div class="image-result image-set<?php echo $featured_set ? ' featured-image-set' : false ?> <?php sandbox_post_class() ?>" style="width: <?php echo $imageSet_width .'px' ?>; height: <?php echo $imageSet_height .'px' ?>;">
+  <div class="image-result image-set<?php echo $featured_set ? ' featured-image-set' : false ?> <?php sandbox_post_class() ?>" style="width: <?php echo $imageSet_width .'px' ?>; height: <?php echo $imageSet_height .'px' ?>;" tabindex="0">
 
     <?php
 
@@ -106,9 +106,9 @@
     ?>
 
       <?php if($row_count > 0){ // only show an image for the first image in the set ?>
-        <div class="image-set-placeholder" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>; margin-top: <?php echo $row_count * $marginTop . 'px' ?>; margin-left: <?php echo $row_count * $marginLeft . 'px' ?>;"></div>
+        <div class="image-set-placeholder" data-title="<?php the_title(); ?>" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-set-caption="<?php the_field('image_set_caption'); ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>; margin-top: <?php echo $row_count * $marginTop . 'px' ?>; margin-left: <?php echo $row_count * $marginLeft . 'px' ?>;"></div>
       <?php } else { ?>
-        <div class="image-set-info-wrapper" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>">
+        <div class="image-set-info-wrapper" data-title="<?php the_title(); ?>" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-set-caption="<?php the_field('image_set_caption'); ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>">
           <div class="image-set-info">
             <div class="image-info-text">
               <h6><?php the_title() ?></h6>
@@ -170,8 +170,8 @@
       // Check if the image's individual ACF tags OR caption match the search query, and only show these images.
       if($single_tag_match || $single_caption_match):
   ?>
-        <div class="image-result single-image <?php sandbox_post_class() ?>">
-          <div class="image-set-info-wrapper" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-caption="<?php echo $caption ?>">
+        <div class="image-result single-image <?php sandbox_post_class() ?>" tabindex="0">
+          <div class="image-set-info-wrapper" data-title="<?php the_title(); ?>" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-set-caption="<?php the_field('image_set_caption'); ?>" data-image-caption="<?php echo $caption ?>">
             <div class="image-set-info">
               <div class="image-info-text">
                 <h6><?php the_title() ?></h6>

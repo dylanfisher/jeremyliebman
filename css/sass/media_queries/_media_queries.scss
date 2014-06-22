@@ -13,6 +13,9 @@
   nav {
     max-width: 40%;
   }
+  .slick-custom-button {
+    width: 20%;
+  }
 }
 
 @media only screen and (max-width: 760px) {
@@ -34,7 +37,8 @@
     padding-top: 60px; // value matches the imageViewerHeight javascript variable, minus the original padding
   }
   .slick-next,
-  .slick-prev {
+  .slick-prev,
+  .slick-custom-button {
     display: none !important;
   }
   .slick-initialized {
