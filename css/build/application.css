@@ -649,10 +649,13 @@ h6 {
 }
 
 .chromeframe {
-  margin: 0.2em 0;
-  background: #ccc;
+  margin: 0;
+  background: #fdfe35;
   color: #000;
-  padding: 0.2em 0;
+  padding: 60px 40px;
+}
+.chromeframe a {
+  border-bottom: 1px solid;
 }
 
 .pjax-container {

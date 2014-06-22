@@ -14248,6 +14248,18 @@ the specific language governing permissions and limitations under the Apache Lic
 //
 ///////////////////////////////////////////////////////
 
+var JL = {};
+
+// Constants
+JL.mobileBreak = 760;
+JL.isMobile = function(){
+  if(window.outerWidth <= JL.mobileBreak){
+    return true;
+  } else {
+    return false;
+  }
+};
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 //
@@ -14258,6 +14270,12 @@ the specific language governing permissions and limitations under the Apache Lic
 ///////////////////////////////////////////////////////
 
 $(function(){
+
+  // Detect pixel density
+  JL.pixelRatio = 1;
+  JL.isRetina = false;
+  if(window.devicePixelRatio !== undefined) JL.pixelRatio = window.devicePixelRatio;
+  if(JL.pixelRatio > 1) JL.isRetina = true;
 
   // If an image set width is larger than initial viewport width,
   // update the VW dynamically to match max image set width.
@@ -14273,6 +14291,9 @@ $(function(){
   if(viewportWidth > initialWidth){
     $('#viewport').attr('content', 'width=' + viewportWidth + ', minimal-ui');
   }
+
+  // Determine if we are on a mobile device based on window width
+  JL.isMobile();
 
   ///////////////////////////////////////////////////////
   //
@@ -14506,6 +14527,7 @@ $(function(){
   $(window).resize(function(){
     calculateColumnsInRow('.image-set');
     calculateColumnsInRow('.single-image');
+    JL.isMobile();
   });
 
 });
@@ -14691,7 +14713,9 @@ function createImageViewer(el, aboveOrBelow, images){
     el.after(imageViewer);
   }
 
-  $(images).each(function(){
+  var activatedSlide = slideActivator();
+
+  $(images).each(function(index){
     var setCaption = $(this).attr('data-image-set-caption').length ? ' \u2014 ' + $(this).attr('data-image-set-caption') : '';
     var caption = $(this).attr("data-image-caption").length ? '<div class="caption">' + $(this).attr("data-title") + setCaption + ' \u2014 ' + $(this).attr("data-image-caption") + '</div>' : '<div class="caption">' + $(this).attr("data-title") + setCaption + '</div>';
     // var captionParentClass = $(this).attr("data-image-caption").length ? ' class="has-caption"' : '';
@@ -14699,16 +14723,33 @@ function createImageViewer(el, aboveOrBelow, images){
     var image2x = $(this).attr("data-image-url-2x");
     var imageMobile = $(this).attr("data-image-url-mobile");
     var imageMobile2x = $(this).attr("data-image-url-mobile-2x");
+    var lazyImage;
     // $('.image-viewer-slide-container').append('<div' + captionParentClass + '>' + image + caption + '</div>');
+
+    if(JL.isMobile()){
+      if(JL.isRetina){
+        lazyImage = imageMobile2x;
+      } else {
+        lazyImage = imageMobile;
+      }
+    } else {
+      if(JL.isRetina){
+        lazyImage = image2x;
+      } else {
+        lazyImage = image;
+      }
+    }
+
+    var imageToSlide = '<img data-lazy="' + lazyImage + '">';
+
+    // If a placeholder image was clicked, don't set the activated slide to lazy.
+    if(activatedSlide !== 0 && activatedSlide == index){
+      imageToSlide = '<img src="' + lazyImage + '">';
+    }
+
     $('.image-viewer-slide-container').append(
       '<div class="has-caption">' +
-        '<picture style="display: none;">' +
-          '<!--[if IE 9]><video style="display: none;"><![endif]-->' +
-          '<source srcset="' + imageMobile + ', ' + imageMobile2x + ' 2x" media="(max-width: 800px)">' +
-          '<source srcset="' + image + ', ' + image2x + ' 2x">' +
-          '<!--[if IE 9]></video><![endif]-->' +
-          '<img srcset="' + image + ', ' + image2x + ' 2x">' +
-        '</picture>' +
+        imageToSlide +
         caption +
       '</div>'
       );
@@ -14716,7 +14757,7 @@ function createImageViewer(el, aboveOrBelow, images){
 
   // Re-initialize picturefill after appending picture element.
   $('.image-viewer-slide-container picture').show();
-  picturefill();
+  // picturefill();
 
   $('.image-viewer').addClass('open').css({height: imageViewerHeight});
   var positionTop = $('.image-viewer').offset().top - offset;
@@ -14726,6 +14767,7 @@ function createImageViewer(el, aboveOrBelow, images){
   var current = 1;
   var count = 0;
   $('.image-viewer-slide-container').slick({
+    lazyLoad: 'progressive',
     onInit: function(slick){
       count = slick.slideCount;
       current = slick.currentSlide + 1;
@@ -14742,12 +14784,12 @@ function createImageViewer(el, aboveOrBelow, images){
           var trackHeight = $('.slick-track').height();
           var slideHeight = $(that).height();
           var trackOffset = (sliderHeight - trackHeight) / 2;
-          var offset = (sliderHeight - slideHeight) / 2;
+          var offset = (trackHeight - slideHeight) / 2;
           var caption = $(that).find('.caption');
           var captionHeight = caption.height() + (caption.height() / 2);
           $('.slick-list').css({height: sliderHeight});
           $('.slick-track').css({top: trackOffset});
-          caption.css({transform: 'translate(' + '-50%,' + (offset - captionHeight) + ')'});
+          // caption.css({transform: 'translate(' + '-50%,' + (offset - captionHeight) + ')'});
         });
       });
     },

@@ -118,9 +118,7 @@
             </div>
           </div>
           <picture>
-            <!--[if IE 9]><video style="display: none;"><![endif]-->
             <source srcset="<?php echo $image_first['sizes']['medium']; ?>, <?php echo $image_first['sizes']['medium@2x']; ?> 2x">
-            <!--[if IE 9]></video><![endif]-->
             <img srcset="<?php echo $image_first['sizes']['medium']; ?>, <?php echo $image_first['sizes']['medium@2x']; ?> 2x" alt="<?php echo $alt_first ?>">
           </picture>
         </div>
@@ -181,9 +179,7 @@
               </div>
             </div>
             <picture>
-              <!--[if IE 9]><video style="display: none;"><![endif]-->
               <source srcset="<?php echo $image['sizes']['medium']; ?>, <?php echo $image['sizes']['medium@2x']; ?> 2x">
-              <!--[if IE 9]></video><![endif]-->
               <img srcset="<?php echo $image['sizes']['medium']; ?>, <?php echo $image['sizes']['medium@2x']; ?> 2x" alt="<?php echo $alt ?>" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-caption="<?php echo $caption ?>">
             </picture>
           </div>

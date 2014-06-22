@@ -57,7 +57,7 @@
               $postName = get_the_title();
               $postSlug = sanitize_title(get_the_title());
               $postUrl = get_the_permalink();
-              $searchLink = get_home_url() . '/?search&amp;s=' . $child->cat_name;
+              $searchLink = get_home_url() . '/?search&amp;s=' . sanitize_title($child->cat_name);
 
       ?>
 
@@ -65,9 +65,7 @@
         <?php if($image_at_size){ ?>
           <a href="<?php echo $searchLink; ?>">
             <picture>
-              <!--[if IE 9]><video style="display: none;"><![endif]-->
               <source srcset="<?php echo $image['sizes']['small']; ?>, <?php echo $image['sizes']['small@2x']; ?> 2x">
-              <!--[if IE 9]></video><![endif]-->
               <img srcset="<?php echo $image['sizes']['small']; ?>, <?php echo $image['sizes']['small@2x']; ?> 2x" alt="<?php echo $alt ?>">
             </picture>
           </a>
