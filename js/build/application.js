@@ -14314,11 +14314,13 @@ $(function(){
 
   $(document).on('pjax:start', function(){
     // console.log('pjax start');
-    $('#pjax-container').addClass('pjax-transition');
-    // if(infoWrapperOpen === true){
-      // toggleInfoBox();
-      $('html, body').animate({scrollTop: 0}, 400, 'swing');
-    // }
+
+    // Set transition class after short delay
+    JL.pjaxTransition = setTimeout(function(){
+      $('#pjax-container').addClass('pjax-transition');
+    }, 500);
+
+    $('html, body').animate({scrollTop: 0}, 400, 'swing');
   });
 
   $(document).on('pjax:end', function(){
@@ -14328,6 +14330,8 @@ $(function(){
     // Replace the select2 chosen item in search input with proper pjax page title
     var pjaxTitle = $('#pjax-page-title').html();
     $('#select2-chosen-1').html(pjaxTitle + '<span class="search-caret"></span>');
+
+    clearTimeout(JL.pjaxTransition);
 
     destroyImageViewer();
   });

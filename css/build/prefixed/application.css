@@ -742,8 +742,8 @@ h6 {
 }
 
 .pjax-container .post-container {
-  -webkit-transition: opacity 0.6s 0.5s;
-  transition: opacity 0.6s 0.5s;
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
 }
 
 .info-wrapper {

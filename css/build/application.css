@@ -665,7 +665,7 @@ h6 {
   opacity: 0;
 }
 .pjax-container .post-container {
-  transition: opacity 0.6s 0.5s;
+  transition: opacity 0.6s;
 }
 
 .info-wrapper {
