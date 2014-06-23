@@ -440,13 +440,13 @@ function sandbox_ajax_get_single_post($id){
      return $posts;
 }
 
-// pjax detection routes all pjex requests to pjax_template.php
-// add_action( 'template_redirect', 'getCustomPjaxTemplate' );
-// function getCustomPjaxTemplate() {
-//     if (array_key_exists('HTTP_X_PJAX', $_SERVER) && $_SERVER['HTTP_X_PJAX']) {
-//         include('pjax_template.php');
-//         exit;
-//     }
-// }
+pjax detection routes all pjex requests to pjax_template.php
+add_action( 'template_redirect', 'getCustomPjaxTemplate' );
+function getCustomPjaxTemplate() {
+    if (array_key_exists('HTTP_X_PJAX', $_SERVER) && $_SERVER['HTTP_X_PJAX']) {
+        include('pjax_template.php');
+        exit;
+    }
+}
 
 ?>
