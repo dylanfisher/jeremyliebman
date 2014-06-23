@@ -14310,7 +14310,7 @@ $(function(){
   }
 
   // Initialize pjax on all anchor tags
-  a$(document).pjax('a', '#pjax-container');
+  $(document).pjax('a', '#pjax-container');
 
   $(document).on('pjax:start', function(){
     // console.log('pjax start');
