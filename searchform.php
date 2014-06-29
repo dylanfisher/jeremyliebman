@@ -68,9 +68,7 @@
 
     <option class="search-select-title"><?php echo strlen(get_search_query()) > 0 ? get_search_query() : the_title() ?></option>
 
-    <optgroup class="search-category-parent recent-work-optgroup" label="Home">
-      <option class="image-set-search-tag recent-work-option">Recent Work</option>
-    </optgroup>
+    <option class="image-set-search-tag recent-work-option">Recent Work</option>
 
     <?php
       $categories = get_categories( array('hide_empty' => 0) );
@@ -79,17 +77,15 @@
         if($cat->category_parent == 0 && $cat->slug != 'uncategorized') :
     ?>
 
-    <optgroup class="search-category-parent" label="<?php echo $cat->name; ?>">
-      <?php
-        // Child categories
-        $children = get_categories( array('child_of' => $cat->cat_ID) );
-        foreach ($children as &$child) :
-      ?>
-        <option class="image-set-search-tag"><?php echo $child->name; ?></option>
-      <?php
-        endforeach;
-      ?>
-    </optgroup>
+    <?php
+      // Child categories
+      $children = get_categories( array('child_of' => $cat->cat_ID) );
+      foreach ($children as &$child) :
+    ?>
+      <option class="image-set-search-tag"><?php echo $child->name; ?></option>
+    <?php
+      endforeach;
+    ?>
 
     <?php
         endif;

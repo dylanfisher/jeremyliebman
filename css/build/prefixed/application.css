@@ -992,7 +992,7 @@ footer .contact a {
 }
 
 .image-set .image-set-placeholder:hover {
-  background: #fdfe35;
+  background: #fdfe35 !important;
 }
 
 .featured-image-set {

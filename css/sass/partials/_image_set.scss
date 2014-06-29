@@ -41,7 +41,7 @@ $featured_image_set_info_height: 100px;
     background: #fff;
     border: 2px solid #000;
     &:hover {
-      background: $yellow;
+      background: $yellow !important;
     }
   }
 }
