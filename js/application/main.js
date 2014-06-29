@@ -205,6 +205,11 @@ $(function(){
     }, 10);
   }
 
+  JL.initialQuery = $('#select2-chosen-1').html();
+  JL_searchTypeAnimation('<span>Click or search here</span><span class="search-caret"></span>', function(){
+    JL_searchTypeAnimation(JL.initialQuery);
+  });
+
   ///////////////////////////////////////////////////////
   //
   // Info wrapper toggle
@@ -586,4 +591,35 @@ function destroyImageViewer(scroll){
   $('.image-set-placeholder').removeClass('activate-slide');
   $('.image-viewer').remove();
   calculateColumnsInRow('.image-result');
+}
+
+// Search type animates in
+function JL_searchTypeAnimation(string, callback){
+  var str = string;
+  var i = 0;
+  var isTag;
+  var text;
+  var input = $('#select2-chosen-1');
+
+  (function type() {
+    text = str.slice(0, ++i);
+    if (text === str){
+      if (typeof callback === 'function'){
+        callback();
+      }
+      return;
+    }
+
+    document.getElementById('select2-chosen-1').innerHTML = text;
+
+    var char = text.slice(-1);
+    if( char === '<' ) isTag = true;
+    if( char === '>' ) isTag = false;
+
+    if (isTag){
+      return type();
+    }
+
+    setTimeout(type, 160);
+  }());
 }

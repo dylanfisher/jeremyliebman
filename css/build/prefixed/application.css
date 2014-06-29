@@ -925,6 +925,10 @@ footer {
   margin-top: 240px;
 }
 
+footer h2 {
+  display: none;
+}
+
 footer h5 {
   margin-top: 10px;
   margin-left: -2px;
