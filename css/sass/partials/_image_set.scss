@@ -173,6 +173,7 @@ $featured_image_set_info_height: 100px;
 }
 
 .caption {
+  display: none;
   font-size: $font_small;
   position: absolute;
   left: 50%;
@@ -193,10 +194,10 @@ $featured_image_set_info_height: 100px;
     }
     &.has-caption {
       img {
-        padding-bottom: 36px;
-        position: relative;
-        top: 50%;
-        transform: translate(0, -50%);
+        // padding-bottom: 36px;
+        // position: relative;
+        // top: 50%;
+        // transform: translate(0, -50%);
       }
     }
   }
