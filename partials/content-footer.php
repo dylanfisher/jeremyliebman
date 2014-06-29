@@ -39,6 +39,11 @@
               $first_row = $rows[0]; // get the first row
 
               $image = $first_row['image'];
+
+              if(empty($image)){
+                $image = get_field('video_image');
+              }
+
               $url = $image['url'];
               $title = $image['title'];
               $alt = $image['alt'];
