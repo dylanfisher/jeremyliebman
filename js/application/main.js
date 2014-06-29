@@ -355,14 +355,14 @@ $(document).on('page:load ready pjax:end', function(){
   // Remove focus outline when clicking on an image set.
   var isMouseDown = false;
 
-  $('.image-set').on('mousedown', function(){
+  $('.image-result').on('mousedown', function(){
     $(this).addClass('no-outline');
     isMouseDown = true;
   });
 
   $(document).mouseup(function(){
     if(isMouseDown){
-      $('.image-set').removeClass('no-outline');
+      $('.image-result').removeClass('no-outline');
       isMouseDown = false;
     }
   });
@@ -539,9 +539,10 @@ function createImageViewer(el, aboveOrBelow, images){
           var offset = (trackHeight - slideHeight) / 2;
           var caption = $(that).find('.caption');
           var captionHeight = caption.height() + (caption.height() / 2);
-          $('.slick-list').css({height: sliderHeight});
+          $('.slick-list, .slick-slide').css({height: sliderHeight});
           $('.slick-track').css({top: trackOffset});
           // caption.css({transform: 'translate(' + '-50%,' + (offset - captionHeight) + ')'});
+          caption.css({marginTop: -caption.height()});
         });
       });
     },
@@ -581,7 +582,7 @@ function destroyImageViewer(scroll){
     $('html, body').animate({scrollTop: $('.image-set-open').offset().top - $(window).height() * 0.1});
   }
   $('.image-set, .single-image').removeClass('image-set-open');
-  $('.image-set').removeClass('no-outline');
+  $('.image-result').removeClass('no-outline');
   $('.image-set-placeholder').removeClass('activate-slide');
   $('.image-viewer').remove();
   calculateColumnsInRow('.image-result');

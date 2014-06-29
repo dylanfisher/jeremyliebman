@@ -8,11 +8,17 @@
   get_field('featured_set') ? $featured_set = true : $featured_set = false;
 
   if($featured_set){
-    // get_template_part( 'partials/module', 'image_set-image_large' );
+
     include(locate_template('partials/module-image_set-image_large.php'));
+
   } else {
-    // get_template_part( 'partials/module', 'image_set-image_medium' );
+
     include(locate_template('partials/module-image_set-image_medium.php'));
+
+    if(get_field('video')){
+      include(locate_template('partials/module-videos.php'));
+    }
+
   }
 
 ?>

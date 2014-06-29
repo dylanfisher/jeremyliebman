@@ -958,20 +958,21 @@ footer .contact a {
   outline: 2px solid #000;
 }
 
-.single-image {
+.image-result {
   display: inline-block;
   margin: 20px 20px 0;
+}
+
+.image-result.no-outline {
+  outline: 0;
+}
+
+.single-image {
   cursor: pointer;
 }
 
 .image-set {
   position: relative;
-  display: inline-block;
-  margin: 20px 20px 0;
-}
-
-.image-set.no-outline {
-  outline: 0;
 }
 
 .image-set img,
@@ -987,7 +988,7 @@ footer .contact a {
 
 .image-set .image-set-placeholder {
   background: #fff;
-  outline: 2px solid #000;
+  border: 2px solid #000;
 }
 
 .image-set .image-set-placeholder:hover {
@@ -1121,6 +1122,8 @@ footer .contact a {
   left: 50%;
   -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
+  top: 100%;
+  margin-top: -1.3em;
 }
 
 .slick-initialized {
@@ -1136,7 +1139,11 @@ footer .contact a {
 }
 
 .slick-initialized .slick-slide.has-caption img {
-  padding-bottom: 48px;
+  padding-bottom: 36px;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
 }
 
 .slick-list {

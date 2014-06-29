@@ -55,6 +55,11 @@
     };
   };
 
+  $color = '#fff';
+  if(get_field('color')){
+    $color = get_field('color');
+  }
+
   // echo "<br>";
   // echo "<br>";
   // print_r($cats);
@@ -106,7 +111,7 @@
     ?>
 
       <?php if($row_count > 0){ // only show an image for the first image in the set ?>
-        <div class="image-set-placeholder" data-title="<?php the_title(); ?>" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-set-caption="<?php the_field('image_set_caption'); ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>; margin-top: <?php echo $row_count * $marginTop . 'px' ?>; margin-left: <?php echo $row_count * $marginLeft . 'px' ?>;"></div>
+        <div class="image-set-placeholder" data-title="<?php the_title(); ?>" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-set-caption="<?php the_field('image_set_caption'); ?>" data-image-caption="<?php echo $caption ?>" style="background-color: <?php echo $color; ?>; width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>; margin-top: <?php echo $row_count * $marginTop . 'px' ?>; margin-left: <?php echo $row_count * $marginLeft . 'px' ?>;"></div>
       <?php } else { ?>
         <div class="image-set-info-wrapper" data-title="<?php the_title(); ?>" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-set-caption="<?php the_field('image_set_caption'); ?>" data-image-caption="<?php echo $caption ?>" style="width: <?php echo $width_first . 'px' ?>; height: <?php echo $height_first . 'px' ?>">
           <div class="image-set-info">
@@ -169,7 +174,7 @@
       if($single_tag_match || $single_caption_match):
   ?>
         <div class="image-result single-image <?php sandbox_post_class() ?>" tabindex="0">
-          <div class="image-set-info-wrapper" data-title="<?php the_title(); ?>" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-set-caption="<?php the_field('image_set_caption'); ?>" data-image-caption="<?php echo $caption ?>">
+          <div class="image-set-info-wrapper" style="width: <?php echo $width ?>px; height: <?php echo $height ?>px;" data-title="<?php the_title(); ?>" data-image-url="<?php echo $data_url ?>" data-image-url-2x="<?php echo $data_url_2x ?>" data-image-url-mobile="<?php echo $data_url_mobile ?>" data-image-url-mobile-2x="<?php echo $data_url_mobile_2x ?>" data-image-set-caption="<?php the_field('image_set_caption'); ?>" data-image-caption="<?php echo $caption ?>">
             <div class="image-set-info">
               <div class="image-info-text">
                 <h6><?php the_title() ?></h6>
