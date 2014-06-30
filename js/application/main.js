@@ -83,6 +83,9 @@ $(function(){
     // console.log('pjax end');
     $('#pjax-container').removeClass('pjax-transition');
 
+    // Stop search typing animation
+    clearTimeout(JL.typeTimer);
+
     // Replace the select2 chosen item in search input with proper pjax page title
     var pjaxTitle = $('#pjax-page-title').html();
     $('#select2-chosen-1').html(pjaxTitle + '<span class="search-caret"></span>');
@@ -620,6 +623,6 @@ function JL_searchTypeAnimation(string, callback){
       return type();
     }
 
-    setTimeout(type, 160);
+    JL.typeTimer = setTimeout(type, 160);
   }());
 }
