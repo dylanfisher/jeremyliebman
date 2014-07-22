@@ -14451,7 +14451,9 @@ $(function(){
 
   JL.initialQuery = $('#select2-chosen-1').html();
   JL_searchTypeAnimation('<span>Click or search here</span><span class="search-caret"></span>', function(){
-    JL_searchTypeAnimation(JL.initialQuery);
+    setTimeout(function(){
+      JL_searchTypeAnimation(JL.initialQuery);
+    }, 3000);
   });
 
   ///////////////////////////////////////////////////////

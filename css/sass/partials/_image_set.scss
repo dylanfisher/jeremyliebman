@@ -38,10 +38,10 @@ $featured_image_set_info_height: 100px;
   }
 
   .image-set-placeholder {
-    background: #fff;
-    border: 2px solid #000;
+    background: #D3D3D3;
+    border: 2px solid #fff;
     &:hover {
-      background: $yellow !important;
+      background: #000 !important;
     }
   }
 }

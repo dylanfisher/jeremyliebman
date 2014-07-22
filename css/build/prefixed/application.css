@@ -857,6 +857,14 @@ nav {
   display: none !important;
 }
 
+.recent-work-option {
+  margin-bottom: .7em !important;
+}
+
+.select-option-space-above {
+  margin-top: .7em !important;
+}
+
 .search-select-title {
   display: none !important;
 }
@@ -991,12 +999,12 @@ footer .contact a {
 }
 
 .image-set .image-set-placeholder {
-  background: #fff;
-  border: 2px solid #000;
+  background: #D3D3D3;
+  border: 2px solid #fff;
 }
 
 .image-set .image-set-placeholder:hover {
-  background: #fdfe35 !important;
+  background: #000 !important;
 }
 
 .featured-image-set {

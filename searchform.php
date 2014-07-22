@@ -81,9 +81,15 @@
       // Child categories
       $children = get_categories( array('child_of' => $cat->cat_ID) );
       foreach ($children as &$child) :
+        if(strtolower($child->name) == 'video' || strtolower($child->name) == 'series'):
     ?>
-      <option class="image-set-search-tag"><?php echo $child->name; ?></option>
+        <option class="image-set-search-tag select-option-space-above"><?php echo $child->name; ?></option>
     <?php
+        else:
+    ?>
+        <option class="image-set-search-tag"><?php echo $child->name; ?></option>
+    <?php
+        endif;
       endforeach;
     ?>
 
