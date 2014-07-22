@@ -354,8 +354,8 @@ add_image_size( 'small', 175, 9999, false ); // Footer images
 add_image_size( 'small@2x', 350, 9999, false ); // Footer images @2x
 // add_image_size( 'medium', 350, 400, false ); // WP Medium
 add_image_size( 'medium@2x', 700, 800, false ); // WP Medium @2x
-// add_image_size( 'large', 550, 700, false ); // WP Large
-add_image_size( 'large@2x', 1100, 1400, false ); // WP Large @2x
+// add_image_size( 'large', 650, 800, false ); // WP Large
+add_image_size( 'large@2x', 1300, 1600, false ); // WP Large @2x
 add_image_size( 'huge', 1200, 856, false ); // Carousel images
 add_image_size( 'huge@2x', 2400, 1712, false ); // Carousel images
 add_image_size( 'carousel-mobile', 800, 571, false ); // Carousel images mobile

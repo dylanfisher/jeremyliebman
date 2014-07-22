@@ -319,6 +319,10 @@ $(document).on('page:load ready pjax:end', function(){
 
   // Append an image viewer when clicking on an image set and set this set to active
   $('.image-set-placeholder, .image-set-info-wrapper').click(function(){
+    if($(this).closest('.image-result').hasClass('video-result')){
+      return;
+    }
+
     // Place the image viewer before the next image set on the following row.
     var thisImageSet = $(this).closest('.image-result');
     var nextImageSet = thisImageSet.nextAll('.new-image-set-row').first();
@@ -386,6 +390,13 @@ $(document).on('page:load ready pjax:end', function(){
     }, 50);
   }
 
+  // Video results
+  $('.video-result img').click(function(){
+    var container = $(this).closest('.video-result');
+    var iframe = container.find('iframe');
+    container.addClass('video-playing');
+    iframe.attr('src', iframe.attr('data-src'));
+  });
 
 
 });

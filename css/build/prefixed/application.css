@@ -16,6 +16,7 @@
 
 .slick-prev.active,
 .slick-prev,
+.video-result .play-button,
 .slick-next.active,
 .slick-next,
 .image-viewer-open-indicator:before,
@@ -33,6 +34,7 @@
   border-color: transparent #000 transparent transparent;
 }
 
+.video-result .play-button,
 .slick-next.active,
 .slick-next {
   border-width: 20px 0 20px 20px;
@@ -43,6 +45,7 @@
   border-width: 30px 30px 30px 0;
 }
 
+.video-result .play-button,
 .slick-next.active {
   border-width: 30px 0 30px 30px;
 }
@@ -1031,6 +1034,33 @@ footer .contact a {
 
 .image-set-info-wrapper:hover .image-set-info {
   margin-top: -80px;
+}
+
+.video-result:hover .image-set-info {
+  margin-top: -80px;
+}
+
+.video-result.video-playing iframe {
+  display: block;
+}
+
+.video-result.video-playing .image-set-info,
+.video-result.video-playing .play-button,
+.video-result.video-playing picture,
+.video-result.video-playing img {
+  display: none !important;
+}
+
+.video-result iframe {
+  display: none;
+}
+
+.video-result .play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -15px;
+  margin-top: -30px;
 }
 
 .image-set-open .image-set-info {

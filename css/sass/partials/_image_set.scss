@@ -73,6 +73,40 @@ $featured_image_set_info_height: 100px;
   }
 }
 
+.video-result {
+  &:hover {
+    .image-set-info {
+      margin-top: -$image_set_info_height;
+    }
+  }
+
+  &.video-playing {
+    iframe {
+      display: block;
+    }
+
+    .image-set-info,
+    .play-button,
+    picture,
+    img {
+      display: none !important;
+    }
+  }
+
+  iframe {
+    display: none;
+  }
+
+  .play-button {
+    @extend %arrow-right-large;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -15px;
+    margin-top: -30px;
+  }
+}
+
 .image-set-open {
   .image-set-info {
     margin-top: -$image_set_info_height;
