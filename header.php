@@ -31,8 +31,9 @@
       $info_content = get_post_meta($info_id);
       $column1 = wpautop($info_content['column_one'][0]);
       $column2 = wpautop($info_content['column_two'][0]);
+      $column3 = wpautop($info_content['column_three'][0]);
   ?>
-  <div id="info-wrapper" class="info-wrapper">
+  <div id="info-wrapper" class="info-wrapper clearfix">
     <div id="info-wrapper-close" class="info-wrapper-close"></div>
     <h2>Information</h2>
     <div class="column column1">
@@ -40,6 +41,9 @@
     </div>
     <div class="column column2">
     <?php echo $column2; ?>
+    </div>
+    <div class="column column3">
+    <?php echo $column3; ?>
     </div>
   </div>
 <?php endif; ?>

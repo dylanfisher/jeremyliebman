@@ -43,9 +43,11 @@
 }
 
 .column {
-  display: inline-block;
-  max-width: 400px;
-  margin-left: $space_medium;
+  float: left;
+  width: 33%;
+  max-width: 450px;
+  min-width: 320px;
+  padding-left: $space_medium;
 }
 
 .loader {

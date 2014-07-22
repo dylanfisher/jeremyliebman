@@ -695,9 +695,11 @@ h6 {
 }
 
 .column {
-  display: inline-block;
-  max-width: 400px;
-  margin-left: 40px;
+  float: left;
+  width: 33%;
+  max-width: 450px;
+  min-width: 320px;
+  padding-left: 40px;
 }
 
 .loader {
@@ -918,6 +920,10 @@ footer .contact a {
   cursor: pointer;
 }
 .image-set-info-wrapper:hover .image-set-info {
+  margin-top: -80px;
+}
+
+.image-set-open .image-set-info {
   margin-top: -80px;
 }
 
@@ -1789,6 +1795,12 @@ html[dir="rtl"] .select2-search-choice-close {
 
   nav {
     margin-bottom: 20px;
+  }
+
+  .column {
+    width: 100%;
+    max-width: none;
+    min-width: none;
   }
 
   .image-viewer {

@@ -32,6 +32,11 @@
   nav {
     margin-bottom: 20px;
   }
+  .column {
+    width: 100%;
+    max-width: none;
+    min-width: none;
+  }
   .image-viewer {
     width: calc(100% - 20px);
     padding-top: 60px; // value matches the imageViewerHeight javascript variable, minus the original padding

@@ -73,6 +73,12 @@ $featured_image_set_info_height: 100px;
   }
 }
 
+.image-set-open {
+  .image-set-info {
+    margin-top: -$image_set_info_height;
+  }
+}
+
 .image-set-info {
   height: $image_set_info_height;
   position: absolute;
