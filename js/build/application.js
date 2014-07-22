@@ -14295,6 +14295,8 @@ $(function(){
   // Determine if we are on a mobile device based on window width
   JL.isMobile();
 
+  JL_SetVideoModuleHeights();
+
   ///////////////////////////////////////////////////////
   //
   // pjax configuration
@@ -14628,6 +14630,8 @@ $(document).on('page:load ready pjax:end', function(){
     }, 50);
   }
 
+
+
 });
 
 ///////////////////////////////////////////////////////
@@ -14871,4 +14875,16 @@ function JL_searchTypeAnimation(string, callback){
 
     JL.typeTimer = setTimeout(type, 160);
   }());
+}
+
+function JL_SetVideoModuleHeights(){
+  // Set correct ratio for video module iframes
+  $('.video-result iframe').each(function(){
+    var width = $(this).attr('width');
+    var actualWidth = $(this).width();
+    var height = $(this).attr('height');
+    var ratio = width / height;
+    var newHeight = actualWidth / ratio;
+    $(this).css('height', newHeight);
+  });
 }
