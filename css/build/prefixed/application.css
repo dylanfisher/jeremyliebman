@@ -938,8 +938,9 @@ footer {
   margin-top: 240px;
 }
 
-footer h2,
-footer h5 a {
+footer,
+footer a,
+footer h2 {
   color: #fff;
 }
 
@@ -953,7 +954,7 @@ footer h5 {
 }
 
 footer .contact {
-  margin-top: 180px;
+  margin-top: 60px;
 }
 
 footer .contact > span {
@@ -1175,14 +1176,7 @@ footer .contact a {
 }
 
 .caption {
-  display: none;
   font-size: 12px;
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
-  top: 100%;
-  margin-top: -1.3em;
 }
 
 .slick-initialized {

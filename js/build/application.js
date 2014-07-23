@@ -14434,7 +14434,7 @@ $(function(){
   $('#select2-chosen-1').append('<span class="search-caret"></span>');
 
   // Add placeholder text to select input
-  $('#s2id_autogen1_search').attr('placeholder', 'select from the menu or type a search term');
+  $('#s2id_autogen1_search').attr('placeholder', 'Select from menu or type search term here');
 
   function searchTagEnabler(state){
     if(state == 'enable'){
@@ -14741,14 +14741,13 @@ function createImageViewer(el, aboveOrBelow, images){
 
   $(images).each(function(index){
     var setCaption = $(this).attr('data-image-set-caption').length ? ' \u2014 ' + $(this).attr('data-image-set-caption') : '';
-    var caption = $(this).attr("data-image-caption").length ? '<div class="caption">' + $(this).attr("data-title") + setCaption + ' \u2014 ' + $(this).attr("data-image-caption") + '</div>' : '<div class="caption">' + $(this).attr("data-title") + setCaption + '</div>';
-    // var captionParentClass = $(this).attr("data-image-caption").length ? ' class="has-caption"' : '';
+    var caption = '<div class="caption">' + $(this).attr("data-image-caption") + '</div>';
+    var captionParentClass = $(this).attr("data-image-caption").length ? ' class="has-caption"' : '';
     var image = $(this).attr("data-image-url");
     var image2x = $(this).attr("data-image-url-2x");
     var imageMobile = $(this).attr("data-image-url-mobile");
     var imageMobile2x = $(this).attr("data-image-url-mobile-2x");
     var lazyImage;
-    // $('.image-viewer-slide-container').append('<div' + captionParentClass + '>' + image + caption + '</div>');
 
     if(JL.isMobile()){
       if(JL.isRetina){
@@ -14771,12 +14770,15 @@ function createImageViewer(el, aboveOrBelow, images){
       imageToSlide = '<img src="' + lazyImage + '">';
     }
 
-    $('.image-viewer-slide-container').append(
-      '<div class="has-caption">' +
-        imageToSlide +
-        caption +
-      '</div>'
-      );
+    $('.image-viewer-slide-container').append('<div' + captionParentClass + '>' + imageToSlide + caption + '</div>');
+
+    // $('.image-viewer-slide-container').append(
+    //   '<div class="has-caption">' +
+    //     imageToSlide +
+    //     caption +
+    //   '</div>'
+    //   );
+
   });
 
   // Re-initialize picturefill after appending picture element.
@@ -14803,6 +14805,11 @@ function createImageViewer(el, aboveOrBelow, images){
       });
       $('.slick-slide').each(function(){
         var that = this;
+
+        if($(that).find('.caption').html().length){
+          $(that).find('img').css({paddingBottom: $(that).find('.caption').height() + 10});
+        }
+
         $(that).imagesLoaded(function(){
           var sliderHeight = $('.slick-slider').height();
           var trackHeight = $('.slick-track').height();

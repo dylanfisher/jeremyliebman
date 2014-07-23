@@ -838,8 +838,9 @@ footer {
   padding: 40px;
   margin-top: 240px;
 }
-footer h2,
-footer h5 a {
+footer,
+footer a,
+footer h2 {
   color: #fff;
 }
 footer h2 {
@@ -850,7 +851,7 @@ footer h5 {
   margin-left: -2px;
 }
 footer .contact {
-  margin-top: 180px;
+  margin-top: 60px;
 }
 footer .contact > span {
   margin-right: 40px;
@@ -1049,13 +1050,7 @@ footer .contact a {
 }
 
 .caption {
-  display: none;
   font-size: 12px;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-  top: 100%;
-  margin-top: -1.3em;
 }
 
 .slick-initialized {
