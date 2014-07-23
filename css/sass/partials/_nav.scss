@@ -95,6 +95,11 @@ nav {
   to { visibility: hidden; }
 }
 
+.select2-input::-webkit-input-placeholder { padding-top: 2px; }
+.select2-input::-moz-placeholder          { padding-top: 2px; }
+.select2-input:-ms-input-placeholder      { padding-top: 2px; }
+.select2-input:-moz-placeholder           { padding-top: 2px; }
+
 // Magnifying glass
 .select2-container .select2-choice,
 .select2-search {

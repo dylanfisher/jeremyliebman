@@ -912,6 +912,22 @@ nav {
   }
 }
 
+.select2-input::-webkit-input-placeholder {
+  padding-top: 2px;
+}
+
+.select2-input::-moz-placeholder {
+  padding-top: 2px;
+}
+
+.select2-input:-ms-input-placeholder {
+  padding-top: 2px;
+}
+
+.select2-input:-moz-placeholder {
+  padding-top: 2px;
+}
+
 .select2-container .select2-choice:after,
 .select2-search:after {
   background: url("../../../images/magnifying-glass.png") no-repeat 0 0;
