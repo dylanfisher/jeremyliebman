@@ -14458,7 +14458,7 @@ $(function(){
   }
 
   JL.initialQuery = $('#select2-chosen-1').html();
-  JL_searchTypeAnimation('<span>select from the menu or type a search term</span><span class="search-caret"></span>', function(){
+  JL_searchTypeAnimation('<span>Select from menu or type search term here</span><span class="search-caret"></span>', function(){
     setTimeout(function(){
       JL_searchTypeAnimation(JL.initialQuery);
     }, 3000);
