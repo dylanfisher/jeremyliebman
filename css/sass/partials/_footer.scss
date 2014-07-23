@@ -3,9 +3,13 @@
 //
 
 footer {
-  background: $yellow;
+  background: #000;
   padding: $space_medium;
   margin-top: 240px;
+  h2,
+  h5 a {
+    color: #fff;
+  }
   h2 {
     display: none;
   }

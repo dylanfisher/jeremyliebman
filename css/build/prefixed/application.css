@@ -933,9 +933,14 @@ nav {
 }
 
 footer {
-  background: #fdfe35;
+  background: #000;
   padding: 40px;
   margin-top: 240px;
+}
+
+footer h2,
+footer h5 a {
+  color: #fff;
 }
 
 footer h2 {
@@ -1004,7 +1009,7 @@ footer .contact a {
 }
 
 .image-set .image-set-placeholder {
-  background: #D3D3D3;
+  background: #f2f2f2;
   border: 2px solid #fff;
 }
 
@@ -1034,6 +1039,10 @@ footer .contact a {
 
 .image-set-info-wrapper:hover .image-set-info {
   margin-top: -80px;
+}
+
+.video-result {
+  max-width: 650px;
 }
 
 .video-result:hover .image-set-info {
@@ -1075,7 +1084,8 @@ footer .contact a {
   display: table;
   z-index: 2;
   width: 100%;
-  background: #fdfe35;
+  background: #000;
+  color: #fff;
 }
 
 .image-info-text {

@@ -189,6 +189,9 @@ $(function(){
   // Add blinking caret to the end of the selected term
   $('#select2-chosen-1').append('<span class="search-caret"></span>');
 
+  // Add placeholder text to select input
+  $('#s2id_autogen1_search').attr('placeholder', 'select from the menu or type a search term');
+
   function searchTagEnabler(state){
     if(state == 'enable'){
       $('#select2-drop').addClass('active');
@@ -211,7 +214,7 @@ $(function(){
   }
 
   JL.initialQuery = $('#select2-chosen-1').html();
-  JL_searchTypeAnimation('<span>Click or search here</span><span class="search-caret"></span>', function(){
+  JL_searchTypeAnimation('<span>select from the menu or type a search term</span><span class="search-caret"></span>', function(){
     setTimeout(function(){
       JL_searchTypeAnimation(JL.initialQuery);
     }, 3000);
