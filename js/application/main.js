@@ -394,7 +394,7 @@ $(document).on('page:load ready pjax:end', function(){
   }
 
   // Video results
-  $('.video-result img').click(function(){
+  $('.video-result .image-set-info-wrapper').click(function(){
     var container = $(this).closest('.video-result');
     var iframe = container.find('iframe');
     container.addClass('video-playing');
