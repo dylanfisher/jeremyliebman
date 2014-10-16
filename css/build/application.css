@@ -5,7 +5,6 @@
   font-style: normal;
   font-weight: 400;
 }
-
 @font-face {
   font-family: 'univers_bold_extended';
   src: url("../../../assets/fonts/UniversLT-BoldExt.eot");
@@ -13,7 +12,6 @@
   font-style: normal;
   font-weight: 700;
 }
-
 .slick-prev.active, .slick-prev, .video-result .play-button, .slick-next.active, .slick-next, .image-viewer-open-indicator:before, .image-viewer-open-indicator:after {
   width: 0;
   height: 0;
@@ -650,7 +648,7 @@ h6 {
 
 .chromeframe {
   margin: 0;
-  background: #fdfe35;
+  background: #FDFE35;
   color: #000;
   padding: 60px 40px;
 }
@@ -672,7 +670,7 @@ h6 {
   display: none;
   font-size: 15px;
   padding: 40px;
-  background: #fdfe35;
+  background: #FDFE35;
   z-index: 100;
 }
 .info-wrapper h2 {
@@ -743,14 +741,14 @@ nav {
   line-height: 46px;
   top: 4px;
   right: 0;
-  background: #fdfe35;
-  outline: 4px solid #fdfe35;
+  background: #FDFE35;
+  outline: 4px solid #FDFE35;
   padding: 0px 20px;
   cursor: pointer;
 }
 .info-button:hover {
   background: #000;
-  color: #fdfe35;
+  color: #FDFE35;
   outline: #000;
 }
 
@@ -807,12 +805,10 @@ nav {
   from {
     visibility: visible;
   }
-
   to {
     visibility: hidden;
   }
 }
-
 .select2-input::-webkit-input-placeholder {
   padding-top: 2px;
 }
@@ -1311,7 +1307,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 
 .select2-dropdown-open .select2-choice {
   border-bottom-color: transparent;
-  background-color: #fdfe35;
+  background-color: #FDFE35;
 }
 
 .select2-dropdown-open.select2-drop-above .select2-choice,
@@ -1350,7 +1346,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .select2-results ul.select2-result-sub {
@@ -1410,7 +1406,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
 }
 
 .select2-results .select2-highlighted {
-  background: #fdfe35;
+  background: #FDFE35;
   color: #000;
 }
 
@@ -1452,7 +1448,7 @@ disabled look for disabled choices in the results dropdown
 }
 
 .select2-more-results.select2-active {
-  background: white url("../../../images/select2-spinner.gif") no-repeat 100%;
+  background: #fff url("../../../images/select2-spinner.gif") no-repeat 100%;
 }
 
 .select2-more-results {
@@ -1520,7 +1516,7 @@ html[dir="rtl"] .select2-container-multi .select2-choices li {
 }
 
 .select2-container-multi .select2-choices .select2-search-field input.select2-active {
-  background: white url("../../../images/select2-spinner.gif") no-repeat 100% !important;
+  background: #fff url("../../../images/select2-spinner.gif") no-repeat 100% !important;
 }
 
 .select2-default {
@@ -1636,7 +1632,7 @@ html[dir="rtl"] .select2-search-choice-close {
   user-select: none;
   -ms-touch-action: none;
   touch-action: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
   background: url(../../../images/ajax-loader.gif) center center no-repeat;
 }
 .slick-slider.slick-loaded {
@@ -1655,7 +1651,7 @@ html[dir="rtl"] .select2-search-choice-close {
   outline: none;
 }
 .slick-loading .slick-list {
-  background: white image-url("./ajax-loader.gif") center center no-repeat;
+  background: #fff url("./ajax-loader.gif") center center no-repeat;
 }
 .slick-list.dragging {
   cursor: pointer;
@@ -1925,8 +1921,7 @@ html[dir="rtl"] .select2-search-choice-close {
 
   @page {
     margin: 0.5cm;
-}
-
+  }
   p,
   h2,
   h3 {
@@ -1939,3 +1934,5 @@ html[dir="rtl"] .select2-search-choice-close {
     page-break-after: avoid;
   }
 }
+
+/*# sourceMappingURL=application.css.map */
