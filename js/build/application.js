@@ -14891,7 +14891,7 @@ function createImageViewer(el, aboveOrBelow, images){
           var caption = $(that).find('.caption');
           var captionHeight = caption.height() + (caption.height() / 2);
           $('.slick-list, .slick-slide').css({height: sliderHeight});
-          $('.slick-track').css({top: trackOffset});
+          // $('.slick-track').css({top: trackOffset});
           // caption.css({transform: 'translate(' + '-50%,' + (offset - captionHeight) + ')'});
           caption.css({marginTop: -caption.height()});
         });
