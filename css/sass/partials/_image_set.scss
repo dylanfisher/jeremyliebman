@@ -233,13 +233,16 @@ $featured_image_set_info_height: 100px;
       height: auto;
       width: auto;
       margin: 0 auto;
+
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      left: 50%;
     }
     &.has-caption {
       img {
-        // padding-bottom: 36px;
-        // position: relative;
-        // top: 50%;
-        // transform: translate(0, -50%);
+        position: static;
+        transform: none;
       }
     }
   }

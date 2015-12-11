@@ -309,7 +309,7 @@ $(function(){
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 
-$(document).on('page:load ready pjax:end', function(){
+$(document).on('page:load ready pjax:end jl:pageLoaded', function(){
 
   ///////////////////////////////////////////////////////
   //
@@ -321,7 +321,7 @@ $(document).on('page:load ready pjax:end', function(){
   calculateColumnsInRow('.image-result');
 
   // Append an image viewer when clicking on an image set and set this set to active
-  $('.image-set-placeholder, .image-set-info-wrapper').click(function(){
+  $(document).on('click', '.image-set-placeholder, .image-set-info-wrapper', function(){
     if($(this).closest('.image-result').hasClass('video-result')){
       return;
     }
@@ -394,7 +394,7 @@ $(document).on('page:load ready pjax:end', function(){
   }
 
   // Video results
-  $('.video-result .image-set-info-wrapper').click(function(){
+  $(document).on('click', '.video-result .image-set-info-wrapper', function() {
     var container = $(this).closest('.video-result');
     var iframe = container.find('iframe');
     container.addClass('video-playing');
@@ -665,3 +665,21 @@ function JL_SetVideoModuleHeights(){
     $(this).css('height', newHeight);
   });
 }
+
+
+// Infinite load ajax pagination
+$(document).on('click', '.ajax-navigation a', function(e) {
+  e.preventDefault();
+
+  var $nextPageLink = $(this);
+  var $ajaxNavigation = $nextPageLink.closest('.ajax-navigation');
+  var url = $nextPageLink.attr('href');
+
+  $ajaxNavigation.replaceWith('<div class="ajax-loading">Loading...</div>');
+
+  $.get($nextPageLink.attr('href')).done(function(data) {
+    $('.ajax-loading').remove();
+    $(data).find('.image-set-loop-wrapper > *').appendTo('.image-set-loop-wrapper');
+    $(document).trigger('jl:pageLoaded');
+  });
+});
