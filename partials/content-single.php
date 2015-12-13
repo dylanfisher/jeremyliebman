@@ -9,7 +9,7 @@
 
   <?php if(get_next_posts_link()): ?>
     <div class="ajax-navigation">
-      <?php echo get_next_posts_link('Load more', 12); ?>
+      <?php echo get_next_posts_link('Load more'); ?>
     </div>
   <?php endif; ?>
 </div>
