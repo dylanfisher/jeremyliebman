@@ -1,7 +1,7 @@
 <?php
 $args = array(
   'post_type' => 'post',
-  'posts_per_page' => 15
+  'posts_per_page' => 27
   // 'category__not_in' => array(26) // exclude video category
 );
 
