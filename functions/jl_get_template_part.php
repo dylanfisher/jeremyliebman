@@ -9,9 +9,8 @@
 // jl_get_template_part( 'partials/calendar/datepicker_active_dates', array( 'relative_date' => $relative_date ), 'page-calendar/relative_dates');
 
 function jl_get_template_part( $file, $template_args = array(), $options = array() ) {
-  // Disable the cache in development
-  // $disable_cache = sandbox_is_local();
-  $disable_cache = false;
+  // Disable the cache for logged in users
+  $disable_cache = current_user_can( 'manage_options' );
 
   $cache_key     = isset( $options['cache_key'] ) ? $options['cache_key'] : false;
   $force         = isset( $options['force'] ) ? $options['force'] : false;
