@@ -1359,7 +1359,7 @@ Version: 3.4.8 Timestamp: Thu May  1 09:50:32 EDT 2014
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .select2-results ul.select2-result-sub {
@@ -1645,7 +1645,7 @@ html[dir="rtl"] .select2-search-choice-close {
   user-select: none;
   -ms-touch-action: none;
   touch-action: none;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background: url(../../../images/ajax-loader.gif) center center no-repeat;
 }
 .slick-slider.slick-loaded {

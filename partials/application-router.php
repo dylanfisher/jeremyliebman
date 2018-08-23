@@ -14,8 +14,8 @@
 
   <?php
     if(isset($post)):
-      if($post->post_name == 'home-page'){
-        get_template_part( 'partials/content', 'home_page' );
+      if($post->post_name == 'home-page') {
+        jl_get_template_part( 'partials/content-home_page', array(), array( 'cache_key' => 'home_page_content', 'cache_timeout' => 3600 ) );
       } else {
         get_template_part( 'partials/content', 'single' );
       }

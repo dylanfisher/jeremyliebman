@@ -1,5 +1,7 @@
 <?php
 
+require_once('functions/jl_get_template_part.php');
+
 function sandbox_posts_per_page( $query ) {
     if ( ! $query->is_home() && $query->is_main_query() ) {
         $query->set( 'posts_per_page', '15' );
