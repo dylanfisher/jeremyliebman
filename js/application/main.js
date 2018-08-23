@@ -145,20 +145,24 @@ $(function(){
     // Event triggers when clicking or pressing enter on an item.
     // This is the final event that should trigger search.
     var selection = e.val;
+    var url;
 
     $('#wp-search-input, #wp-search-input-single-images').val(selection);
 
-    var url;
     if(e.object.css.indexOf('recent-work-option') !== -1){
       // Recent work links to home page
       url = $('html').attr('data-home-url');
-      $.pjax({url: url, container: '#pjax-container'});
     } else {
       var searchQuery = encodeURIComponent(e.object.text);
+
       url = $('html').attr('data-home-url') + '/?search&s=' + searchQuery;
-      $.pjax({url: url, container: '#pjax-container'});
     }
 
+    if ( $.support.pjax ) {
+      $.pjax({url: url, container: '#pjax-container'});
+    } else {
+      window.location = url;
+    }
   });
 
   $(document)
